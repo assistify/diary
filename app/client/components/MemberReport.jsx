@@ -1,11 +1,13 @@
 import React from 'react';
-import { activityType } from '../../models/activityType';
 import ActivityItems from './ActivityItem';
+import { memberReportType } from '../../models/memberReportType';
 
-export default function MemberActivity(props) {
+export default function MemberReport(props) {
   const {
-    name, availability, workedOnItems, completedItems, plannedItems, blockingItems
+    name, past, future
   } = props;
+  const { workedOnItems, completedItems, blockingItems } = past;
+  const { availability, plannedItems } = future;
 
   return (
     <div className="member">
@@ -39,4 +41,4 @@ export default function MemberActivity(props) {
   );
 }
 
-MemberActivity.propTypes = activityType;
+MemberReport.propTypes = memberReportType;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { itemType } from '../../models/activityType';
+import { activityItemType } from '../../models/activityItemType';
 
 function ActivityItem(props) {
   const { title } = props;
@@ -9,7 +9,7 @@ function ActivityItem(props) {
   );
 }
 
-ActivityItem.propTypes = itemType;
+ActivityItem.propTypes = activityItemType;
 
 export default function ActivityItems(props) {
   const { title, list, className } = props;
@@ -39,6 +39,6 @@ ActivityItems.defaultProps = {
 
 ActivityItems.propTypes = {
   title: PropTypes.string.isRequired,
-  list: PropTypes.arrayOf(itemType),
+  list: PropTypes.arrayOf(PropTypes.shape(activityItemType)),
   className: PropTypes.string.isRequired
 };

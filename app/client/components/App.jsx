@@ -5,39 +5,47 @@ import DiaryPage from './DiaryPage';
 const mockData = {
   date: new Date('2018-11-16'),
   teamName: 'Assistify Core',
-  activities: [
+  teamReport: [
     {
       name: 'Oliver',
-      availability: 'Office',
-      workedOnItems: [
-        { title: 'Conversational Design Diary' },
-        { title: 'Ne Menge administratives' },
-      ],
-      completedItems: [
-        { title: 'Masteranden geplant' }
-      ],
-      plannedItems: [
-        { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
-        { title: 'Sich vorher React noch einmal anschauen' },
-        { title: 'Nicht übertreiben' },
-      ],
+      past: {
+        workedOnItems: [
+          { title: 'Conversational Design Diary' },
+          { title: 'Ne Menge administratives' },
+        ],
+        completedItems: [
+          { title: 'Masteranden geplant' }
+        ],
+      },
+      future: {
+        availability: 'Office',
+        plannedItems: [
+          { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
+          { title: 'Sich vorher React noch einmal anschauen' },
+          { title: 'Nicht übertreiben' },
+        ],
+      },
     },
     {
-      name: 'Olivers Klon',
-      availability: 'virtuell',
-      workedOnItems: [
-        { title: 'Conversational Design Diary' },
-        { title: 'Ne Menge administratives' },
-      ],
-      completedItems: [
-        { title: 'Masteranden geplant' }
-      ],
-      plannedItems: [
-        { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
-        { title: 'Sich vorher React noch einmal anschauen' },
-        { title: 'Nicht übertreiben' },
-      ],
-    }
+      name: 'Klon von Oliver',
+      past: {
+        workedOnItems: [
+          { title: 'Conversational Design Diary' },
+          { title: 'Ne Menge administratives' },
+        ],
+        completedItems: [
+          { title: 'Masteranden geplant' }
+        ],
+      },
+      future: {
+        availability: 'Office',
+        plannedItems: [
+          { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
+          { title: 'Sich vorher React noch einmal anschauen' },
+          { title: 'Nicht übertreiben' },
+        ],
+      },
+    },
   ]
 };
 
@@ -49,7 +57,7 @@ export default function App() {
     <DiaryPage
       date={mockData.date}
       teamName={mockData.teamName}
-      activities={mockData.activities}
+      teamReport={mockData.teamReport}
     />
   );
 }
