@@ -1,0 +1,55 @@
+import React from 'react';
+import { localization } from '../lib/localization';
+import DiaryPage from './DiaryPage';
+
+const mockData = {
+  date: new Date('2018-11-16'),
+  teamName: 'Assistify Core',
+  activities: [
+    {
+      name: 'Oliver',
+      availability: 'Office',
+      workedOnItems: [
+        { title: 'Conversational Design Diary' },
+        { title: 'Ne Menge administratives' },
+      ],
+      completedItems: [
+        { title: 'Masteranden geplant' }
+      ],
+      plannedItems: [
+        { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
+        { title: 'Sich vorher React noch einmal anschauen' },
+        { title: 'Nicht übertreiben' },
+      ],
+    },
+    {
+      name: 'Olivers Klon',
+      availability: 'virtuell',
+      workedOnItems: [
+        { title: 'Conversational Design Diary' },
+        { title: 'Ne Menge administratives' },
+      ],
+      completedItems: [
+        { title: 'Masteranden geplant' }
+      ],
+      plannedItems: [
+        { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
+        { title: 'Sich vorher React noch einmal anschauen' },
+        { title: 'Nicht übertreiben' },
+      ],
+    }
+  ]
+};
+
+
+export default function App() {
+  localization();
+
+  return (
+    <DiaryPage
+      date={mockData.date}
+      teamName={mockData.teamName}
+      activities={mockData.activities}
+    />
+  );
+}
