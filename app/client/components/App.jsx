@@ -49,6 +49,26 @@ const mockData = {
         ],
       },
     },
+    {
+      name: 'Yet another Klon von Oliver',
+      past: {
+        workedOnItems: [
+          { title: 'Conversational Design Diary' },
+          { title: 'Ne Menge administratives' },
+        ],
+        completedItems: [
+          { title: 'Masteranden geplant' }
+        ],
+      },
+      future: {
+        availability: 'Office',
+        plannedItems: [
+          { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
+          { title: 'Sich vorher React noch einmal anschauen' },
+          { title: 'Nicht übertreiben' },
+        ],
+      },
+    },
   ]
 };
 
