@@ -1,5 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import Heading from 'react-bulma-components/lib/components/heading';
+import Container from 'react-bulma-components/lib/components/container';
 import { activityItemType } from '../../models/activityItemType';
 
 function ActivityItem(props) {
@@ -14,8 +16,8 @@ ActivityItem.propTypes = activityItemType;
 export default function ActivityItems(props) {
   const { title, list, className } = props;
   return (
-    <div className={className}>
-      <h4>{title}</h4>
+    <Container className={className}>
+      <Heading size={6}>{title}</Heading>
       { list.length > 0
         ? (
           <ul>
@@ -29,7 +31,7 @@ export default function ActivityItems(props) {
         )
         : <div className="empty-items">nüscht</div>
         }
-    </div>
+    </Container>
   );
 }
 

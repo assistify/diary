@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import dateFormat from 'dateformat';
+import Tile from 'react-bulma-components/lib/components/tile';
+import Heading from 'react-bulma-components/lib/components/heading';
+import Box from 'react-bulma-components/lib/components/box';
 import { dailyType } from '../../models/dailyType';
 import MemberReport from './MemberReport';
 
@@ -16,18 +19,26 @@ export default class DiaryPage extends Component {
 
   render() {
     return (
-      <div className="diary-page">
-        <h1 className="team-name">{this.teamName}</h1>
-        <h2 className="date">{dateFormat(this.date, 'dddd, dd. mmmm')}</h2>
-        {this.teamReport.map(memberReport => (
-          <MemberReport
-            key={memberReport.name}
-            name={memberReport.name}
-            past={memberReport.past}
-            future={memberReport.future}
-          />
-        ))}
-      </div>
+      <Box className="diary-page">
+        <Heading>
+          {this.teamName}
+        </Heading>
+        <Heading subtitle className="date">
+          {dateFormat(this.date, 'dddd, dd. mmmm')}
+        </Heading>
+        <Tile kind="ancestor">
+          <Tile size={8} vertical>
+            {this.teamReport.map(memberReport => (
+              <MemberReport
+                key={memberReport.name}
+                name={memberReport.name}
+                past={memberReport.past}
+                future={memberReport.future}
+              />
+            ))}
+          </Tile>
+        </Tile>
+      </Box>
     );
   }
 }

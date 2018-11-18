@@ -1,7 +1,10 @@
 const path = require('path');
 const webpack = require('webpack'); // remember to require this, because we DefinePlugin is a webpack plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const dotenv = require('dotenv');
+
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = () => {
 // call dotenv and it will return an Object with a parsed key
@@ -17,7 +20,10 @@ module.exports = () => {
     mode: 'development',
     entry: ['babel-polyfill', 'whatwg-fetch', './app/client/index.jsx'],
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx'],
+      alias: {
+        '~_variables.sass': path.resolve(__dirname, 'app/client/styles/variables.scss'),
+      },
     },
     output: {
       filename: 'bundle.js',
@@ -29,14 +35,28 @@ module.exports = () => {
         test: /.(js|jsx)$/,
         use: 'babel-loader'
       },
+      // CSS / SASS
       {
-        test: /.css$/,
-        use: ['style-loader', 'css-loader']
-      }]
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          // 'postcss-loader',
+          'sass-loader',
+        ],
+      }
+      ]
+
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: './app/client/index.html'
+      }),
+      new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: devMode ? '[name].css' : '[name].[hash].css',
+        chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
       }),
       new webpack.DefinePlugin(envKeys)
     ],

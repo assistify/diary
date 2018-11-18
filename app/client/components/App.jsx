@@ -1,6 +1,9 @@
 import React from 'react';
+import { Section } from 'react-bulma-components';
 import { localization } from '../lib/localization';
 import DiaryPage from './DiaryPage';
+
+import '../styles/index.scss';
 
 const mockData = {
   date: new Date('2018-11-16'),
@@ -54,10 +57,12 @@ export default function App() {
   localization();
 
   return (
-    <DiaryPage
-      date={mockData.date}
-      teamName={mockData.teamName}
-      teamReport={mockData.teamReport}
-    />
+    <Section>
+      <DiaryPage
+        date={mockData.date}
+        teamName={mockData.teamName}
+        teamReport={mockData.teamReport}
+      />
+    </Section>
   );
 }
