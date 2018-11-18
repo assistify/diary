@@ -16,7 +16,7 @@ ActivityItem.propTypes = activityItemType;
 export default function ActivityItems(props) {
   const { title, list, className } = props;
   return (
-    <Box className={`activities ${className}`}>
+    <Box className={`c-activities ${className}`}>
       <Heading size={6}>{title}</Heading>
       { list.length > 0
         ? (

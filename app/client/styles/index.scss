@@ -1,19 +1,6 @@
 @import '~_variables.sass';
 @import '~react-bulma-components/lib/index.sass';
 
-.activities{
-    border-left: 6px solid;
-    &.worked-on{
-        border-left-color: orange;
-    }
-    &.completed{
-        border-left-color: green;
-    }
-    &.blocking{
-        border-left-color: red;
-    }
-}
-
-.availability{
-    margin: 20px 0;
-}
+// own COMPONENTS
+@import './components/Activity.scss';
+@import './components/availability.scss';

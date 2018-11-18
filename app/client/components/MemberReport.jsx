@@ -5,7 +5,7 @@ import Columns from 'react-bulma-components/lib/components/columns';
 import Tag from 'react-bulma-components/lib/components/tag';
 import Container from 'react-bulma-components/lib/components/container/container';
 
-import ActivityItems from './ActivityItem';
+import ActivityItems from './Activity';
 import { memberReportType } from '../../models/memberReportType';
 
 export default function MemberReport(props) {
@@ -23,7 +23,7 @@ export default function MemberReport(props) {
         </Card.Header>
         <Card.Content>
           <Container>
-            <Tag color="primary" size="medium" className="availability">
+            <Tag color="primary" size="medium" className="c-availability">
               {`Verfügbarkeit: ${availability}`}
             </Tag>
           </Container>
