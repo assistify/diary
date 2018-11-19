@@ -15,8 +15,8 @@ export default function Availabilities(props) {
       <ul>
         {
         members.map(member => (
-          <li key={member.name}>
-            {`${member.name}: ${member.availability}`}
+          <li key={member.username}>
+            {`${member.username}: ${member.availability}`}
           </li>
         ))
       }
@@ -27,7 +27,7 @@ export default function Availabilities(props) {
 
 Availabilities.propTypes = {
   members: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
     availability: PropTypes.string.isRequired,
   })).isRequired
 };

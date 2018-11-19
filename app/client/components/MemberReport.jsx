@@ -9,7 +9,7 @@ import { memberReportType } from '../../models/memberReportType';
 
 export default function MemberReport(props) {
   const {
-    name, past, plannedAvailability: availability, future
+    username, past, plannedAvailability: availability, future
   } = props;
   const { workedOnItems, completedItems, blockingItems } = past;
 
@@ -17,7 +17,7 @@ export default function MemberReport(props) {
     <Columns.Column renderAs="article" size={6}>
       <Card className="member">
         <Card.Header>
-          <Card.Header.Title>{name}</Card.Header.Title>
+          <Card.Header.Title>{username}</Card.Header.Title>
           <Tag.Group>
             { blockingItems
               && (

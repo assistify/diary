@@ -2,7 +2,7 @@ import { PropTypes } from 'prop-types';
 import { activityItemType } from './activityItemType';
 
 const memberReportType = {
-  name: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
   past: PropTypes.shape({
     workedOnItems: PropTypes.arrayOf(PropTypes.shape(activityItemType)),
     completedItems: PropTypes.arrayOf(PropTypes.shape(activityItemType)),

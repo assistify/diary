@@ -14,8 +14,8 @@ export default function Past(props) {
       <Columns centered multiline>
         {teamReport.map(memberReport => (
           <MemberReport
-            key={memberReport.name}
-            name={memberReport.name}
+            key={memberReport.username}
+            username={memberReport.username}
             plannedAvailability={memberReport.future.availability}
             past={memberReport.past}
           />

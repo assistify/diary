@@ -15,7 +15,7 @@ export default function Future(props) {
       const plannedBy = memberReport.future.plannedItems.map(plannedItem => ({
         title: plannedItem.title,
         details: plannedItem.details,
-        owner: memberReport.name
+        owner: memberReport.username
       }));
       return all.concat(plannedBy);
     },
@@ -27,7 +27,7 @@ export default function Future(props) {
 
       <Availabilities
         members={teamReport.map(memberReport => ({
-          name: memberReport.name,
+          username: memberReport.username,
           availability: memberReport.future.availability
         }))}
       />

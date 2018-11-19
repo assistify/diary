@@ -10,7 +10,7 @@ const mockData = {
   teamName: 'Assistify Core',
   teamReport: [
     {
-      name: 'Oliver',
+      username: 'Oliver',
       past: {
         workedOnItems: [
           { title: 'Conversational Design Diary' },
@@ -30,7 +30,7 @@ const mockData = {
       },
     },
     {
-      name: 'Klon von Oliver',
+      username: 'Klon von Oliver',
       past: {
         workedOnItems: [
           { title: 'Conversational Design Diary' },
@@ -50,7 +50,7 @@ const mockData = {
       },
     },
     {
-      name: 'Blockierter Klon von Oliver',
+      username: 'Blockierter Klon von Oliver',
       past: {
         workedOnItems: [
           { title: 'Conversational Design Diary' },
