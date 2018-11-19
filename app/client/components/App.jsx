@@ -64,7 +64,7 @@ const mockData = {
         ]
       },
       future: {
-        availability: 'Office',
+        availability: 'Virtuell',
         plannedItems: [
           { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
           { title: 'Sich vorher React noch einmal anschauen' },
@@ -80,12 +80,10 @@ export default function App() {
   localization();
 
   return (
-    <Section>
-      <DiaryPage
-        date={mockData.date}
-        teamName={mockData.teamName}
-        teamReport={mockData.teamReport}
-      />
-    </Section>
+    <DiaryPage
+      date={mockData.date}
+      teamName={mockData.teamName}
+      teamReport={mockData.teamReport}
+    />
   );
 }

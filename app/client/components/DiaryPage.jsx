@@ -9,6 +9,7 @@ import Section from 'react-bulma-components/lib/components/section';
 
 import MemberReport from './MemberReport';
 import { dailyType } from '../../models/dailyType';
+import Future from './Future';
 
 export default class DiaryPage extends Component {
   static propTypes = dailyType;
@@ -36,14 +37,19 @@ export default class DiaryPage extends Component {
             </Container>
           </Hero.Body>
         </Hero>
+        <Future teamReport={this.teamReport} />
         <Container>
+          {
+          // TODO Past component
+        }
+          <Heading size={3}>Was los war</Heading>
           <Columns centered multiline>
             {this.teamReport.map(memberReport => (
               <MemberReport
                 key={memberReport.name}
                 name={memberReport.name}
+                plannedAvailability={memberReport.future.availability}
                 past={memberReport.past}
-                future={memberReport.future}
               />
             ))}
           </Columns>

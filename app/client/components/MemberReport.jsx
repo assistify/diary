@@ -9,30 +9,27 @@ import { memberReportType } from '../../models/memberReportType';
 
 export default function MemberReport(props) {
   const {
-    name, past, future
+    name, past, plannedAvailability: availability, future
   } = props;
   const { workedOnItems, completedItems, blockingItems } = past;
-  const { availability, plannedItems } = future;
 
   return (
     <Columns.Column renderAs="article" size={6}>
       <Card className="member">
         <Card.Header>
           <Card.Header.Title>{name}</Card.Header.Title>
-          <Card.Header>
-            <Tag.Group>
-              { blockingItems
+          <Tag.Group>
+            { blockingItems
               && (
                 <Tag size="medium" className="blocked">
                   Blockiert
                 </Tag>
               )
             }
-              <Tag color="info" size="medium">
+            {/* <Tag color="info" size="medium">
                 {`${availability}`}
-              </Tag>
-            </Tag.Group>
-          </Card.Header>
+              </Tag> */}
+          </Tag.Group>
         </Card.Header>
         <Card.Content>
           { blockingItems
@@ -53,12 +50,6 @@ export default function MemberReport(props) {
             title="Erledigt"
             list={completedItems}
             className="completed"
-          />
-
-          <ActivityItems
-            title="Als nächstes"
-            list={plannedItems}
-            className="next"
           />
         </Card.Content>
       </Card>
