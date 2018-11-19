@@ -11,6 +11,7 @@ export default function Availabilities(props) {
   const {
     members
   } = props;
+
   return (
     <Container className="c-availabilities">
       <Heading size={3}>Verfügbarkeit</Heading>
@@ -18,10 +19,10 @@ export default function Availabilities(props) {
       <Columns multiline centered>
         {
         members.map(member => (
-          <Columns.Column size={3}>
+          <Columns.Column key={member.username} size={3}>
             <Media>
               <Media.Item renderAs="figure" position="left">
-                <Image renderAs="p" size={64} alt="64x64" src="http://bulma.io/images/placeholders/128x128.png" />
+                <Image size={128} className="avatar" alt={member.username} src="http://bulma.io/images/placeholders/128x128.png" />
               </Media.Item>
               <Media.Item>
                 <User username={member.username} />
