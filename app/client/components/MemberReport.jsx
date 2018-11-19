@@ -6,6 +6,7 @@ import Tag from 'react-bulma-components/lib/components/tag';
 
 import ActivityItems from './Activity';
 import { memberReportType } from '../../models/memberReportType';
+import User from './User';
 
 export default function MemberReport(props) {
   const {
@@ -17,7 +18,7 @@ export default function MemberReport(props) {
     <Columns.Column renderAs="article" size={6}>
       <Card className="member">
         <Card.Header>
-          <Card.Header.Title>{username}</Card.Header.Title>
+          <Card.Header.Title><User username={username} /></Card.Header.Title>
           <Tag.Group>
             { blockingItems
               && (

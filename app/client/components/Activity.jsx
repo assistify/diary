@@ -1,15 +1,28 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+
 import Heading from 'react-bulma-components/lib/components/heading';
 import Box from 'react-bulma-components/lib/components/box';
+import Content from 'react-bulma-components/lib/components/content';
+
+import Container from 'react-bulma-components/lib/components/container';
 import { activityItemType } from '../../models/activityItemType';
+import User from './User';
 
 function ActivityItem(props) {
   const { title, owner } = props;
   return (
     <li>
       {title}
-      <span className="c-owner">{owner && ` (${owner})`}</span>
+      {owner
+        && (
+          <Container renderAs="span">
+            <Content renderAs="span">&nbsp;(</Content>
+            <User username={owner} />
+            <Content renderAs="span">)</Content>
+          </Container>
+        )
+    }
     </li>
   );
 }
