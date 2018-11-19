@@ -40,7 +40,7 @@ export default function Future(props) {
         list={allPlannedItems}
         className="next"
       />
-    </C>
+    </Container>
 
   );
 }
