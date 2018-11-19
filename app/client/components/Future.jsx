@@ -13,8 +13,9 @@ export default function Future(props) {
   const allPlannedItems = teamReport.reduce(
     (all, memberReport) => {
       const plannedBy = memberReport.future.plannedItems.map(plannedItem => ({
-        title: `${plannedItem.title} (${memberReport.name})`,
-        details: plannedItem.details
+        title: plannedItem.title,
+        details: plannedItem.details,
+        owner: memberReport.name
       }));
       return all.concat(plannedBy);
     },
@@ -28,7 +29,7 @@ export default function Future(props) {
       <ul className="availabilities">
         {
         teamReport.map(memberReport => (
-          <li>
+          <li key={memberReport.name}>
             {`${memberReport.name}: ${memberReport.future.availability}`}
           </li>
         ))

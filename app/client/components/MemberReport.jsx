@@ -26,9 +26,6 @@ export default function MemberReport(props) {
                 </Tag>
               )
             }
-            {/* <Tag color="info" size="medium">
-                {`${availability}`}
-              </Tag> */}
           </Tag.Group>
         </Card.Header>
         <Card.Content>

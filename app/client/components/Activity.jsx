@@ -5,16 +5,21 @@ import Box from 'react-bulma-components/lib/components/box';
 import { activityItemType } from '../../models/activityItemType';
 
 function ActivityItem(props) {
-  const { title } = props;
+  const { title, owner } = props;
   return (
-    <li>{title}</li>
+    <li>
+      {title}
+      <span className="c-owner">{owner && ` (${owner})`}</span>
+    </li>
   );
 }
 
 ActivityItem.propTypes = activityItemType;
 
 export default function ActivityItems(props) {
-  const { title, list, className } = props;
+  const {
+    title, list, className
+  } = props;
   return (
     <Box className={`c-activities ${className}`}>
       <Heading size={6}>{title}</Heading>
@@ -25,6 +30,8 @@ export default function ActivityItems(props) {
               <ActivityItem
                 key={item.title}
                 title={item.title}
+                details={item.details}
+                owner={item.owner}
               />
             ))}
           </ul>
