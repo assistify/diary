@@ -28,7 +28,8 @@ export default function Future(props) {
       <Availabilities
         members={teamReport.map(memberReport => ({
           username: memberReport.username,
-          availability: memberReport.future.availability
+          availability: memberReport.future.availability,
+          blocked: memberReport.past.blockingItems && memberReport.past.blockingItems.length > 0
         }))}
       />
 

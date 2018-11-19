@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Container from 'react-bulma-components/lib/components/container';
 import Columns from 'react-bulma-components/lib/components/columns';
+import Tag from 'react-bulma-components/lib/components/tag';
 import UserFactsheet from './UserFactsheet';
 
 export default function Availabilities(props) {
@@ -19,7 +20,10 @@ export default function Availabilities(props) {
         members.map(member => (
           <Columns.Column key={member.username} size={3}>
             <UserFactsheet username={member.username}>
-              <p>{member.availability}</p>
+              <Tag.Group>
+                {member.blocked && <Tag className="blocked">Blockiert</Tag>}
+                <Tag color="primary">{member.availability}</Tag>
+              </Tag.Group>
             </UserFactsheet>
           </Columns.Column>
         ))
@@ -33,5 +37,6 @@ Availabilities.propTypes = {
   members: PropTypes.arrayOf(PropTypes.shape({
     username: PropTypes.string.isRequired,
     availability: PropTypes.string.isRequired,
+    blocked: PropTypes.bool
   })).isRequired
 };

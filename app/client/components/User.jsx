@@ -7,7 +7,12 @@ export default function User(props) {
   return (
     <TeamContext.Consumer>
       { teamContext => (
-        <a className="c-user" href={`${teamContext.serverUrl}/direct/${username}`} target="_blank">
+        <a
+          className="c-user"
+          href={`${teamContext.serverUrl}/direct/${username}`}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           {`@${username}`}
         </a>
       )}
