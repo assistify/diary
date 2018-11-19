@@ -6,6 +6,7 @@ import Container from 'react-bulma-components/lib/components/container';
 import Columns from 'react-bulma-components/lib/components/columns';
 import ActivityItems from './Activity';
 import { memberReportType } from '../../models/memberReportType';
+import Availabilities from './Availability';
 
 export default function Future(props) {
   const { teamReport } = props;
@@ -23,18 +24,14 @@ export default function Future(props) {
   );
 
   return (
-    <Container className="future">
+    <Container className="c-future">
 
-      <Heading size={3}>Verfügbarkeit</Heading>
-      <ul className="availabilities">
-        {
-        teamReport.map(memberReport => (
-          <li key={memberReport.name}>
-            {`${memberReport.name}: ${memberReport.future.availability}`}
-          </li>
-        ))
-      }
-      </ul>
+      <Availabilities
+        members={teamReport.map(memberReport => ({
+          name: memberReport.name,
+          availability: memberReport.future.availability
+        }))}
+      />
 
       <Heading size={3}>Was ansteht</Heading>
 
@@ -43,7 +40,7 @@ export default function Future(props) {
         list={allPlannedItems}
         className="next"
       />
-    </Container>
+    </C>
 
   );
 }
