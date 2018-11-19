@@ -3,7 +3,6 @@ import React from 'react';
 import Card from 'react-bulma-components/lib/components/card';
 import Columns from 'react-bulma-components/lib/components/columns';
 import Tag from 'react-bulma-components/lib/components/tag';
-import Container from 'react-bulma-components/lib/components/container/container';
 
 import ActivityItems from './Activity';
 import { memberReportType } from '../../models/memberReportType';
@@ -20,13 +19,30 @@ export default function MemberReport(props) {
       <Card className="member">
         <Card.Header>
           <Card.Header.Title>{name}</Card.Header.Title>
+          <Card.Header>
+            <Tag.Group>
+              { blockingItems
+              && (
+                <Tag size="medium" className="blocked">
+                  Blockiert
+                </Tag>
+              )
+            }
+              <Tag color="info" size="medium">
+                {`${availability}`}
+              </Tag>
+            </Tag.Group>
+          </Card.Header>
         </Card.Header>
         <Card.Content>
-          <Container>
-            <Tag color="primary" size="medium" className="c-availability">
-              {`Verfügbarkeit: ${availability}`}
-            </Tag>
-          </Container>
+          { blockingItems
+          && (
+          <ActivityItems
+            title="Blockiert"
+            list={blockingItems}
+            className="blocking"
+          />
+          )}
           <ActivityItems
             title="Beschäftigt mit"
             list={workedOnItems}
@@ -43,12 +59,6 @@ export default function MemberReport(props) {
             title="Als nächstes"
             list={plannedItems}
             className="next"
-          />
-
-          <ActivityItems
-            title="Blockiert"
-            list={blockingItems}
-            className="blocking"
           />
         </Card.Content>
       </Card>

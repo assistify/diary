@@ -1,0 +1,13 @@
+// Semantically enriched variants of Bulma's Tag-component
+
+.member .card-header .tags {
+    .tag {
+        margin-bottom: 0px;
+    }
+    margin: auto 5px;
+}
+
+.tag.blocked {
+    border: 3px solid $red;
+    background-color: $white;
+}

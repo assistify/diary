@@ -50,7 +50,7 @@ const mockData = {
       },
     },
     {
-      name: 'Yet another Klon von Oliver',
+      name: 'Blockierter Klon von Oliver',
       past: {
         workedOnItems: [
           { title: 'Conversational Design Diary' },
@@ -59,6 +59,9 @@ const mockData = {
         completedItems: [
           { title: 'Masteranden geplant' }
         ],
+        blockingItems: [
+          { title: 'SCSS & Webpack' }
+        ]
       },
       future: {
         availability: 'Office',
