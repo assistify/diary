@@ -1,8 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import Heading from 'react-bulma-components/lib/components/heading';
-import Box from 'react-bulma-components/lib/components/box';
-import Container from 'react-bulma-components/lib/components/Container/Container';
+import Container from 'react-bulma-components/lib/components/container';
 
 export default function Availabilities(props) {
   const {

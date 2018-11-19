@@ -4,10 +4,7 @@ import dateFormat from 'dateformat';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Hero from 'react-bulma-components/lib/components/hero';
 import Container from 'react-bulma-components/lib/components/container';
-import Columns from 'react-bulma-components/lib/components/columns';
-import Section from 'react-bulma-components/lib/components/section';
 
-import MemberReport from './MemberReport';
 import { dailyType } from '../../models/dailyType';
 import Future from './Future';
 import Past from './Past';

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Section } from 'react-bulma-components';
 import { localization } from '../lib/localization';
 import DiaryPage from './DiaryPage';
 
@@ -24,8 +23,6 @@ const mockData = {
         availability: 'Office',
         plannedItems: [
           { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
-          { title: 'Sich vorher React noch einmal anschauen' },
-          { title: 'Nicht übertreiben' },
         ],
       },
     },
@@ -43,9 +40,7 @@ const mockData = {
       future: {
         availability: 'Office',
         plannedItems: [
-          { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
           { title: 'Sich vorher React noch einmal anschauen' },
-          { title: 'Nicht übertreiben' },
         ],
       },
     },
@@ -66,8 +61,6 @@ const mockData = {
       future: {
         availability: 'Virtuell',
         plannedItems: [
-          { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
-          { title: 'Sich vorher React noch einmal anschauen' },
           { title: 'Nicht übertreiben' },
         ],
       },

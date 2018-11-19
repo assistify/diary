@@ -4,7 +4,9 @@ import { PropTypes } from 'prop-types';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
 import Columns from 'react-bulma-components/lib/components/columns';
+
 import MemberReport from './MemberReport';
+import { memberReportType } from '../../models/memberReportType';
 
 export default function Past(props) {
   const { teamReport } = props;
@@ -24,3 +26,7 @@ export default function Past(props) {
     </Section>
   );
 }
+
+Past.propTypes = {
+  teamReport: PropTypes.arrayOf(PropTypes.shape(memberReportType)).isRequired
+};

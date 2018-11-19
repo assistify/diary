@@ -9,7 +9,7 @@ import { memberReportType } from '../../models/memberReportType';
 
 export default function MemberReport(props) {
   const {
-    username, past, plannedAvailability: availability, future
+    username, past
   } = props;
   const { workedOnItems, completedItems, blockingItems } = past;
 
