@@ -2,8 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import Heading from 'react-bulma-components/lib/components/heading';
-import Container from 'react-bulma-components/lib/components/container';
-import Columns from 'react-bulma-components/lib/components/columns';
+import Section from 'react-bulma-components/lib/components/section';
 import ActivityItems from './Activity';
 import { memberReportType } from '../../models/memberReportType';
 import Availabilities from './Availability';
@@ -24,7 +23,7 @@ export default function Future(props) {
   );
 
   return (
-    <Container className="c-future">
+    <Section className="c-future">
 
       <Availabilities
         members={teamReport.map(memberReport => ({
@@ -40,7 +39,7 @@ export default function Future(props) {
         list={allPlannedItems}
         className="next"
       />
-    </Container>
+    </Section>
 
   );
 }
