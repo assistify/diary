@@ -10,15 +10,22 @@ import { activityItemType } from '../../models/activityItemType';
 import User from './User';
 
 function ActivityItem(props) {
-  const { title, owner } = props;
+  const { title, owners } = props;
   return (
     <li>
       {title}
-      {owner
+      {owners
         && (
           <Container renderAs="span">
             <Content renderAs="span">&nbsp;(</Content>
-            <User username={owner} />
+            {owners.map((owner, i, owners) => (
+              <Container renderAs="span">
+                <User username={owner} />
+                {owners.length > 1 && i !== (owners.length - 1)
+            && <Content renderAs="span">,&nbsp;</Content>
+            }
+              </Container>
+            ))}
             <Content renderAs="span">)</Content>
           </Container>
         )
@@ -26,6 +33,10 @@ function ActivityItem(props) {
     </li>
   );
 }
+
+ActivityItem.defaultProps = {
+  owners: null
+};
 
 ActivityItem.propTypes = activityItemType;
 
@@ -44,7 +55,7 @@ export default function ActivityItems(props) {
                 key={item.title}
                 title={item.title}
                 details={item.details}
-                owner={item.owner}
+                owners={item.owners}
               />
             ))}
           </ul>

@@ -15,12 +15,24 @@ export default function Future(props) {
       const plannedBy = memberReport.future.plannedItems.map(plannedItem => ({
         title: plannedItem.title,
         details: plannedItem.details,
-        owner: memberReport.username
+        owners: [memberReport.username]
       }));
+
       return all.concat(plannedBy);
     },
     []
   );
+
+  const aggregatedItems = allPlannedItems.reduce((aggregated, item) => {
+    const sameTitleItemIndex = aggregated.findIndex(aggregatedItem => aggregatedItem.title === item.title);
+    if (sameTitleItemIndex >= 0) {
+      aggregated[sameTitleItemIndex].owners.push(...item.owners);
+    } else {
+      aggregated.push(item);
+    }
+    return aggregated;
+  },
+  []);
 
   return (
     <Section className="c-future">
@@ -37,7 +49,7 @@ export default function Future(props) {
 
       <ActivityItems
         title="Geplante Tätigkeiten"
-        list={allPlannedItems}
+        list={aggregatedItems}
         className="next"
       />
     </Section>

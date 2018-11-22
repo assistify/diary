@@ -14,8 +14,50 @@ const mockData = {
       username: 'Oliver',
       past: {
         workedOnItems: [
-          { title: 'Conversational Design Diary' },
-          { title: 'Ne Menge administratives' },
+          { title: 'Review' },
+          { title: 'HTML-version des Tagebuchs' },
+        ],
+        completedItems: [
+          // { title: 'Masteranden geplant' }
+        ],
+      },
+      future: {
+        availability: 'Office',
+        plannedItems: [
+          { title: 'Business Case' },
+          { title: 'Mit Masteranden treffen' },
+          { title: 'Retro & Planning' },
+        ],
+      },
+    },
+    {
+      username: 'ruediger',
+      past: {
+        workedOnItems: [
+          {
+            title: 'Smarti und Chatpal läuft wieder vollständig in Produktion',
+            details: 'Java für Chatpal-Solr war out of memory => JVM im Docker image wurde neu konfiguriert'
+          },
+          { title: 'Schutzbedarffestellung für Vendo' },
+        ],
+        completedItems: [
+          // { title: 'Masteranden geplant' }
+        ],
+      },
+      future: {
+        availability: 'Office',
+        plannedItems: [
+          { title: 'Business Case' },
+          { title: 'Retro & Planning' },
+        ],
+      },
+    },
+    {
+      username: 'ThomasR',
+      past: {
+        workedOnItems: [
+          // { title: 'Irgendwas mit Smarti ;)' },
+          // { title: 'Wiki gardening' },
         ],
         completedItems: [
           { title: 'Masteranden geplant' }
