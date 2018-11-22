@@ -10,7 +10,7 @@ import User from './User';
 
 export default function MemberReport(props) {
   const {
-    username, past
+    username, past, statusKnown
   } = props;
   const { workedOnItems, completedItems, blockingItems } = past;
 
@@ -31,13 +31,13 @@ export default function MemberReport(props) {
         </Card.Header>
         <Card.Content>
           { blockingItems
-          && (
-          <ActivityItems
-            title="Blockiert"
-            list={blockingItems}
-            className="blocking"
-          />
-          )}
+              && (
+              <ActivityItems
+                title="Blockiert"
+                list={blockingItems}
+                className="blocking"
+              />
+              )}
           <ActivityItems
             title="Beschäftigt mit"
             list={workedOnItems}

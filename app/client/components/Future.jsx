@@ -12,11 +12,13 @@ export default function Future(props) {
 
   const allPlannedItems = teamReport.reduce(
     (all, memberReport) => {
-      const plannedBy = memberReport.future.plannedItems.map(plannedItem => ({
-        title: plannedItem.title,
-        details: plannedItem.details,
-        owners: [memberReport.username]
-      }));
+      const plannedBy = memberReport.future.plannedItems
+        ? memberReport.future.plannedItems.map(plannedItem => ({
+          title: plannedItem.title,
+          details: plannedItem.details,
+          owners: [memberReport.username]
+        }))
+        : [];
 
       return all.concat(plannedBy);
     },
@@ -41,6 +43,7 @@ export default function Future(props) {
         members={teamReport.map(memberReport => ({
           username: memberReport.username,
           availability: memberReport.future.availability,
+          statusKnown: memberReport.statusKnown,
           blocked: memberReport.past.blockingItems && memberReport.past.blockingItems.length > 0
         }))}
       />

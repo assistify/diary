@@ -18,7 +18,11 @@ export default function Availabilities(props) {
       <Columns multiline centered>
         {
         members.map(member => (
-          <Columns.Column key={member.username} size={3}>
+          <Columns.Column
+            key={member.username}
+            size={3}
+            className={member.statusKnown ? 'status-known' : 'status-unknown'}
+          >
             <UserFactsheet username={member.username}>
               <Tag.Group>
                 {member.blocked && <Tag className="blocked">Blockiert</Tag>}
@@ -36,6 +40,7 @@ export default function Availabilities(props) {
 Availabilities.propTypes = {
   members: PropTypes.arrayOf(PropTypes.shape({
     username: PropTypes.string.isRequired,
+    statusKnown: PropTypes.bool.isRequired,
     availability: PropTypes.string.isRequired,
     blocked: PropTypes.bool
   })).isRequired

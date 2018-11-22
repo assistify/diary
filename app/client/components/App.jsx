@@ -12,33 +12,100 @@ const mockData = {
   teamReport: [
     {
       username: 'Oliver',
+      statusKnown: false,
       past: {
         workedOnItems: [
-          { title: 'Review' },
-          { title: 'HTML-version des Tagebuchs' },
+          // { title: 'Review' },
+          // { title: 'HTML-version des Tagebuchs' },
         ],
         completedItems: [
           // { title: 'Masteranden geplant' }
         ],
       },
       future: {
-        availability: 'Office',
+        availability: '',
         plannedItems: [
-          { title: 'Business Case' },
-          { title: 'Mit Masteranden treffen' },
-          { title: 'Retro & Planning' },
+          // { title: 'Business Case' },
+          // { title: 'Mit Masteranden treffen' },
+          // { title: 'Retro & Planning' },
         ],
       },
     },
     {
       username: 'ruediger',
+      statusKnown: true,
       past: {
         workedOnItems: [
           {
-            title: 'Smarti und Chatpal läuft wieder vollständig in Produktion',
-            details: 'Java für Chatpal-Solr war out of memory => JVM im Docker image wurde neu konfiguriert'
+            title: 'dummes Zeug',
+            // details: 'Java für Chatpal-Solr war out of memory => JVM im Docker image wurde neu konfiguriert'
           },
-          { title: 'Schutzbedarffestellung für Vendo' },
+          // { title: 'Schutzbedarffestellung für Vendo' },
+        ],
+        completedItems: [
+          // { title: 'Masteranden geplant' }
+        ],
+        blockingItems: [
+          { title: 'vom Wahnsinn' }
+        ]
+      },
+      future: {
+        availability: '',
+        plannedItems: [
+          // { title: 'Business Case' },
+          // { title: 'Retro & Planning' },
+        ],
+      },
+    },
+    {
+      username: 'ThomasR',
+      statusKnown: true,
+      past: {
+        workedOnItems: [
+          { title: 'endlosen Raum von Fragen kategorisieren' },
+        ],
+        completedItems: [
+          { title: '2 wichtigsten KPIs bestimmen' },
+          { title: 'Passende Situationen beschreiben wann du was tust' },
+        ],
+        // blockingItems: [
+        //   { title: 'vom Wahnsinn' }
+        // ]
+      },
+      future: {
+        availability: 'normal im Home Office',
+        // plannedItems: [
+        //   { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
+        // ],
+      },
+    },
+    {
+      username: 'vickyokrm',
+      statusKnown: true,
+      past: {
+        workedOnItems: [
+          // { title: 'endlosen Raum von Fragen kategorisieren' },
+        ],
+        completedItems: [
+          // { title: '2 wichtigsten KPIs bestimmen' },
+        ],
+        // blockingItems: [
+        //   { title: 'vom Wahnsinn' }
+        // ]
+      },
+      future: {
+        availability: 'nicht da',
+        // plannedItems: [
+        //   { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
+        // ],
+      },
+    },
+    {
+      username: 'Joachim',
+      statusKnown: false,
+      past: {
+        workedOnItems: [
+          // { title: 'Conversational Design Diary' },
         ],
         completedItems: [
           // { title: 'Masteranden geplant' }
@@ -46,67 +113,30 @@ const mockData = {
       },
       future: {
         availability: 'Office',
-        plannedItems: [
-          { title: 'Business Case' },
-          { title: 'Retro & Planning' },
-        ],
+        // plannedItems: [
+        //   { title: 'Sich vorher React noch einmal anschauen' },
+        // ],
       },
     },
     {
-      username: 'ThomasR',
+      username: 'Steffi.Kunze',
+      statusKnown: false,
       past: {
         workedOnItems: [
-          // { title: 'Irgendwas mit Smarti ;)' },
-          // { title: 'Wiki gardening' },
+          // { title: 'Ne Menge administratives' },
         ],
         completedItems: [
-          { title: 'Masteranden geplant' }
-        ],
-      },
-      future: {
-        availability: 'Office',
-        plannedItems: [
-          { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
-        ],
-      },
-    },
-    {
-      username: 'Klon von Oliver',
-      past: {
-        workedOnItems: [
-          { title: 'Conversational Design Diary' },
-          { title: 'Ne Menge administratives' },
-        ],
-        completedItems: [
-          { title: 'Masteranden geplant' }
-        ],
-      },
-      future: {
-        availability: 'Office',
-        plannedItems: [
-          { title: 'Sich vorher React noch einmal anschauen' },
-        ],
-      },
-    },
-    {
-      username: 'Blockierter Klon von Oliver',
-      past: {
-        workedOnItems: [
-          { title: 'Conversational Design Diary' },
-          { title: 'Ne Menge administratives' },
-        ],
-        completedItems: [
-          { title: 'Masteranden geplant' }
+          // { title: 'Masteranden geplant' }
         ],
         blockingItems: [
-          { title: 'SCSS & Webpack' }
+          // { title: 'SCSS & Webpack' }
         ]
       },
       future: {
-        availability: 'Virtuell',
-        plannedItems: [
-          { title: 'Nicht übertreiben' },
-        ],
+        availability: '',
+        // plannedItems: [
+        //   { title: 'Nicht übertreiben' },
+        // ],
       },
     },
   ]

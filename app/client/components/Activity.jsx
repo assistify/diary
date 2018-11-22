@@ -12,14 +12,14 @@ import User from './User';
 function ActivityItem(props) {
   const { title, owners } = props;
   return (
-    <li>
+    <li key={title}>
       {title}
       {owners
         && (
           <Container renderAs="span">
             <Content renderAs="span">&nbsp;(</Content>
-            {owners.map((owner, i, owners) => (
-              <Container renderAs="span">
+            {owners.map((owner, i) => (
+              <Container key={title} renderAs="span">
                 <User username={owner} />
                 {owners.length > 1 && i !== (owners.length - 1)
             && <Content renderAs="span">,&nbsp;</Content>
@@ -60,7 +60,7 @@ export default function ActivityItems(props) {
             ))}
           </ul>
         )
-        : <div className="empty-items">nüscht</div>
+        : <div className="empty-items">-</div>
         }
     </Box>
   );
