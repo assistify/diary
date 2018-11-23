@@ -18,6 +18,7 @@ export default function Past(props) {
           <MemberReport
             key={memberReport.username}
             username={memberReport.username}
+            statusKnown={memberReport.statusKnown}
             plannedAvailability={memberReport.future.availability}
             past={memberReport.past}
           />

@@ -13,14 +13,14 @@ import { localization } from '../lib/localization';
 
 import 'jsoneditor-react/es/editor.min.css';
 
-const mockData = {
+const templateData = {
   date: '2018-11-23T00:00:00.000Z',
   teamName: 'Assistify Core',
   serverUrl: 'https://team.assistify-test.noncd.db.de',
   teamReport: [
     {
       username: 'Template',
-      statusKnown: false,
+      statusKnown: true,
       past: {
         completedItems: [
           {
@@ -80,7 +80,7 @@ export default class App extends Component {
 
     this.state = {
       editing: false,
-      diaryPage: mockData,
+      diaryPage: templateData,
     };
   }
 
