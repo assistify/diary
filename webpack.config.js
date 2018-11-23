@@ -44,6 +44,22 @@ module.exports = () => {
           // 'postcss-loader',
           'sass-loader',
         ],
+      },
+      // SVG
+      {
+        test: /\.svg$/,
+        issuer: /\.s?css$/,
+        use: [
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: 'svg-url-loader',
+            options: {
+              jsx: true // true outputs JSX tags
+            }
+          }
+        ]
       }
       ]
 

@@ -20,7 +20,7 @@ export default function Availabilities(props) {
         members.map(member => (
           <Columns.Column
             key={member.username}
-            size={3}
+            size={4}
             className={member.statusKnown ? 'status-known' : 'status-unknown'}
           >
             <UserFactsheet username={member.username}>

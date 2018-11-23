@@ -1,163 +1,140 @@
-import React from 'react';
-import { localization } from '../lib/localization';
-import DiaryPage from './DiaryPage';
-import { TeamContext } from '../lib/teamContext';
+import React, { Component } from 'react';
+import { JsonEditor as Editor } from 'jsoneditor-react';
+import { PropTypes } from 'prop-types';
 
 import '../styles/index.scss';
+import Button from 'react-bulma-components/lib/components/button';
+import Container from 'react-bulma-components/lib/components/container';
+import Content from 'react-bulma-components/lib/components/content';
+import Footer from 'react-bulma-components/lib/components/footer';
+import { TeamContext } from '../lib/teamContext';
+import DiaryPage from './DiaryPage';
+import { localization } from '../lib/localization';
+
+import 'jsoneditor-react/es/editor.min.css';
 
 const mockData = {
-  date: new Date('2018-11-16'),
+  date: '2018-11-23T00:00:00.000Z',
   teamName: 'Assistify Core',
   serverUrl: 'https://team.assistify-test.noncd.db.de',
   teamReport: [
     {
-      username: 'Oliver',
+      username: 'Template',
       statusKnown: false,
       past: {
-        workedOnItems: [
-          // { title: 'Review' },
-          // { title: 'HTML-version des Tagebuchs' },
-        ],
         completedItems: [
-          // { title: 'Masteranden geplant' }
+          {
+            title: 'Kurzbeschreibung',
+            details: 'hier könnten Details reingeschrieben werden - diese werden derzeit aber noch nicht visualisiert',
+          }
         ],
-      },
-      future: {
-        availability: '',
-        plannedItems: [
-          // { title: 'Business Case' },
-          // { title: 'Mit Masteranden treffen' },
-          // { title: 'Retro & Planning' },
-        ],
-      },
-    },
-    {
-      username: 'ruediger',
-      statusKnown: true,
-      past: {
         workedOnItems: [
           {
-            title: 'dummes Zeug',
-            // details: 'Java für Chatpal-Solr war out of memory => JVM im Docker image wurde neu konfiguriert'
+            title: 'Kurzbeschreibung',
+            details: 'hier könnten Details reingeschrieben werden - diese werden derzeit aber noch nicht visualisiert',
           },
-          // { title: 'Schutzbedarffestellung für Vendo' },
-        ],
-        completedItems: [
-          // { title: 'Masteranden geplant' }
         ],
         blockingItems: [
-          { title: 'vom Wahnsinn' }
-        ]
+          {
+            title: 'Kurzbeschreibung',
+            details: 'hier könnten Details reingeschrieben werden - diese werden derzeit aber noch nicht visualisiert',
+          },
+        ],
       },
       future: {
-        availability: '',
+        availability: 'da geht Freitext',
         plannedItems: [
-          // { title: 'Business Case' },
-          // { title: 'Retro & Planning' },
+          {
+            title: 'Kurzbeschreibung',
+            details: 'hier könnten Details reingeschrieben werden - diese werden derzeit aber noch nicht visualisiert',
+          }
         ],
-      },
-    },
-    {
-      username: 'ThomasR',
-      statusKnown: true,
-      past: {
-        workedOnItems: [
-          { title: 'endlosen Raum von Fragen kategorisieren' },
-        ],
-        completedItems: [
-          { title: '2 wichtigsten KPIs bestimmen' },
-          { title: 'Passende Situationen beschreiben wann du was tust' },
-        ],
-        // blockingItems: [
-        //   { title: 'vom Wahnsinn' }
-        // ]
-      },
-      future: {
-        availability: 'normal im Home Office',
-        // plannedItems: [
-        //   { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
-        // ],
-      },
-    },
-    {
-      username: 'vickyokrm',
-      statusKnown: true,
-      past: {
-        workedOnItems: [
-          // { title: 'endlosen Raum von Fragen kategorisieren' },
-        ],
-        completedItems: [
-          // { title: '2 wichtigsten KPIs bestimmen' },
-        ],
-        // blockingItems: [
-        //   { title: 'vom Wahnsinn' }
-        // ]
-      },
-      future: {
-        availability: 'nicht da',
-        // plannedItems: [
-        //   { title: 'Das Design in eine einfache HTML-Implementierung umsetzen' },
-        // ],
-      },
-    },
-    {
-      username: 'Joachim',
-      statusKnown: false,
-      past: {
-        workedOnItems: [
-          // { title: 'Conversational Design Diary' },
-        ],
-        completedItems: [
-          // { title: 'Masteranden geplant' }
-        ],
-      },
-      future: {
-        availability: 'Office',
-        // plannedItems: [
-        //   { title: 'Sich vorher React noch einmal anschauen' },
-        // ],
-      },
-    },
-    {
-      username: 'Steffi.Kunze',
-      statusKnown: false,
-      past: {
-        workedOnItems: [
-          // { title: 'Ne Menge administratives' },
-        ],
-        completedItems: [
-          // { title: 'Masteranden geplant' }
-        ],
-        blockingItems: [
-          // { title: 'SCSS & Webpack' }
-        ]
-      },
-      future: {
-        availability: '',
-        // plannedItems: [
-        //   { title: 'Nicht übertreiben' },
-        // ],
       },
     },
   ]
 };
 
-
-export default function App() {
-  localization();
+function ReportFooter(props) {
+  const { onClick } = props;
   return (
-    <div>
-      <TeamContext.Provider value={{
-        teamName: mockData.teamName,
-        serverUrl: mockData.serverUrl,
-      }}
-      >
-        <DiaryPage
-          date={mockData.date}
-          teamName={mockData.teamName}
-          teamReport={mockData.teamReport}
-        />
-      </TeamContext.Provider>
-    </div>
+    <Footer>
+      <Container>
+        <Content style={{ textAlign: 'center' }}>
+          <Button onClick={onClick}>
+            Made with ❤ by the Assistify Team
+          </Button>
+        </Content>
+      </Container>
+    </Footer>
   );
+}
+ReportFooter.propTypes = {
+  onClick: PropTypes.func.isRequired
+};
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    localization();
+
+    this.state = {
+      editing: false,
+      diaryPage: mockData,
+    };
+  }
+
+  toggleEdit = () => {
+    const { editing } = this.state;
+    this.setState({ editing: !editing });
+  }
+
+  updateDiaryPage = (newState) => {
+    //     The following object will be passed to your method:
+
+    // {
+    //     updated_src: src, //new src value
+    //     name: name, //new var name
+    //     namespace: namespace, //list, namespace indicating var location
+    //     new_value: new_value, //new variable value
+    //     existing_value: existing_value, //existing variable value
+    // }
+    this.setState({
+      diaryPage: newState
+    });
+  }
+
+  render() {
+    const { diaryPage, editing } = this.state;
+
+    if (!editing) {
+      return (
+        <Container>
+          <TeamContext.Provider value={{
+            teamName: diaryPage.teamName,
+            serverUrl: diaryPage.serverUrl,
+          }}
+          >
+            <DiaryPage
+              date={diaryPage.date}
+              teamName={diaryPage.teamName}
+              teamReport={diaryPage.teamReport}
+            />
+          </TeamContext.Provider>
+          <ReportFooter onClick={this.toggleEdit} />
+        </Container>
+      );
+    }
+    return (
+      <Container>
+        <Editor
+          value={diaryPage}
+          allowedModes={['tree', 'code', 'form', 'text']}
+
+          onChange={this.updateDiaryPage}
+        />
+        <ReportFooter onClick={this.toggleEdit} />
+      </Container>
+    );
+  }
 }
