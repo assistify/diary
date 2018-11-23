@@ -10,6 +10,7 @@ COPY . /usr/src/app/
 
 RUN npm run build
 
-FROM pierrezemb/gostatic
+FROM abiosoft/caddy
 
-COPY --from=builder ./dist /srv/http
+# COPY --from=builder /usr/src/app/dist/ /srv/http
+COPY --from=builder /usr/src/app/dist /srv
