@@ -17,7 +17,7 @@
     "build": "node scripts/build.js",
     "lint": "eslint ./app",
     "lint-fix": "eslint ./app --fix",
-    "start": "webpack-dev-server --open"
+    "start": "node scripts/start.js"
   },
   "keywords": [],
   "author": "",
@@ -64,6 +64,7 @@
     "node-sass": "^4.10.0",
     "postcss-loader": "^3.0.0",
     "react-dev-utils": "^6.1.1",
+    "react-error-overlay": "^5.1.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "svg-url-loader": "^2.3.2",

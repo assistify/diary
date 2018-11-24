@@ -43,7 +43,7 @@ module.exports = {
   //   appPublic: resolveApp('public'),
   appIndexJs: resolveApp('app/client/index.jsx'),
   appHtml: resolveApp('app/client/index.html'),
-  //   appPackageJson: resolveApp('package.json'),
+  appPackageJson: resolveApp('package.json'),
   //   appSrc: resolveApp('app'),
   //   //   testsSetup: resolveApp('src/setupTests.js'),
   //   appNodeModules: resolveApp('node_modules'),

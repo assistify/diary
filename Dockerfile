@@ -12,5 +12,4 @@ RUN npm run build
 
 FROM abiosoft/caddy
 
-# COPY --from=builder /usr/src/app/dist/ /srv/http
 COPY --from=builder /usr/src/app/dist /srv
