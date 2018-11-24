@@ -18,11 +18,11 @@ module.exports = () => {
 
   return {
     mode: 'development',
-    entry: ['babel-polyfill', 'whatwg-fetch', './app/client/index.jsx'],
+    entry: ['babel-polyfill', 'whatwg-fetch', './src/client/index.jsx'],
     resolve: {
       extensions: ['.js', '.jsx'],
       alias: {
-        '~_variables.sass': path.resolve(__dirname, 'app/client/styles/variables.scss'),
+        '~_variables.sass': path.resolve(__dirname, 'src/client/styles/variables.scss'),
       },
     },
     output: {
@@ -66,7 +66,7 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './app/client/index.html'
+        template: './src/client/index.html'
       }),
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output

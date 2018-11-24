@@ -15,8 +15,8 @@
   },
   "scripts": {
     "build": "webpack",
-    "lint": "eslint ./app",
-    "lint-fix": "eslint ./app --fix",
+    "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix",
     "start": "webpack-dev-server --open"
   },
   "keywords": [],
