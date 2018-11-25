@@ -9,5 +9,8 @@
     &.blocking{
         border-left-color: red;
     }
+    & li {
+        margin-bottom: 5px;
+    }
 }
 
