@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import { PropTypes } from 'prop-types';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 import '../styles/index.scss';
 import Button from 'react-bulma-components/lib/components/button';
@@ -130,6 +132,16 @@ export default class Home extends Component {
     });
   }
 
+  generateStatefulUrl = () => {
+    const { diaryPage } = this.state;
+    const {
+      teamName, date, serverUrl, teamReport
+    } = diaryPage;
+    return `${window.location.origin}/?teamName=${teamName}`
+            + `&date=${date}&serverUrl=${serverUrl}`
+            + `&teamReport=${encodeURIComponent(JSON.stringify(teamReport))}`;
+  }
+
   render() {
     const { diaryPage, editing } = this.state;
 
@@ -158,6 +170,12 @@ export default class Home extends Component {
           allowedModes={['tree', 'code', 'form', 'text']}
           onChange={this.updateDiaryPage}
         />
+        <CopyToClipboard
+          text={this.generateStatefulUrl()}
+          onCopy={() => console.log('copied')}
+        >
+          <Button>Copy diary page as URL</Button>
+        </CopyToClipboard>
         <ReportFooter onClick={this.toggleEdit} />
       </Container>
     );
