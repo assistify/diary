@@ -151,7 +151,8 @@ export default class Home extends Component {
       } = diaryPage;
       const encodedTeamReport = await encode(JSON.stringify(teamReport));
       const url = `${window.location.origin}${window.location.pathname || '/'}?teamName=${teamName}`
-      + `&date=${new Date(date).toJSON()}&serverUrl=${serverUrl}`
+      + `&date=${typeof date === 'string' ? date : date.toJSON()}`
+      + `&serverUrl=${serverUrl}`
       + `&teamReport=${encodedTeamReport}`;
       copyToClipboard(url);
       return url;
@@ -178,6 +179,12 @@ export default class Home extends Component {
           </Container>
         );
       }
+
+      // we need to convert dates to strings in order to make them editable
+      if (diaryPage.date && typeof diaryPage.date !== 'string') {
+        diaryPage.date = diaryPage.date.toJSON();
+      }
+
       return (
         <Container>
           <Editor
