@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { JsonEditor as Editor } from 'jsoneditor-react';
-import { PropTypes } from 'prop-types';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
+import { PropTypes } from 'prop-types';
+import copyToClipboard from 'copy-to-clipboard';
+import { compressToEncodedURIComponent as encode, decompressFromEncodedURIComponent as decode } from 'lz-string';
 
 import '../styles/index.scss';
 import Button from 'react-bulma-components/lib/components/button';
@@ -84,11 +85,16 @@ export default class Home extends Component {
 
     this.state = {
       editing: false,
-      diaryPage: this.getInitialDiaryPage(props)
+      diaryPage: { } // provided asynchronously in componentDidMount
     };
   }
 
-  getInitialDiaryPage() {
+  async componentDidMount() {
+    const diaryPage = await this.getInitialDiaryPage();
+    this.setState({ editing: false, diaryPage });
+  }
+
+  async getInitialDiaryPage() {
     const { location } = this.props;
     const { search } = location;
     const queryParams = qs.parse(search, { ignoreQueryPrefix: true });
@@ -99,13 +105,19 @@ export default class Home extends Component {
     }
 
     if (queryParams.teamName) {
+      let teamReport;
+      try {
+        const decodedTeamReport = await decode(queryParams.teamReport);
+        teamReport = await JSON.parse(decodedTeamReport);
+      } catch (e) {
+        console.error(e);
+        teamReport = [];
+      }
       return {
         date: queryParams.date || new Date(),
         teamName: queryParams.teamName,
         serverUrl: queryParams.serverUrl || 'https://localhost:3000',
-        teamReport: queryParams.teamReport
-          ? JSON.parse(decodeURIComponent(queryParams.teamReport))
-          : [],
+        teamReport,
       };
     }
 
@@ -132,52 +144,56 @@ export default class Home extends Component {
     });
   }
 
-  generateStatefulUrl = () => {
-    const { diaryPage } = this.state;
-    const {
-      teamName, date, serverUrl, teamReport
-    } = diaryPage;
-    return `${window.location.origin}/?teamName=${teamName}`
-            + `&date=${date}&serverUrl=${serverUrl}`
-            + `&teamReport=${encodeURIComponent(JSON.stringify(teamReport))}`;
-  }
+    generateStatefulUrl = async () => {
+      const { diaryPage } = this.state;
+      const {
+        teamName, date, serverUrl, teamReport
+      } = diaryPage;
+      const encodedTeamReport = await encode(JSON.stringify(teamReport));
+      const url = `${window.location.origin}/?teamName=${teamName}`
+      + `&date=${new Date(date).toJSON()}&serverUrl=${serverUrl}`
+      + `&teamReport=${encodedTeamReport}`;
+      copyToClipboard(url);
+      const decompressed = await decode(encodedTeamReport);
+      return url;
+    }
 
-  render() {
-    const { diaryPage, editing } = this.state;
+    render() {
+      const { diaryPage, editing } = this.state;
 
-    if (!editing && diaryPage.teamName) {
+      if (!editing && diaryPage.teamName) {
+        return (
+          <Container>
+            <TeamContext.Provider value={{
+              teamName: diaryPage.teamName,
+              serverUrl: diaryPage.serverUrl,
+            }}
+            >
+              <DiaryPage
+                date={diaryPage.date}
+                teamName={diaryPage.teamName}
+                teamReport={diaryPage.teamReport}
+              />
+            </TeamContext.Provider>
+            <ReportFooter onClick={this.toggleEdit} />
+          </Container>
+        );
+      }
       return (
         <Container>
-          <TeamContext.Provider value={{
-            teamName: diaryPage.teamName,
-            serverUrl: diaryPage.serverUrl,
-          }}
-          >
-            <DiaryPage
-              date={diaryPage.date}
-              teamName={diaryPage.teamName}
-              teamReport={diaryPage.teamReport}
-            />
-          </TeamContext.Provider>
+          <Editor
+            value={diaryPage}
+            allowedModes={['tree', 'code', 'form', 'text']}
+            onChange={this.updateDiaryPage}
+          />
+          {/* <CopyToClipboard
+          text={this.generateStatefulUrl()}
+          onCopy={() => console.log('copied')}
+        > */}
+          <Button onClick={this.generateStatefulUrl}>Copy diary page as URL</Button>
+          {/* </CopyToClipboard> */}
           <ReportFooter onClick={this.toggleEdit} />
         </Container>
       );
     }
-    return (
-      <Container>
-        <Editor
-          value={diaryPage}
-          allowedModes={['tree', 'code', 'form', 'text']}
-          onChange={this.updateDiaryPage}
-        />
-        <CopyToClipboard
-          text={this.generateStatefulUrl()}
-          onCopy={() => console.log('copied')}
-        >
-          <Button>Copy diary page as URL</Button>
-        </CopyToClipboard>
-        <ReportFooter onClick={this.toggleEdit} />
-      </Container>
-    );
-  }
 }
