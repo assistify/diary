@@ -1,9 +1,9 @@
 const path = require('path');
 const webpack = require('webpack'); // remember to require this, because we DefinePlugin is a webpack plugin
-const paths = require('./paths');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const dotenv = require('dotenv');
+const paths = require('./paths');
 
 const devMode = process.env.NODE_ENV !== 'production';
 // call dotenv and it will return an Object with a parsed key
@@ -44,10 +44,9 @@ module.exports = {
     filename: 'static/js/[name].[chunkhash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     // We inferred the "public path" (such as / or /my-project) from homepage.
-    publicPath: publicPath,
+    publicPath,
     // Point sourcemap entries to original disk location
-    devtoolModuleFilenameTemplate: info =>
-      path.relative(paths.appSrc, info.absoluteResourcePath),
+    devtoolModuleFilenameTemplate: info => path.relative(paths.appSrc, info.absoluteResourcePath),
   },
   module: {
     rules: [{

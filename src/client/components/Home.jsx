@@ -8,9 +8,9 @@ import Container from 'react-bulma-components/lib/components/container';
 import Content from 'react-bulma-components/lib/components/content';
 import Footer from 'react-bulma-components/lib/components/footer';
 
+import qs from 'qs';
 import { TeamContext } from '../lib/teamContext';
 import DiaryPage from './DiaryPage';
-import qs from 'qs';
 import { localization } from '../lib/localization';
 
 import 'jsoneditor-react/es/editor.min.css';
@@ -81,13 +81,37 @@ export default class Home extends Component {
     localization();
 
     this.state = {
-        editing: false,
-        diaryPage: {
-        date: new Date(),
-        teamName: 'Team Name',
-        serverUrl: 'https://team-assistify-url',
-        teamReport: [],
-      },
+      editing: false,
+      diaryPage: this.getInitialDiaryPage(props)
+    };
+  }
+
+  getInitialDiaryPage() {
+    const { location } = this.props;
+    const { search } = location;
+    const queryParams = qs.parse(search, { ignoreQueryPrefix: true });
+
+    // interpret query parameters
+    if (queryParams.template === 'true') {
+      return templateData;
+    }
+
+    if (queryParams.teamName) {
+      return {
+        date: queryParams.date || new Date(),
+        teamName: queryParams.teamName,
+        serverUrl: queryParams.serverUrl || 'https://localhost:3000',
+        teamReport: queryParams.teamReport
+          ? JSON.parse(decodeURIComponent(queryParams.teamReport))
+          : [],
+      };
+    }
+
+    return {
+      date: new Date(),
+      teamName: 'Team Name',
+      serverUrl: 'https://team-assistify-url',
+      teamReport: [],
     };
   }
 
@@ -98,7 +122,7 @@ export default class Home extends Component {
 
   updateDiaryPage = (newState) => {
     // workaround for editing a date: convert if necessary
-    if(typeof newState.date === 'string') {
+    if (typeof newState.date === 'string') {
       newState.date = new Date(newState.date);
     }
     this.setState({
@@ -106,21 +130,10 @@ export default class Home extends Component {
     });
   }
 
-  componentDidMount() {
-    const { location } = this.props;
-    const { search } = location;
-    const queryParams = qs.parse(search, { ignoreQueryPrefix: true });
-
-    if(queryParams.template){
-      this.updateDiaryPage(templateData);
-      this.toggleEdit();
-    }
-  }
-
   render() {
     const { diaryPage, editing } = this.state;
 
-    if (!editing) {
+    if (!editing && diaryPage.teamName) {
       return (
         <Container>
           <TeamContext.Provider value={{
@@ -143,7 +156,6 @@ export default class Home extends Component {
         <Editor
           value={diaryPage}
           allowedModes={['tree', 'code', 'form', 'text']}
-
           onChange={this.updateDiaryPage}
         />
         <ReportFooter onClick={this.toggleEdit} />

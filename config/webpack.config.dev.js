@@ -1,9 +1,9 @@
 const path = require('path');
 const webpack = require('webpack'); // remember to require this, because we DefinePlugin is a webpack plugin
-const paths = require('./paths');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const dotenv = require('dotenv');
+const paths = require('./paths');
 
 const devMode = process.env.NODE_ENV !== 'production';
 // call dotenv and it will return an Object with a parsed key
@@ -26,8 +26,8 @@ const publicUrl = '';
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 module.exports = {
-    mode: 'development',
-    // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
+  mode: 'development',
+  // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
   devtool: 'cheap-module-source-map',
   // These are the "entry points" to our application.
@@ -57,77 +57,75 @@ module.exports = {
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
   ],
-    resolve: {
-      extensions: ['.js', '.jsx'],
-      alias: {
-        '~_variables.sass': path.resolve(__dirname, '../src/client/styles/variables.scss'),
-      },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias: {
+      '~_variables.sass': path.resolve(__dirname, '../src/client/styles/variables.scss'),
     },
-    output: {
-      // Next line is not used in dev but WebpackDevServer crashes without it:
-      path: paths.appBuild,
-      // Add /* filename */ comments to generated require()s in the output.
-      pathinfo: true,
-      // This does not produce a real file. It's just the virtual path that is
-      // served by WebpackDevServer in development. This is the JS bundle
-      // containing code from all our entry points, and the Webpack runtime.
-      filename: 'static/js/bundle.js',
-      // There are also additional JS chunk files if you use code splitting.
-      chunkFilename: 'static/js/[name].chunk.js',
-      // This is the URL that app is served from. We use "/" in development.
-      publicPath: publicPath,
-      // Point sourcemap entries to original disk location
-      devtoolModuleFilenameTemplate: info =>
-        path.resolve(info.absoluteResourcePath),
+  },
+  output: {
+    // Next line is not used in dev but WebpackDevServer crashes without it:
+    path: paths.appBuild,
+    // Add /* filename */ comments to generated require()s in the output.
+    pathinfo: true,
+    // This does not produce a real file. It's just the virtual path that is
+    // served by WebpackDevServer in development. This is the JS bundle
+    // containing code from all our entry points, and the Webpack runtime.
+    filename: 'static/js/bundle.js',
+    // There are also additional JS chunk files if you use code splitting.
+    chunkFilename: 'static/js/[name].chunk.js',
+    // This is the URL that app is served from. We use "/" in development.
+    publicPath,
+    // Point sourcemap entries to original disk location
+    devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath),
+  },
+  module: {
+    rules: [{
+      test: /.(js|jsx)$/,
+      use: 'babel-loader'
     },
-    module: {
-      rules: [{
-        test: /.(js|jsx)$/,
-        use: 'babel-loader'
-      },
-      // CSS / SASS
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          // 'postcss-loader',
-          'sass-loader',
-        ],
-      },
-      // SVG
-      {
-        test: /\.svg$/,
-        issuer: /\.s?css$/,
-        use: [
-          {
-            loader: 'babel-loader'
-          },
-          {
-            loader: 'svg-url-loader',
-            options: {
-              jsx: true // true outputs JSX tags
-            }
+    // CSS / SASS
+    {
+      test: /\.(sa|sc|c)ss$/,
+      use: [
+        devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+        'css-loader',
+        // 'postcss-loader',
+        'sass-loader',
+      ],
+    },
+    // SVG
+    {
+      test: /\.svg$/,
+      issuer: /\.s?css$/,
+      use: [
+        {
+          loader: 'babel-loader'
+        },
+        {
+          loader: 'svg-url-loader',
+          options: {
+            jsx: true // true outputs JSX tags
           }
-        ]
-      }
+        }
       ]
+    }
+    ]
 
-    },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: './src/client/index.html'
-      }),
-      new MiniCssExtractPlugin({
-        // Options similar to the same options in webpackOptions.output
-        // both options are optional
-        filename: devMode ? '[name].css' : '[name].[hash].css',
-        chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-      }),
-      new webpack.DefinePlugin(envKeys)
-    ],
-    devServer: {
-      historyApiFallback: true,
-    },
-    devtool: 'eval-source-map'
-  };
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/client/index.html'
+    }),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    }),
+    new webpack.DefinePlugin(envKeys)
+  ],
+  devServer: {
+    historyApiFallback: true,
+  },
+};
