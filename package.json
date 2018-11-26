@@ -52,6 +52,7 @@
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "babel-polyfill": "^6.26.0",
+    "copy-to-clipboard": "^3.0.8",
     "dateformat": "^3.0.3",
     "history": "^4.7.2",
     "jsoneditor": "^5.26.2",

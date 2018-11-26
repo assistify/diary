@@ -150,7 +150,7 @@ export default class Home extends Component {
         teamName, date, serverUrl, teamReport
       } = diaryPage;
       const encodedTeamReport = await encode(JSON.stringify(teamReport));
-      const url = `${window.location.origin}/?teamName=${teamName}`
+      const url = `${window.location.origin}${window.location.pathname || '/'}?teamName=${teamName}`
       + `&date=${new Date(date).toJSON()}&serverUrl=${serverUrl}`
       + `&teamReport=${encodedTeamReport}`;
       copyToClipboard(url);
