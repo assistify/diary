@@ -144,7 +144,7 @@ export default class Home extends Component {
     });
   }
 
-    generateStatefulUrl = async () => {
+    copyStatefulUrlToClipboard = async () => {
       const { diaryPage } = this.state;
       const {
         teamName, date, serverUrl, teamReport
@@ -154,7 +154,6 @@ export default class Home extends Component {
       + `&date=${new Date(date).toJSON()}&serverUrl=${serverUrl}`
       + `&teamReport=${encodedTeamReport}`;
       copyToClipboard(url);
-      const decompressed = await decode(encodedTeamReport);
       return url;
     }
 
@@ -187,10 +186,10 @@ export default class Home extends Component {
             onChange={this.updateDiaryPage}
           />
           {/* <CopyToClipboard
-          text={this.generateStatefulUrl()}
+          text={this.copyStatefulUrlToClipboard()}
           onCopy={() => console.log('copied')}
         > */}
-          <Button onClick={this.generateStatefulUrl}>Copy diary page as URL</Button>
+          <Button onClick={this.copyStatefulUrlToClipboard}>Copy diary page as URL</Button>
           {/* </CopyToClipboard> */}
           <ReportFooter onClick={this.toggleEdit} />
         </Container>
