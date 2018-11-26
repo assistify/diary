@@ -85,7 +85,7 @@ export default class Home extends Component {
 
     this.state = {
       editing: false,
-      diaryPage: { } // provided asynchronously in componentDidMount
+      diaryPage: { }// provided asynchronously in componentDidMount
     };
   }
 
@@ -114,7 +114,7 @@ export default class Home extends Component {
         teamReport = [];
       }
       return {
-        date: queryParams.date || new Date(),
+        date: new Date(queryParams.date) || new Date(),
         teamName: queryParams.teamName,
         serverUrl: queryParams.serverUrl || 'https://localhost:3000',
         teamReport,
