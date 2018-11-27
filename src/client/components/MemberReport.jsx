@@ -13,7 +13,7 @@ export default function MemberReport(props) {
   const {
     username, past, statusKnown
   } = props;
-  const { workedOnItems, completedItems, blockingItems } = past;
+  const { workingOnItems, completedItems, blockingItems } = past;
   if (statusKnown) {
     return (
       <Columns.Column renderAs="article" size={6}>
@@ -46,7 +46,7 @@ export default function MemberReport(props) {
             />
             <ActivityItems
               title="Beschäftigt mit"
-              list={workedOnItems}
+              list={workingOnItems}
               className="worked-on"
             />
           </Card.Content>

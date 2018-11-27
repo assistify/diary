@@ -33,7 +33,7 @@ const templateData = {
             details: 'hier könnten Details reingeschrieben werden - diese werden derzeit aber noch nicht visualisiert',
           }
         ],
-        workedOnItems: [
+        workingOnItems: [
           {
             title: 'Kurzbeschreibung',
             details: 'hier könnten Details reingeschrieben werden - diese werden derzeit aber noch nicht visualisiert',

@@ -4,7 +4,7 @@ import { activityItemType } from './activityItemType';
 const memberReportType = {
   username: PropTypes.string.isRequired,
   past: PropTypes.shape({
-    workedOnItems: PropTypes.arrayOf(PropTypes.shape(activityItemType)),
+    workingOnItems: PropTypes.arrayOf(PropTypes.shape(activityItemType)),
     completedItems: PropTypes.arrayOf(PropTypes.shape(activityItemType)),
     blockingItems: PropTypes.arrayOf(PropTypes.shape(activityItemType)),
   }).isRequired,
