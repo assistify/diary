@@ -25,7 +25,7 @@ export default class DiaryPage extends Component {
       <Container>
         <Hero className="diary-page" color="primary">
           <Hero.Body>
-            <Heading>
+            <Heading className="team-name">
               {this.teamName}
             </Heading>
             <Heading subtitle className="date">
