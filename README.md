@@ -28,3 +28,4 @@ Currently, the "application" works by editing the activities of a team using JSO
 - Simply click the button "made with... by assistify" at the bottom, this takes you to an editor. 
 Edit carefully. Clicking the same button takes you back.
 - Using a "copy URL"-button, you can create a URL which includes the complete state. This URL you can share with everybody
+- You can make the application generate a template by suffixing the URL your application is running with `?template=true`
