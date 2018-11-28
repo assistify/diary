@@ -39,3 +39,72 @@ it('renders correctly', () => {
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+
+it('aggregates correctly', () => {
+  const tree = renderer
+    .create(
+      <Future
+        teamReport={[
+          {
+            username: 'user1',
+            future: {
+              availability: 'irrelevant',
+              plannedItems: [
+                { title: 'planned 1', details: 'some details' }
+              ]
+            },
+            past: {
+              blockingItems: []
+            }
+          },
+          {
+            username: 'user2',
+            future: {
+              availability: 'irrelevant',
+              plannedItems: [
+                { title: 'planned 1', details: 'some details' }
+              ]
+            },
+            past: {
+              blockingItems: []
+            }
+          }
+        ]}
+      />
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders a placeholder if nothing\'s planned', () => {
+  const tree = renderer
+    .create(
+      <Future
+        teamReport={[
+          {
+            username: 'user1',
+            future: {
+              availability: 'irrelevant',
+              plannedItems: []
+            },
+            past: {
+              blockingItems: []
+            }
+          },
+          {
+            username: 'user2',
+            future: {
+              availability: 'irrelevant',
+              plannedItems: []
+            },
+            past: {
+              blockingItems: []
+            }
+          }
+        ]}
+      />
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});

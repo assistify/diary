@@ -1,5 +1,106 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`aggregates correctly 1`] = `
+<section
+  className="section c-future"
+  style={Object {}}
+>
+  <h1
+    className="title is-3"
+  >
+    Was ansteht
+  </h1>
+  <div
+    className="box c-activities next"
+    style={Object {}}
+  >
+    <h1
+      className="title is-6"
+    >
+      Geplante Tätigkeiten
+    </h1>
+    <ul>
+      <li>
+        planned 1
+        <span
+          className="container"
+          style={Object {}}
+        >
+          <span
+            className="content"
+            style={Object {}}
+          >
+             (
+          </span>
+          <span
+            className="container"
+            style={Object {}}
+          >
+            <a
+              className="c-user"
+              href="/direct/user1"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              @user1
+            </a>
+            <span
+              className="content"
+              style={Object {}}
+            >
+              , 
+            </span>
+          </span>
+          <span
+            className="container"
+            style={Object {}}
+          >
+            <a
+              className="c-user"
+              href="/direct/user2"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              @user2
+            </a>
+          </span>
+          <span
+            className="content"
+            style={Object {}}
+          >
+            )
+          </span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</section>
+`;
+
+exports[`renders a placeholder if nothing's planned 1`] = `
+<section
+  className="section c-future"
+  style={Object {}}
+>
+  <h1
+    className="title is-3"
+  >
+    Was ansteht
+  </h1>
+  <div
+    className="box"
+    style={Object {}}
+  >
+    <div
+      className="container no-planned-activities"
+      style={Object {}}
+    >
+      Bisher nichts geplant
+    </div>
+  </div>
+</section>
+`;
+
 exports[`renders correctly 1`] = `
 <section
   className="section c-future"

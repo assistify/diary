@@ -19,7 +19,7 @@ function ActivityItem(props) {
           <Container renderAs="span">
             <Content renderAs="span">&nbsp;(</Content>
             {owners.map((owner, i) => (
-              <Container key={title} renderAs="span">
+              <Container key={owner} renderAs="span">
                 <User username={owner} />
                 {owners.length > 1 && i !== (owners.length - 1)
             && <Content renderAs="span">,&nbsp;</Content>
