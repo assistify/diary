@@ -22,7 +22,7 @@ export default function MemberReport(props) {
           <Card.Header>
             <Card.Header.Title>
               <Avatar
-                size={32}
+                size={64}
                 username={username}
               />
               <User username={username} />
