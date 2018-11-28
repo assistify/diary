@@ -103,7 +103,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "ee:35:2d:c3:39:34:c4:23:0a:fa:d6:51:ea:9d:11:5c"
-            
+
       - attach_workspace:
           at: ~/repo
 
@@ -131,9 +131,21 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - test
-      - ui-test
+      - build:
+          filters:
+            branches: 
+              ignore:
+                - gh-pages
+      - test:
+          filters:
+            branches: 
+              ignore:
+                - gh-pages
+      - ui-test:
+          filters:
+            branches: 
+              ignore:
+                - gh-pages
       - deploy:
           requires:
             - build
