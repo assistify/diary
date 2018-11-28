@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
-import { JsonEditor as Editor } from 'jsoneditor-react';
-
-import { PropTypes } from 'prop-types';
-import copyToClipboard from 'copy-to-clipboard';
-import { compressToEncodedURIComponent as encode, decompressFromEncodedURIComponent as decode } from 'lz-string';
 
 import '../styles/index.scss';
-import Button from 'react-bulma-components/lib/components/button';
 import Container from 'react-bulma-components/lib/components/container';
-import Content from 'react-bulma-components/lib/components/content';
-import Footer from 'react-bulma-components/lib/components/footer';
+import { decompressFromEncodedURIComponent as decode } from 'lz-string';
 
 import qs from 'qs';
 import { TeamContext } from '../lib/teamContext';
 import DiaryPage from './DiaryPage';
+import Editor from './Editor';
 import { localization } from '../lib/localization';
 
 import 'jsoneditor-react/es/editor.min.css';
+import ReportFooter from './ReportFooter';
 
 const templateData = {
   date: '2018-11-23T00:00:00.000Z',
@@ -59,24 +54,6 @@ const templateData = {
   ]
 };
 
-function ReportFooter(props) {
-  const { onClick } = props;
-  return (
-    <Footer>
-      <Container>
-        <Content style={{ textAlign: 'center' }}>
-          <Button onClick={onClick}>
-            Made with ❤ by the Assistify Team
-          </Button>
-        </Content>
-      </Container>
-    </Footer>
-  );
-}
-ReportFooter.propTypes = {
-  onClick: PropTypes.func.isRequired
-};
-
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -114,9 +91,9 @@ export default class Home extends Component {
         teamReport = [];
       }
       return {
-        date: new Date(queryParams.date) || new Date(),
-        teamName: queryParams.teamName,
-        serverUrl: queryParams.serverUrl || 'https://localhost:3000',
+        date: queryParams.date ? new Date(decode(queryParams.date)) : new Date(),
+        teamName: decode(queryParams.teamName),
+        serverUrl: queryParams.serverUrl ? decode(queryParams.serverUrl) : 'https://localhost:3000',
         teamReport,
       };
     }
@@ -144,62 +121,39 @@ export default class Home extends Component {
     });
   }
 
-    copyStatefulUrlToClipboard = async () => {
-      const { diaryPage } = this.state;
-      const {
-        teamName, date, serverUrl, teamReport
-      } = diaryPage;
-      const encodedTeamReport = await encode(JSON.stringify(teamReport));
-      const url = `${window.location.origin}${window.location.pathname || '/'}?teamName=${teamName}`
-      + `&date=${typeof date === 'string' ? date : date.toJSON()}`
-      + `&serverUrl=${serverUrl}`
-      + `&teamReport=${encodedTeamReport}`;
-      copyToClipboard(url);
-      return url;
-    }
+  render() {
+    const { diaryPage, editing } = this.state;
 
-    render() {
-      const { diaryPage, editing } = this.state;
-
-      if (!editing && diaryPage.teamName) {
-        return (
-          <Container>
-            <TeamContext.Provider value={{
-              teamName: diaryPage.teamName,
-              serverUrl: diaryPage.serverUrl,
-            }}
-            >
-              <DiaryPage
-                date={diaryPage.date}
-                teamName={diaryPage.teamName}
-                teamReport={diaryPage.teamReport}
-              />
-            </TeamContext.Provider>
-            <ReportFooter onClick={this.toggleEdit} />
-          </Container>
-        );
-      }
-
-      // we need to convert dates to strings in order to make them editable
-      if (diaryPage.date && typeof diaryPage.date !== 'string') {
-        diaryPage.date = diaryPage.date.toJSON();
-      }
-
+    if (!editing && diaryPage.teamName) {
       return (
         <Container>
-          <Editor
-            value={diaryPage}
-            allowedModes={['tree', 'code', 'form', 'text']}
-            onChange={this.updateDiaryPage}
-          />
-          {/* <CopyToClipboard
-          text={this.copyStatefulUrlToClipboard()}
-          onCopy={() => console.log('copied')}
-        > */}
-          <Button onClick={this.copyStatefulUrlToClipboard}>Copy diary page as URL</Button>
-          {/* </CopyToClipboard> */}
+          <TeamContext.Provider value={{
+            teamName: diaryPage.teamName,
+            serverUrl: diaryPage.serverUrl,
+          }}
+          >
+            <DiaryPage
+              date={diaryPage.date}
+              teamName={diaryPage.teamName}
+              teamReport={diaryPage.teamReport}
+            />
+          </TeamContext.Provider>
           <ReportFooter onClick={this.toggleEdit} />
         </Container>
       );
     }
+
+    // we need to convert dates to strings in order to make them editable
+    if (diaryPage.date && typeof diaryPage.date !== 'string') {
+      diaryPage.date = diaryPage.date.toJSON();
+    }
+
+    return (
+      <Editor
+        diaryPage={diaryPage}
+        onChange={this.updateDiaryPage}
+        onFooterClick={this.toggleEdit}
+      />
+    );
+  }
 }
