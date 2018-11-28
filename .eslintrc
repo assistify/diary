@@ -10,7 +10,8 @@
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "plugins": [
     "react",
@@ -27,6 +28,16 @@
     "jsx-a11y/label-has-for": "off",
     "no-plusplus": "off"
   },
+  "overrides": [
+    {
+      // jest and testcafe specific patterns
+      "files": [ "src/client/**/*.test.*" ],
+      "rules": {
+        "no-undef": 0,
+        "no-unused-expressions": 0
+      }
+    }
+  ],
   "settings": {
     "react": {
       "pragma": "React",

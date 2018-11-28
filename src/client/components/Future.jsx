@@ -7,7 +7,6 @@ import Box from 'react-bulma-components/lib/components/box';
 import Container from 'react-bulma-components/lib/components/container';
 import ActivityItems from './Activity';
 import { memberReportType } from '../../models/memberReportType';
-import Availabilities from './Availability';
 
 export default function Future(props) {
   const { teamReport } = props;
@@ -28,7 +27,7 @@ export default function Future(props) {
   );
 
   const aggregatedItems = allPlannedItems.reduce((aggregated, item) => {
-    const sameTitleItemIndex = aggregated.findIndex(aggregatedItem => aggregatedItem.title === item.title);
+    const sameTitleItemIndex = aggregated.findIndex(aggregatedItem => aggregatedItem.title === item.title); // eslint-disable-line max-len
     if (sameTitleItemIndex >= 0) {
       aggregated[sameTitleItemIndex].owners.push(...item.owners);
     } else {

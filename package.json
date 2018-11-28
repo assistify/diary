@@ -20,9 +20,12 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "lint": "eslint ./src",
+    "lint-all": "eslint .",
+    "lint-fix": "eslint . --fix",
     "test": "node scripts/test.js --env=jsdom",
     "coverage": "node scripts/test.js --env=jsdom --coverage",
-    "ui-test": "testcafe chrome test/scripts/*.test.js --app 'npm run start' --app-init-delay 8000",
+    "ui-test": "testcafe chrome test/scripts/*.test.js --app 'npm run start' --app-init-delay 10000",
     "predeploy": "PUBLIC_URL=https://assistify.github.io/diary npm run build",
     "deploy": "gh-pages -d build"
   },

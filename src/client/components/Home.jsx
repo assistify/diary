@@ -110,7 +110,7 @@ export default class Home extends Component {
         const decodedTeamReport = await decode(queryParams.teamReport);
         teamReport = await JSON.parse(decodedTeamReport);
       } catch (e) {
-        console.error(e);
+        console.error(e); // eslint-disable-line no-console
         teamReport = [];
       }
       return {
@@ -137,7 +137,7 @@ export default class Home extends Component {
   updateDiaryPage = (newState) => {
     // workaround for editing a date: convert if necessary
     if (typeof newState.date === 'string') {
-      newState.date = new Date(newState.date);
+      newState.date = new Date(newState.date); // eslint-disable-line no-param-reassign
     }
     this.setState({
       diaryPage: newState

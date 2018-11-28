@@ -2,29 +2,21 @@ const path = require('path');
 const webpack = require('webpack'); // remember to require this, because we DefinePlugin is a webpack plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const dotenv = require('dotenv');
+const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
 const devMode = process.env.NODE_ENV !== 'production';
-// call dotenv and it will return an Object with a parsed key
-const env = dotenv.config().parsed;
-
-// reduce it to a nice object, the same as before
-const envKeys = Object.keys(env).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(env[next]);
-  return prev;
-}, {});
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
 const publicPath = paths.servedPath;
-// Some apps do not use client-side routing with pushState.
-// For these, "homepage" can be set to "." to enable relative asset paths.
-const shouldUseRelativeAssetPaths = publicPath === './';
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
 const publicUrl = publicPath.slice(0, -1);
+
+// Get environment variables to inject into our app.
+const env = getClientEnvironment(publicUrl);
 
 module.exports = {
   mode: 'development',
@@ -92,7 +84,11 @@ module.exports = {
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
-    new webpack.DefinePlugin(envKeys)
+    // Makes some environment variables available to the JS code, for example:
+    // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
+    // It is absolutely essential that NODE_ENV was set to production here.
+    // Otherwise React will be compiled in the very slow development mode.
+    new webpack.DefinePlugin(env.stringified),
   ],
   devServer: {
     historyApiFallback: true,

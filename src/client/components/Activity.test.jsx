@@ -21,11 +21,11 @@ it('renders a list correctly', () => {
 it('does not render an empty list', () => {
   const tree = renderer
     .create(
-        <ActivityItems
-          title="empty"
-          list={[]}
-          className="sample"
-        />
+      <ActivityItems
+        title="empty"
+        list={[]}
+        className="sample"
+      />
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

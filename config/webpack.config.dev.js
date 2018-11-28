@@ -2,18 +2,10 @@ const path = require('path');
 const webpack = require('webpack'); // remember to require this, because we DefinePlugin is a webpack plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const dotenv = require('dotenv');
 const paths = require('./paths');
+const getClientEnvironment = require('./env');
 
 const devMode = process.env.NODE_ENV !== 'production';
-// call dotenv and it will return an Object with a parsed key
-const env = dotenv.config().parsed;
-
-// reduce it to a nice object, the same as before
-const envKeys = Object.keys(env).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(env[next]);
-  return prev;
-}, {});
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -22,6 +14,9 @@ const publicPath = '/';
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
 const publicUrl = '';
+
+// Get environment variables to inject into our app.
+const env = getClientEnvironment(publicUrl);
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -123,7 +118,9 @@ module.exports = {
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
-    new webpack.DefinePlugin(envKeys)
+    // Makes some environment variables available to the JS code, for example:
+    // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
+    new webpack.DefinePlugin(env.stringified),
   ],
   devServer: {
     historyApiFallback: true,

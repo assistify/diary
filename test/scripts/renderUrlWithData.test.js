@@ -2,8 +2,8 @@ import { Selector } from 'testcafe';
 
 import { sampleUrl } from '../data/fullTeamData';
 
-fixture`Render with data`
-  .page`${sampleUrl}`;
+fixture`Render with data` // eslint-disable-line no-undef, no-unused-expressions
+  .page`${sampleUrl}`; // eslint-disable-line no-unused-expressions
 
 
 test('Header: Team-Name as title', async (t) => {

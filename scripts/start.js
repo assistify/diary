@@ -66,6 +66,7 @@ choosePort(HOST, DEFAULT_PORT)
     );
     const devServer = new WebpackDevServer(compiler, serverConfig);
     // Launch WebpackDevServer.
+    // eslint-disable-next-line consistent-return
     devServer.listen(port, HOST, (err) => {
       if (err) {
         return console.log(err);
@@ -78,7 +79,7 @@ choosePort(HOST, DEFAULT_PORT)
     });
 
     ['SIGINT', 'SIGTERM'].forEach((sig) => {
-      process.on(sig, function() {
+      process.on(sig, () => {
         devServer.close();
         process.exit();
       });
