@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { TeamContext } from '../lib/teamContext';
 
-export default function User(props) {
-  const { username } = props;
-  return (
-    <TeamContext.Consumer>
-      { teamContext => (
-        <a
-          className="c-user"
-          href={`${teamContext.serverUrl}/direct/${username}`}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          {`@${username}`}
-        </a>
-      )}
-    </TeamContext.Consumer>
-  );
+export default class User extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...props
+    };
+  }
+
+  render() {
+    const { username } = this.state;
+    return (
+      <TeamContext.Consumer>
+        { teamContext => (
+          <a
+            className="c-user"
+            href={`${teamContext.serverUrl}/direct/${username}`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {`@${username}`}
+          </a>
+        )}
+      </TeamContext.Consumer>
+    );
+  }
 }
 
 User.propTypes = {
