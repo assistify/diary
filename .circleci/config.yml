@@ -60,12 +60,11 @@ jobs:
 
       # run tests!
       - run: npm run test
-      - run: npm run ui-test
 
       - store_test_results:
           path: /tmp/test-results/unit
 
-  ui-test:
+  uitest:
     docker:
       - image: circleci/node:7.10-browsers
       
@@ -117,7 +116,7 @@ workflows:
           requires:
             - build
             - test
-            - ui-test
+            - uitest
           filters:
             branches: 
               only:
