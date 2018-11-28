@@ -9,6 +9,8 @@ export default class Avatar extends Component {
       username: PropTypes.string.isRequired
     }
 
+    static contextType = TeamContext;
+
     constructor(props) {
       super(props);
       this.state = {
@@ -20,11 +22,11 @@ export default class Avatar extends Component {
       const { username } = this.state;
       return (
 
-      <TeamContext.Consumer>
-        {teamContext => (
-          <Image size={128} className="avatar" alt={username} src={`${teamContext.serverUrl}/avatar/${username}`} fallback="http://bulma.io/images/placeholders/128x128.png" />
-        )}
-      </TeamContext.Consumer>
+        <TeamContext.Consumer>
+          {teamContext => (
+            <Image size={128} className="avatar" alt={username} src={`${teamContext.serverUrl}/avatar/${username}`} fallback="http://bulma.io/images/placeholders/128x128.png" />
+          )}
+        </TeamContext.Consumer>
       );
     }
 }

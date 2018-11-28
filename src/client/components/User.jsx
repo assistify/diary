@@ -3,10 +3,16 @@ import { PropTypes } from 'prop-types';
 import { TeamContext } from '../lib/teamContext';
 
 export default class User extends Component {
+  static propTypes = {
+    username: PropTypes.string.isRequired
+  }
+
+  static contextType = TeamContext;
+
   constructor(props) {
     super(props);
     this.state = {
-      ...props
+      username: props.username
     };
   }
 
@@ -28,9 +34,3 @@ export default class User extends Component {
     );
   }
 }
-
-User.propTypes = {
-  username: PropTypes.string.isRequired
-};
-
-User.contextType = TeamContext;
