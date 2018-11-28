@@ -6,6 +6,7 @@ import Hero from 'react-bulma-components/lib/components/hero';
 import Container from 'react-bulma-components/lib/components/container';
 
 import { dailyType } from '../../models/dailyType';
+import Availabilities from './Availability';
 import Future from './Future';
 import Past from './Past';
 
@@ -33,6 +34,14 @@ export default class DiaryPage extends Component {
             </Heading>
           </Hero.Body>
         </Hero>
+        <Availabilities
+          members={this.teamReport.map(memberReport => ({
+            username: memberReport.username,
+            availability: memberReport.future.availability,
+            statusKnown: memberReport.statusKnown,
+            blocked: memberReport.past.blockingItems && memberReport.past.blockingItems.length > 0
+          }))}
+        />
         <Future teamReport={this.teamReport} />
         <Past teamReport={this.teamReport} />
       </Container>

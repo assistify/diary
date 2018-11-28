@@ -3,6 +3,8 @@ import { PropTypes } from 'prop-types';
 
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
+import Box from 'react-bulma-components/lib/components/box';
+import Container from 'react-bulma-components/lib/components/container';
 import ActivityItems from './Activity';
 import { memberReportType } from '../../models/memberReportType';
 import Availabilities from './Availability';
@@ -39,22 +41,23 @@ export default function Future(props) {
   return (
     <Section className="c-future">
 
-      <Availabilities
-        members={teamReport.map(memberReport => ({
-          username: memberReport.username,
-          availability: memberReport.future.availability,
-          statusKnown: memberReport.statusKnown,
-          blocked: memberReport.past.blockingItems && memberReport.past.blockingItems.length > 0
-        }))}
-      />
-
       <Heading size={3}>Was ansteht</Heading>
 
-      <ActivityItems
-        title="Geplante Tätigkeiten"
-        list={aggregatedItems}
-        className="next"
-      />
+      {
+        aggregatedItems.length > 0
+          ? (
+            <ActivityItems
+              title="Geplante Tätigkeiten"
+              list={aggregatedItems}
+              className="next"
+            />
+          )
+          : (
+            <Box>
+              <Container className="no-planned-activities">Bisher nichts geplant</Container>
+            </Box>
+          )
+      }
     </Section>
 
   );

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`does not render an empty list 1`] = `null`;
+
+exports[`renders a list correctly 1`] = `
+<div
+  className="box c-activities sample"
+  style={Object {}}
+>
+  <h1
+    className="title is-6"
+  >
+    sample
+  </h1>
+  <ul>
+    <li>
+      sample title 1
+    </li>
+    <li>
+      sample title 2
+    </li>
+  </ul>
+</div>
+`;

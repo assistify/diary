@@ -21,6 +21,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
+    "coverage": "node scripts/test.js --env=jsdom --coverage",
     "ui-test": "testcafe chrome test/scripts/*.test.js --app 'npm run start' --app-init-delay 8000",
     "predeploy": "PUBLIC_URL=https://assistify.github.io/diary npm run build",
     "deploy": "gh-pages -d build"
@@ -33,8 +34,8 @@
       "<rootDir>/config/polyfills.js"
     ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.js?(x)",
-      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
+      "<rootDir>/src/client/**/__tests__/**/*.js?(x)",
+      "<rootDir>/src/client/**/?(*.)(spec|test).js?(x)"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
@@ -73,14 +74,15 @@
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.2",
+    "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "20.0.3",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "case-sensitive-paths-webpack-plugin": "1.1.4",
     "chalk": "1.1.3",
@@ -100,7 +102,7 @@
     "fs-extra": "3.0.1",
     "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
-    "jest": "20.0.3",
+    "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
     "object-assign": "4.1.1",
@@ -109,6 +111,8 @@
     "promise": "7.1.1",
     "react-dev-utils": "^3.0.0",
     "react-error-overlay": "^1.0.7",
+    "react-test-renderer": "^16.6.3",
+    "regenerator-runtime": "^0.13.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "svg-url-loader": "^2.3.2",

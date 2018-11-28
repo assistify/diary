@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<article
+  className="media"
+  style={Object {}}
+>
+  <div
+    className="container"
+    style={Object {}}
+  >
+    <figure
+      className="media-left"
+      style={Object {}}
+    >
+      <figure
+        className="image avatar is-128x128"
+        style={Object {}}
+      >
+        <img
+          alt="testuser"
+          onError={[Function]}
+          src="/avatar/testuser"
+        />
+      </figure>
+    </figure>
+  </div>
+  <div
+    className="container"
+    style={
+      Object {
+        "margin": "auto",
+      }
+    }
+  >
+    <div
+      className="media-content"
+      style={Object {}}
+    >
+      <h1
+        className="title is-5"
+      >
+        <a
+          className="c-user"
+          href="/direct/testuser"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          @testuser
+        </a>
+      </h1>
+      <div
+        className="container"
+        style={Object {}}
+      >
+        <div
+          className="sampleChild"
+        >
+          sample Child should be rendered
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+`;

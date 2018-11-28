@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<section
+  className="section c-availabilities"
+  style={Object {}}
+>
+  <h1
+    className="title is-3"
+  >
+    Verfügbarkeit
+  </h1>
+  <div
+    className="columns is-multiline is-centered"
+    style={Object {}}
+  >
+    <div
+      className="status-known column is-4"
+      style={Object {}}
+    >
+      <article
+        className="media"
+        style={Object {}}
+      >
+        <div
+          className="container"
+          style={Object {}}
+        >
+          <figure
+            className="media-left"
+            style={Object {}}
+          >
+            <figure
+              className="image avatar is-128x128"
+              style={Object {}}
+            >
+              <img
+                alt="user1"
+                onError={[Function]}
+                src="/avatar/user1"
+              />
+            </figure>
+          </figure>
+        </div>
+        <div
+          className="container"
+          style={
+            Object {
+              "margin": "auto",
+            }
+          }
+        >
+          <div
+            className="media-content"
+            style={Object {}}
+          >
+            <h1
+              className="title is-5"
+            >
+              <a
+                className="c-user"
+                href="/direct/user1"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                @user1
+              </a>
+            </h1>
+            <div
+              className="container"
+              style={Object {}}
+            >
+              <span
+                className="tags"
+                style={Object {}}
+              >
+                <span
+                  className="tag blocked"
+                  style={Object {}}
+                >
+                  Blockiert
+                </span>
+                <span
+                  className="tag is-primary"
+                  style={Object {}}
+                >
+                  here
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div
+      className="status-unknown column is-4"
+      style={Object {}}
+    >
+      <article
+        className="media"
+        style={Object {}}
+      >
+        <div
+          className="container"
+          style={Object {}}
+        >
+          <figure
+            className="media-left"
+            style={Object {}}
+          >
+            <figure
+              className="image avatar is-128x128"
+              style={Object {}}
+            >
+              <img
+                alt="user2"
+                onError={[Function]}
+                src="/avatar/user2"
+              />
+            </figure>
+          </figure>
+        </div>
+        <div
+          className="container"
+          style={
+            Object {
+              "margin": "auto",
+            }
+          }
+        >
+          <div
+            className="media-content"
+            style={Object {}}
+          >
+            <h1
+              className="title is-5"
+            >
+              <a
+                className="c-user"
+                href="/direct/user2"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                @user2
+              </a>
+            </h1>
+            <div
+              className="container"
+              style={Object {}}
+            >
+              <span
+                className="tags"
+                style={Object {}}
+              >
+                <span
+                  className="tag is-primary"
+                  style={Object {}}
+                >
+                  
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+`;

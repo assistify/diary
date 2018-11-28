@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import Heading from 'react-bulma-components/lib/components/heading';
-import Container from 'react-bulma-components/lib/components/container';
+import Section from 'react-bulma-components/lib/components/section';
 import Columns from 'react-bulma-components/lib/components/columns';
 import Tag from 'react-bulma-components/lib/components/tag';
 import UserFactsheet from './UserFactsheet';
@@ -12,7 +12,7 @@ export default function Availabilities(props) {
   } = props;
 
   return (
-    <Container className="c-availabilities">
+    <Section className="c-availabilities">
       <Heading size={3}>Verfügbarkeit</Heading>
 
       <Columns multiline centered>
@@ -33,7 +33,7 @@ export default function Availabilities(props) {
         ))
       }
       </Columns>
-    </Container>
+    </Section>
   );
 }
 
