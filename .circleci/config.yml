@@ -100,6 +100,10 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "ee:35:2d:c3:39:34:c4:23:0a:fa:d6:51:ea:9d:11:5c"
+            
       - attach_workspace:
           at: ~/repo
 
@@ -113,13 +117,13 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
-      - run: git config --global user.email $GH_EMAIL
-      - run: git config --global user.name $GH_NAME
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: git config --global user.email $GH_EMAIL && git config --global user.name $GH_NAME
 
       - run: npm run deploy
 
