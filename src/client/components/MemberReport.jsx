@@ -45,7 +45,7 @@ export default function MemberReport(props) {
               className="completed"
             />
             <ActivityItems
-              title="Beschäftigt mit"
+              title="Arbeitet an"
               list={workingOnItems}
               className="worked-on"
             />

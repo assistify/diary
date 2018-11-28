@@ -8,7 +8,11 @@
     margin-top: 0px;
 }
 
-.tag.blocked {
-    border: 3px solid $red;
-    background-color: $white;
+.tag{
+    font-weight: 700;
+
+    &.blocked {
+        color:  white;
+        background-color: $secondary;
+    }
 }

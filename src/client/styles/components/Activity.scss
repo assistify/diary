@@ -1,13 +1,13 @@
 .c-activities{
     border-left: 6px solid;
     &.worked-on{
-        border-left-color: orange;
+        border-left-color: goldenrod;
     }
     &.completed{
-        border-left-color: green;
+        border-left-color: rgb(3, 98, 90);
     }
     &.blocking{
-        border-left-color: red;
+        border-left-color: $secondary;
     }
     & li {
         margin-bottom: 10px;
