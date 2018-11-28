@@ -28,6 +28,8 @@ jobs:
 
       - run: npm install
 
+      - run: npm build
+
       - save_cache:
           paths:
             - node_modules
@@ -50,7 +52,7 @@ jobs:
 
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: ~/repo/build
 
       - checkout
 
