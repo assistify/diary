@@ -1,5 +1,7 @@
 .c-activities{
     border-left: 6px solid;
+    overflow: hidden;
+
     &.worked-on{
         border-left-color: goldenrod;
     }
@@ -12,7 +14,10 @@
     & li {
         margin-bottom: 10px;
         margin-left: 20px;
-        list-style: square;
+
+        // Indent after the second line
+        padding-left: 1.5em;
+        text-indent:-1.5em;
     }
 }
 
