@@ -960,7 +960,9 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   .c-activities.blocking {
     border-left-color: #d4145a; }
   .c-activities li {
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    margin-left: 20px;
+    list-style: square; }
 
 .c-availabilities {
   padding-bottom: 30px; }
