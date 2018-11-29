@@ -51,12 +51,7 @@ export default class Editor extends Component {
           allowedModes={['tree', 'code', 'form', 'text']}
           onChange={onChange}
         />
-        {/* <CopyToClipboard
-          text={this.copyStatefulUrlToClipboard()}
-          onCopy={() => console.log('copied')}
-        > */}
-        <Button onClick={this.copyStatefulUrlToClipboard}>Copy diary page as URL</Button>
-        {/* </CopyToClipboard> */}
+        <Button className="js-copy-url-to-clipboard" onClick={this.copyStatefulUrlToClipboard}>Copy diary page as URL</Button>
         <ReportFooter onClick={onFooterClick} />
       </Container>
     );

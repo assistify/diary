@@ -2,8 +2,8 @@ import { Selector } from 'testcafe';
 
 import { sampleUrl } from '../data/fullTeamData';
 
-fixture`Render with data` // eslint-disable-line no-undef, no-unused-expressions
-  .page`${sampleUrl}`; // eslint-disable-line no-unused-expressions
+fixture('Render with data') // eslint-disable-line no-undef, no-unused-expressions
+  .page(sampleUrl); // eslint-disable-line no-unused-expressions
 
 
 test('Header: Team-Name as title', async (t) => {
@@ -26,4 +26,13 @@ test('Team overview: user1 in availability overview', async (t) => {
 test('Team report: Next activities', async (t) => {
   await t
     .expect(Selector('.c-activities.next li').textContent).eql('title-planned (@user1, @user2)');
+});
+
+test('Should switch to Editor', async (t) => {
+  await t
+    .click('.js-toggle-editor');
+
+  const jsonEditor = await Selector('.jsoneditor');
+
+  await t.expect(jsonEditor).ok('Editor opened');
 });

@@ -12,7 +12,7 @@ export default function ReportFooter(props) {
     <Footer>
       <Container>
         <Content style={{ textAlign: 'center' }}>
-          <Button onClick={onClick}>
+          <Button className="js-toggle-editor" onClick={onClick}>
               Made with ❤ by the Assistify Team
           </Button>
         </Content>
