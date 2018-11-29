@@ -134,18 +134,15 @@ workflows:
       - build:
           filters:
             branches: 
-              ignore:
-                - gh-pages
+              ignore: gh-pages
       - test:
           filters:
             branches: 
-              ignore:
-                - gh-pages
+              ignore: gh-pages
       - ui-test:
           filters:
             branches: 
-              ignore:
-                - gh-pages
+              ignore: gh-pages
       - deploy:
           requires:
             - build
