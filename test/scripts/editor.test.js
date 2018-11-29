@@ -24,11 +24,13 @@ test('Should switch to code mode', async (t) => {
     .click('.jsoneditor-menu .jsoneditor-menu :nth-child(3) button');
 });
 
-test('Should change the team name', async (t) => {
+test.skip('Should change the team name', async (t) => {
   const teamNameInput = Selector('.jsoneditor-tree table > tbody > tr:nth-child(3) > td:nth-child(3) > table > tbody > tr > td:nth-child(4) > div');
   const suffix = '-dummy';
   await t
-    .typeText(teamNameInput, suffix)
+    .typeText(teamNameInput, suffix);
+
+  await t
     .click('.js-toggle-editor')
     .expect(Selector('.team-name').innerText).contains(suffix);
 });
