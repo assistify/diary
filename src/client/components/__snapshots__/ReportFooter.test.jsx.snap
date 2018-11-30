@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="footer"
+  style={Object {}}
+>
+  <div
+    className="container"
+    style={Object {}}
+  >
+    <div
+      className="content"
+      style={
+        Object {
+          "textAlign": "center",
+        }
+      }
+    >
+      <button
+        className="js-toggle-editor button"
+        disabled={false}
+        onClick={[Function]}
+        style={Object {}}
+        tabIndex={0}
+      >
+        Made with ❤ by the Assistify Team
+      </button>
+    </div>
+  </div>
+</div>
+`;
