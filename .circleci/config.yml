@@ -131,18 +131,9 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build:
-          filters:
-            branches: 
-              ignore: gh-pages
-      - test:
-          filters:
-            branches: 
-              ignore: gh-pages
-      - ui-test:
-          filters:
-            branches: 
-              ignore: gh-pages
+      - build
+      - test
+      - ui-test
       - deploy:
           requires:
             - build
