@@ -19,4 +19,8 @@
         color:  white;
         background-color: $secondary;
     }
+
+    &.wrapped {
+        max-width: 200px;
+    }
 }
