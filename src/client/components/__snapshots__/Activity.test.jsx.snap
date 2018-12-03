@@ -14,10 +14,22 @@ exports[`renders a list correctly 1`] = `
   </h1>
   <ul>
     <li>
-      sample title 1
+      <span
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "sample title 1",
+          }
+        }
+      />
     </li>
     <li>
-      sample title 2
+      <span
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "sample title 2",
+          }
+        }
+      />
     </li>
   </ul>
 </div>
