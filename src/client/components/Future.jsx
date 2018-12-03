@@ -13,7 +13,7 @@ export default function Future(props) {
 
   const allPlannedItems = teamReport.reduce(
     (all, memberReport) => {
-      const plannedBy = memberReport.future.plannedItems
+      const plannedBy = memberReport.statusKnown && memberReport.future.plannedItems
         ? memberReport.future.plannedItems.map(plannedItem => ({
           title: plannedItem.title,
           details: plannedItem.details,
