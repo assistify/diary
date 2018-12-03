@@ -72,6 +72,7 @@ exports[`renders correctly 1`] = `
             >
               <span
                 className="tags"
+                renderAs="div"
                 style={Object {}}
               >
                 <span
@@ -80,17 +81,12 @@ exports[`renders correctly 1`] = `
                 >
                   Blockiert
                 </span>
-                <span
-                  className="tag is-primary"
+                <div
+                  className="tag wrapped is-primary"
                   style={Object {}}
                 >
-                  <div
-                    className="container"
-                    style={Object {}}
-                  >
-                    here
-                  </div>
-                </span>
+                  here
+                </div>
               </span>
             </div>
           </div>
@@ -155,19 +151,15 @@ exports[`renders correctly 1`] = `
             >
               <span
                 className="tags"
+                renderAs="div"
                 style={Object {}}
               >
-                <span
-                  className="tag is-primary"
+                <div
+                  className="tag wrapped is-primary"
                   style={Object {}}
                 >
-                  <div
-                    className="container"
-                    style={Object {}}
-                  >
-                    
-                  </div>
-                </span>
+                  
+                </div>
               </span>
             </div>
           </div>
