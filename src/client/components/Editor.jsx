@@ -10,24 +10,9 @@ import ReportFooter from './ReportFooter';
 import { dailyType } from '../../models/dailyType';
 
 
-export default class Editor extends Component {
-  static propTypes = {
-    diaryPage: PropTypes.shape(dailyType).isRequired,
-    onChange: PropTypes.func.isRequired,
-    onFooterClick: PropTypes.func.isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      diaryPage: props.diaryPage,
-      onChange: props.onChange,
-      onFooterClick: props.onFooterClick,
-    };
-  }
-
-  copyStatefulUrlToClipboard = async () => {
-    const { diaryPage } = this.state;
+export default function Editor(props) {
+  const copyStatefulUrlToClipboard = async () => {
+    const { diaryPage } = props;
     const {
       teamName, date, serverUrl, teamReport
     } = diaryPage;
@@ -41,19 +26,28 @@ export default class Editor extends Component {
     return url;
   };
 
-  render() {
-    const { diaryPage, onChange, onFooterClick } = this.state;
+  const { diaryPage, onChange, onFooterClick } = props;
 
-    return (
-      <Container>
-        <JsonEditor
-          value={diaryPage}
-          allowedModes={['tree', 'code', 'form', 'text']}
-          onChange={onChange}
-        />
-        <Button className="js-copy-url-to-clipboard" onClick={this.copyStatefulUrlToClipboard}>Copy diary page as URL</Button>
-        <ReportFooter onClick={onFooterClick} />
-      </Container>
-    );
-  }
+  const copyOnFooterClick = async () => {
+    await copyStatefulUrlToClipboard();
+    return onFooterClick(); // has to be this order since onFooterClick will manipulate the state
+  };
+
+  return (
+    <Container>
+      <JsonEditor
+        value={diaryPage}
+        allowedModes={['tree', 'code', 'form', 'text']}
+        onChange={onChange}
+      />
+      <Button className="js-copy-url-to-clipboard" onClick={copyStatefulUrlToClipboard}>Copy diary page as URL</Button>
+      <ReportFooter onClick={copyOnFooterClick} />
+    </Container>
+  );
 }
+
+Editor.propTypes = {
+  diaryPage: PropTypes.shape(dailyType).isRequired,
+  onChange: PropTypes.func.isRequired,
+  onFooterClick: PropTypes.func.isRequired,
+};
