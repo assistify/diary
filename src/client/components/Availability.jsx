@@ -25,9 +25,15 @@ export default function Availabilities(props) {
             className={member.statusKnown ? 'status-known' : 'status-unknown'}
           >
             <UserFactsheet username={member.username}>
-              <Tag.Group>
+              <Tag.Group renderAs="div">
                 {member.statusKnown && member.blocked && <Tag className="blocked">Blockiert</Tag>}
-                <Tag color="primary"><Container>{member.availability}</Container></Tag>
+                <Tag
+                  renderAs="div"
+                  color="primary"
+                  className="wrapped"
+                >
+                  {member.availability}
+                </Tag>
               </Tag.Group>
             </UserFactsheet>
           </Columns.Column>
