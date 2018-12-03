@@ -25,7 +25,7 @@ export default function Availabilities(props) {
           >
             <UserFactsheet username={member.username}>
               <Tag.Group>
-                {member.blocked && <Tag className="blocked">Blockiert</Tag>}
+                {member.statusKnown && member.blocked && <Tag className="blocked">Blockiert</Tag>}
                 <Tag color="primary">{member.availability}</Tag>
               </Tag.Group>
             </UserFactsheet>
