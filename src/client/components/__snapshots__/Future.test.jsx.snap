@@ -21,7 +21,13 @@ exports[`aggregates correctly 1`] = `
     </h1>
     <ul>
       <li>
-        planned 1
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "planned 1",
+            }
+          }
+        />
         <span
           className="container"
           style={Object {}}
