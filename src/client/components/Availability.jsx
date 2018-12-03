@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
 import Columns from 'react-bulma-components/lib/components/columns';
+import Container from 'react-bulma-components/lib/components/container';
 import Tag from 'react-bulma-components/lib/components/tag';
 import UserFactsheet from './UserFactsheet';
 
@@ -26,7 +27,7 @@ export default function Availabilities(props) {
             <UserFactsheet username={member.username}>
               <Tag.Group>
                 {member.statusKnown && member.blocked && <Tag className="blocked">Blockiert</Tag>}
-                <Tag color="primary">{member.availability}</Tag>
+                <Tag color="primary"><Container>{member.availability}</Container></Tag>
               </Tag.Group>
             </UserFactsheet>
           </Columns.Column>

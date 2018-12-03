@@ -84,7 +84,12 @@ exports[`renders correctly 1`] = `
                   className="tag is-primary"
                   style={Object {}}
                 >
-                  here
+                  <div
+                    className="container"
+                    style={Object {}}
+                  >
+                    here
+                  </div>
                 </span>
               </span>
             </div>
@@ -156,7 +161,12 @@ exports[`renders correctly 1`] = `
                   className="tag is-primary"
                   style={Object {}}
                 >
-                  
+                  <div
+                    className="container"
+                    style={Object {}}
+                  >
+                    
+                  </div>
                 </span>
               </span>
             </div>
