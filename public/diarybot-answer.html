@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>Antwort an Diary Bot verarbeiten</title>
+    <style>
+        textarea {
+                display: block;
+                width: 100%;
+                height: 300px;
+            }
+            #result {
+                white-space: pre;
+            }
+        </style>
+</head>
+
+<body>
+    <form id="answer-form" action="/diarybot/answer" method="POST">
+        <label>Antwort an den DiaryBot einkopieren:
+            <textarea name="answer"></textarea>
+        </label>
+        <button type="submit">Umwandeln</button>
+        <textarea id="result"></textarea>
+    </form>
+
+    <script>
+        const resultField = document.getElementById('result')
+        document.getElementById('answer-form').addEventListener('submit', function (event) {
+            event.preventDefault()
+            resultField.value = convert(this.elements.answer.value)
+            return false
+        })
+
+        function convert(text) {
+            const result = {
+                username: '',
+                statusKnown: true,
+                past: {
+                    completedItems: [],
+                    blockingItems: []
+                },
+                future: {
+                    availability: [],
+                    plannedItems: []
+                }
+            }
+            let section
+            text.split('\n').forEach(function (line) {
+                if (line.match(/An was hast Du gearbeitet/)) {
+                    section = result.past.completedItems
+                } else if (line.match(/Was möchtest Du als nächstes tun/)) {
+                    section = result.future.plannedItems
+                } else if (line.match(/Wobei benötigst Du Hilfe/)) {
+                    section = result.past.blockingItems
+                } else if (line.match(/Wo verbringst Du Deinen nächsten Arbeitstag/)) {
+                    section = result.future.availability
+                } else {
+                    if (section && line.trim()) {
+                        section.push({title: line.replace(/^[\s\-]*/, '')})
+                    }
+                }
+            })
+            result.future.availability = result.future.availability.map(item => item.title).join('\n') || 'unbekannt'
+            return JSON.stringify(result, null, 2)
+        }
+    </script>
+</body>
+
+</html>
