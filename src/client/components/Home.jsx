@@ -93,7 +93,7 @@ export default class Home extends Component {
       return {
         date: queryParams.date ? new Date(decode(queryParams.date)) : new Date(),
         teamName: decode(queryParams.teamName),
-        serverUrl: queryParams.serverUrl ? decode(queryParams.serverUrl) : 'https://localhost:3000',
+        serverUrl: queryParams.serverUrl ? decode(queryParams.serverUrl) : 'https://localhost:4000',
         teamReport,
       };
     }
