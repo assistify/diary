@@ -7,13 +7,14 @@ import Content from 'react-bulma-components/lib/components/content';
 
 import Container from 'react-bulma-components/lib/components/container';
 import { activityItemType } from '../../models/activityItemType';
+import MarkDown from './Markdown';
 import User from './User';
 
 function ActivityItem(props) {
   const { title, owners } = props;
   return (
     <li key={title}>
-      {title}
+      <MarkDown code={title} />
       {owners
         && (
           <Container renderAs="span">
