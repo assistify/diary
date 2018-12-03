@@ -48,6 +48,7 @@ it('aggregates correctly', () => {
         teamReport={[
           {
             username: 'user1',
+            statusKnown: true,
             future: {
               availability: 'irrelevant',
               plannedItems: [
@@ -60,6 +61,7 @@ it('aggregates correctly', () => {
           },
           {
             username: 'user2',
+            statusKnown: true,
             future: {
               availability: 'irrelevant',
               plannedItems: [
