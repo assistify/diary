@@ -112,82 +112,15 @@ exports[`renders correctly 1`] = `
     Was ansteht
   </h1>
   <div
-    className="box c-activities next"
+    className="box"
     style={Object {}}
   >
-    <h1
-      className="title is-6"
+    <div
+      className="container no-planned-activities"
+      style={Object {}}
     >
-      Geplante Tätigkeiten
-    </h1>
-    <ul>
-      <li>
-        planned 1
-        <span
-          className="container"
-          style={Object {}}
-        >
-          <span
-            className="content"
-            style={Object {}}
-          >
-             (
-          </span>
-          <span
-            className="container"
-            style={Object {}}
-          >
-            <a
-              className="c-user"
-              href="/direct/user1"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              @user1
-            </a>
-          </span>
-          <span
-            className="content"
-            style={Object {}}
-          >
-            )
-          </span>
-        </span>
-      </li>
-      <li>
-        planned 2
-        <span
-          className="container"
-          style={Object {}}
-        >
-          <span
-            className="content"
-            style={Object {}}
-          >
-             (
-          </span>
-          <span
-            className="container"
-            style={Object {}}
-          >
-            <a
-              className="c-user"
-              href="/direct/user2"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              @user2
-            </a>
-          </span>
-          <span
-            className="content"
-            style={Object {}}
-          >
-            )
-          </span>
-        </span>
-      </li>
-    </ul>
+      Bisher nichts geplant
+    </div>
   </div>
 </section>
 `;
