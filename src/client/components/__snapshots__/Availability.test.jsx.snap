@@ -153,14 +153,7 @@ exports[`renders correctly 1`] = `
                 className="tags"
                 renderAs="div"
                 style={Object {}}
-              >
-                <div
-                  className="tag wrapped is-primary"
-                  style={Object {}}
-                >
-                  
-                </div>
-              </span>
+              />
             </div>
           </div>
         </div>
