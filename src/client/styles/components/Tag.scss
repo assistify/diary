@@ -22,5 +22,9 @@
 
     &.wrapped {
         max-width: 200px;
+        overflow: hidden;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
     }
 }
