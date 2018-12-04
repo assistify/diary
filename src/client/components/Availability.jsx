@@ -26,7 +26,11 @@ export default function Availabilities(props) {
           >
             <UserFactsheet username={member.username}>
               <Tag.Group renderAs="div">
-                {member.statusKnown && member.blocked && <Tag className="blocked">Blockiert</Tag>}
+                {member.statusKnown && member.blocked
+                && <Tag className="blocked">Blockiert</Tag>
+                }
+                {member.statusKnown && member.availability
+                && (
                 <Tag
                   renderAs="div"
                   color="primary"
@@ -34,6 +38,8 @@ export default function Availabilities(props) {
                 >
                   {member.availability}
                 </Tag>
+                )
+                }
               </Tag.Group>
             </UserFactsheet>
           </Columns.Column>
