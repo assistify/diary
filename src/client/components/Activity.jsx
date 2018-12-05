@@ -10,11 +10,15 @@ import { activityItemType } from '../../models/activityItemType';
 import MarkDown from './Markdown';
 import User from './User';
 
+import { TeamContext } from '../lib/teamContext';
+
 function ActivityItem(props) {
   const { title, owners } = props;
   return (
     <li key={title}>
-      <MarkDown code={title} />
+      <TeamContext.Consumer>
+        {teamContext => <MarkDown code={title} serverUrl={teamContext.serverUrl} />}
+      </TeamContext.Consumer>
       {owners
         && (
           <Container renderAs="span">
@@ -23,14 +27,14 @@ function ActivityItem(props) {
               <Container key={owner} renderAs="span">
                 <User username={owner} />
                 {owners.length > 1 && i !== (owners.length - 1)
-            && <Content renderAs="span">,&nbsp;</Content>
-            }
+                  && <Content renderAs="span">,&nbsp;</Content>
+                }
               </Container>
             ))}
             <Content renderAs="span">)</Content>
           </Container>
         )
-    }
+      }
     </li>
   );
 }
@@ -48,7 +52,7 @@ export default function ActivityItems(props) {
   return list.length > 0 && (
     <Box className={`c-activities ${className}`}>
       <Heading size={6}>{title}</Heading>
-      { list.length > 0
+      {list.length > 0
         ? (
           <ul>
             {list.map(item => (
@@ -62,7 +66,7 @@ export default function ActivityItems(props) {
           </ul>
         )
         : <div className="empty-items">-</div>
-        }
+      }
     </Box>
   );
 }
