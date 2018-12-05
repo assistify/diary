@@ -23,8 +23,18 @@
     &.wrapped {
         max-width: 200px;
         overflow: hidden;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
         hyphens: auto;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &:not(body) {
+            display: inline;
+            padding: 0.25em 0.75em;
+        }
+    
+        &:hover {
+            white-space: normal;
+            height: auto;
+        }
     }
 }
