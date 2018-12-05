@@ -17,7 +17,7 @@ export default function UserFactsheet(props) {
         </Media.Item>
       </Container>
 
-      <Container style={{ margin: 'auto' }}>
+      <Container className="availablity">
         <Media.Item>
           <Heading size={5}>
             <User username={username} />
