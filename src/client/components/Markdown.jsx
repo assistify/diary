@@ -7,15 +7,22 @@ import emoji from 'markdown-it-emoji';
 const markDown = md();
 markDown.use(emoji);
 
-function createMarkupInline(code) {
-  return { __html: markDown.renderInline(code) };
-}
-
-function createMarkup(code) {
-  return { __html: markDown.render(code) };
-}
-
 export default function Markdown(props) {
+  function handleMentions(code) {
+    return code.replace(/@(\w+)/g, (match) => {
+      const name = match.replace(/^@/, '');
+      return `[${match}](${props.serverUrl}direct/${name})`;
+    });
+  }
+
+  function createMarkupInline(code) {
+    return { __html: markDown.renderInline(handleMentions(code)) };
+  }
+
+  function createMarkup(code) {
+    return { __html: markDown.render(handleMentions(code)) };
+  }
+
   const { code, withBreaks } = props;
   return (
     <span dangerouslySetInnerHTML={withBreaks // eslint-disable-line react/no-danger
@@ -32,5 +39,6 @@ Markdown.defaultProps = {
 
 Markdown.propTypes = {
   code: PropTypes.string.isRequired,
-  withBreaks: PropTypes.bool
+  withBreaks: PropTypes.bool,
+  serverUrl: PropTypes.string.isRequired
 };
