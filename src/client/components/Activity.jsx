@@ -17,7 +17,7 @@ function ActivityItem(props) {
   return (
     <li key={title}>
       <TeamContext.Consumer>
-        {teamContext => <MarkDown code={title} serverUrl={teamContext.serverUrl} />}
+        {teamContext => <MarkDown code={title || ''} serverUrl={teamContext.serverUrl} />}
       </TeamContext.Consumer>
       {owners
         && (
