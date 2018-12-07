@@ -38,7 +38,7 @@ export default function Editor(props) {
       <JsonEditor
         value={diaryPage}
         allowedModes={['tree', 'code', 'form', 'text']}
-        onChange={onChange}
+        onChange={state => onChange(state, copyStatefulUrlToClipboard())}
       />
       <Button className="js-copy-url-to-clipboard" onClick={copyStatefulUrlToClipboard}>Copy diary page as URL</Button>
       <ReportFooter onClick={copyOnFooterClick} />

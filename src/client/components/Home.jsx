@@ -111,11 +111,12 @@ export default class Home extends Component {
     this.setState({ editing: !editing });
   }
 
-  updateDiaryPage = (newState) => {
+  updateDiaryPage = (newState, url) => {
     // workaround for editing a date: convert if necessary
     if (typeof newState.date === 'string') {
       newState.date = new Date(newState.date); // eslint-disable-line no-param-reassign
     }
+    window.history.pushState({}, '', url);
     this.setState({
       diaryPage: newState
     });
@@ -144,8 +145,8 @@ export default class Home extends Component {
     }
 
     // we need to convert dates to strings in order to make them editable
-    if (diaryPage.date && typeof diaryPage.date !== 'string') {
-      diaryPage.date = diaryPage.date.toJSON();
+    if (!diaryPage.date || typeof diaryPage.date !== 'string') {
+      diaryPage.date = (diaryPage.date || new Date()).toJSON();
     }
 
     return (
