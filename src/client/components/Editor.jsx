@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import { JsonEditor } from 'jsoneditor-react';
@@ -11,15 +11,11 @@ import { dailyType } from '../../models/dailyType';
 
 
 export default function Editor(props) {
-  const copyStatefulUrlToClipboard = async () => {
-    const { diaryPage } = props;
-    const {
-      teamName, date, serverUrl, teamReport
-    } = diaryPage;
-    const encodedTeamReport = await encode(JSON.stringify(teamReport));
+  const copyStatefulUrlToClipboard = ({teamName, date, serverUrl, teamReport}) => { // eslint-disable-line
+    const encodedTeamReport = encode(JSON.stringify(teamReport));
     const url = `${window.location.origin}${window.location.pathname || '/'}`
       + `?teamName=${encode(teamName)}`
-      + `&date=${encode(typeof date === 'string' ? date : date.toJSON())}`
+      + `&date=${encode(date && date.toJSON ? date.toJSON() : date)}`
       + `&serverUrl=${encode(serverUrl)}`
       + `&teamReport=${encodedTeamReport}`;
     copyToClipboard(url);
@@ -29,7 +25,7 @@ export default function Editor(props) {
   const { diaryPage, onChange, onFooterClick } = props;
 
   const copyOnFooterClick = async () => {
-    await copyStatefulUrlToClipboard();
+    await copyStatefulUrlToClipboard(diaryPage);
     return onFooterClick(); // has to be this order since onFooterClick will manipulate the state
   };
 
@@ -38,7 +34,7 @@ export default function Editor(props) {
       <JsonEditor
         value={diaryPage}
         allowedModes={['tree', 'code', 'form', 'text']}
-        onChange={onChange}
+        onChange={state => onChange(state, copyStatefulUrlToClipboard(state))}
       />
       <Button className="js-copy-url-to-clipboard" onClick={copyStatefulUrlToClipboard}>Copy diary page as URL</Button>
       <ReportFooter onClick={copyOnFooterClick} />
