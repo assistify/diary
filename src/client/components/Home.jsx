@@ -111,12 +111,11 @@ export default class Home extends Component {
     this.setState({ editing: !editing });
   }
 
-  updateDiaryPage = (newState, url) => {
+  updateDiaryPage = (newState) => {
     // workaround for editing a date: convert if necessary
     if (typeof newState.date === 'string') {
       newState.date = new Date(newState.date); // eslint-disable-line no-param-reassign
     }
-    window.history.pushState({}, '', url);
     this.setState({
       diaryPage: newState
     });
