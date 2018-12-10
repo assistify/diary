@@ -15,7 +15,7 @@ export default function Editor(props) {
     const encodedTeamReport = encode(JSON.stringify(teamReport));
     const url = `${window.location.origin}${window.location.pathname || '/'}`
       + `?teamName=${encode(teamName)}`
-      + `&date=${encode(typeof date === 'string' ? date : date.toJSON())}`
+      + `&date=${encode(date && date.toJSON ? date.toJSON() : date)}`
       + `&serverUrl=${encode(serverUrl)}`
       + `&teamReport=${encodedTeamReport}`;
     copyToClipboard(url);
@@ -25,7 +25,7 @@ export default function Editor(props) {
   const { diaryPage, onChange, onFooterClick } = props;
 
   const copyOnFooterClick = async () => {
-    await copyStatefulUrlToClipboard(props);
+    await copyStatefulUrlToClipboard(diaryPage);
     return onFooterClick(); // has to be this order since onFooterClick will manipulate the state
   };
 
