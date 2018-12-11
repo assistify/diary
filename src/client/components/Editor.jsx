@@ -36,7 +36,9 @@ export default function Editor(props) {
         allowedModes={['tree', 'code', 'form', 'text']}
         onChange={state => onChange(state, copyStatefulUrlToClipboard(state))}
       />
-      <Button className="js-copy-url-to-clipboard" onClick={copyStatefulUrlToClipboard}>Copy diary page as URL</Button>
+      <Button className="js-copy-url-to-clipboard" onClick={() => copyStatefulUrlToClipboard(props.diaryPage)}>
+        Copy diary page as URL
+      </Button>
       <ReportFooter onClick={copyOnFooterClick} />
     </Container>
   );
