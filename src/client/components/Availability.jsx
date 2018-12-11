@@ -3,7 +3,6 @@ import { PropTypes } from 'prop-types';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
 import Columns from 'react-bulma-components/lib/components/columns';
-import Container from 'react-bulma-components/lib/components/container';
 import Tag from 'react-bulma-components/lib/components/tag';
 import UserFactsheet from './UserFactsheet';
 

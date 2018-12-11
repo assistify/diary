@@ -1,5 +1,5 @@
-import { Selector } from 'testcafe';
-import { sampleUrl } from '../data/fullTeamData';
+import { Selector, ClientFunction } from 'testcafe';
+import { sampleUrl, sampleUrlModified } from '../data/fullTeamData';
 
 fixture('Use the editor') // eslint-disable-line no-undef, no-unused-expressions
   .page(sampleUrl) // eslint-disable-line no-unused-expressions
@@ -7,6 +7,9 @@ fixture('Use the editor') // eslint-disable-line no-undef, no-unused-expressions
     await t
       .click('.js-toggle-editor');
   });
+
+// Returns the URL of the current web page
+const getPageUrl = ClientFunction(() => window.location.href);
 
 test('Should be able to copy URL to the clipboard', async (t) => {
   await t
@@ -24,10 +27,22 @@ test('Should switch to code mode', async (t) => {
     .click('.jsoneditor-menu .jsoneditor-menu :nth-child(3) button');
 });
 
-test.skip('Should change the team name', async (t) => {
+test('Should change the URL when changing the team name', async (t) => {
   const teamNameInput = Selector('.jsoneditor-tree table > tbody > tr:nth-child(3) > td:nth-child(3) > table > tbody > tr > td:nth-child(4) > div');
   const suffix = '-dummy';
   await t
+    .setNativeDialogHandler(() => true)
+    .typeText(teamNameInput, suffix);
+
+  await t
+    .expect(getPageUrl()).eql(sampleUrlModified);
+});
+
+test('Should change the team name', async (t) => {
+  const teamNameInput = Selector('.jsoneditor-tree table > tbody > tr:nth-child(3) > td:nth-child(3) > table > tbody > tr > td:nth-child(4) > div');
+  const suffix = '-dummy';
+  await t
+    .setNativeDialogHandler(() => true)
     .typeText(teamNameInput, suffix);
 
   await t

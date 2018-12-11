@@ -24,11 +24,6 @@ export default function Editor(props) {
 
   const { diaryPage, onChange, onFooterClick } = props;
 
-  const copyOnFooterClick = async () => {
-    await copyStatefulUrlToClipboard(diaryPage);
-    return onFooterClick(); // has to be this order since onFooterClick will manipulate the state
-  };
-
   return (
     <Container>
       <JsonEditor
@@ -39,7 +34,7 @@ export default function Editor(props) {
       <Button className="js-copy-url-to-clipboard" onClick={() => copyStatefulUrlToClipboard(props.diaryPage)}>
         Copy diary page as URL
       </Button>
-      <ReportFooter onClick={copyOnFooterClick} />
+      <ReportFooter onClick={onFooterClick} />
     </Container>
   );
 }
