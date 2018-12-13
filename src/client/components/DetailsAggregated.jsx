@@ -8,7 +8,7 @@ import Container from 'react-bulma-components/lib/components/container';
 import ActivityItems from './Activity';
 import { memberReportType } from '../../models/memberReportType';
 
-export default function Future(props) {
+export default function DetailsAggregated(props) {
   const { teamReport } = props;
 
   const allPlannedItems = teamReport.reduce(
@@ -62,6 +62,6 @@ export default function Future(props) {
   );
 }
 
-Future.propTypes = {
+DetailsAggregated.propTypes = {
   teamReport: PropTypes.arrayOf(PropTypes.shape(memberReportType)).isRequired
 };

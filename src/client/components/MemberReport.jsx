@@ -12,9 +12,11 @@ import User from './User';
 
 export default function MemberReport(props) {
   const {
-    username, past, statusKnown
+    username, past, statusKnown, future
   } = props;
   const { workingOnItems, completedItems, blockingItems } = past;
+  const { plannedItems } = future;
+
   if (statusKnown) {
     return (
       <Columns.Column renderAs="article" size={6}>
@@ -55,6 +57,12 @@ export default function MemberReport(props) {
               title="Arbeitet an"
               list={workingOnItems}
               className="worked-on"
+            />
+
+            <ActivityItems
+              title="Geplant"
+              list={plannedItems}
+              className="planned"
             />
           </Card.Content>
         </Card>
