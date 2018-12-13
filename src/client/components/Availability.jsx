@@ -31,7 +31,6 @@ export default function Availabilities(props) {
                 {member.statusKnown && member.availability
                 && (
                 <Tag
-                  renderAs="div"
                   color="primary"
                   className="wrapped"
                 >
