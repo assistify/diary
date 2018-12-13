@@ -77,12 +77,12 @@ exports[`renders correctly 1`] = `
                 >
                   Blockiert
                 </span>
-                <div
+                <span
                   className="tag wrapped is-primary"
                   style={Object {}}
                 >
                   here
-                </div>
+                </span>
               </span>
             </div>
           </div>

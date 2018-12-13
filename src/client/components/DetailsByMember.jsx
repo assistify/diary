@@ -14,16 +14,19 @@ export default function DetailsByMember(props) {
     <Section className="c-past">
       <Heading size={3}>Was los war</Heading>
       <Columns centered multiline>
-        {teamReport.map(memberReport => (
-          <MemberReport
-            key={memberReport.username}
-            username={memberReport.username}
-            statusKnown={memberReport.statusKnown}
-            plannedAvailability={memberReport.future.availability}
-            past={memberReport.past}
-            future={memberReport.future}
-          />
-        ))}
+        {teamReport
+          .sort((a, b) => (a.statusKnown && !b.statusKnown ? -1
+            : a.username > b.username))
+          .map(memberReport => (
+            <MemberReport
+              key={memberReport.username}
+              username={memberReport.username}
+              statusKnown={memberReport.statusKnown}
+              plannedAvailability={memberReport.future.availability}
+              past={memberReport.past}
+              future={memberReport.future}
+            />
+          ))}
       </Columns>
     </Section>
   );
