@@ -7,8 +7,8 @@ import Container from 'react-bulma-components/lib/components/container';
 
 import { dailyType } from '../../models/dailyType';
 import Availabilities from './Availability';
-import Future from './Future';
-import Past from './Past';
+import DetailsAggregated from './DetailsAggregated';
+import DetailsByMember from './DetailsByMember';
 
 export default class DiaryPage extends Component {
   static propTypes = dailyType;
@@ -42,8 +42,8 @@ export default class DiaryPage extends Component {
             blocked: memberReport.past.blockingItems && memberReport.past.blockingItems.length > 0
           }))}
         />
-        <Future teamReport={this.teamReport} />
-        <Past teamReport={this.teamReport} />
+        <DetailsAggregated teamReport={this.teamReport} />
+        <DetailsByMember teamReport={this.teamReport} />
       </Container>
     );
   }

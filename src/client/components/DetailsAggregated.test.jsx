@@ -1,11 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Future from './Future';
+import DetailsAggregated from './DetailsAggregated';
 
 it('renders correctly', () => {
   const tree = renderer
     .create(
-      <Future
+      <DetailsAggregated
         teamReport={[
           {
             username: 'user1',
@@ -44,7 +44,7 @@ it('renders correctly', () => {
 it('aggregates correctly', () => {
   const tree = renderer
     .create(
-      <Future
+      <DetailsAggregated
         teamReport={[
           {
             username: 'user1',
@@ -82,7 +82,7 @@ it('aggregates correctly', () => {
 it('renders a placeholder if nothing\'s planned', () => {
   const tree = renderer
     .create(
-      <Future
+      <DetailsAggregated
         teamReport={[
           {
             username: 'user1',

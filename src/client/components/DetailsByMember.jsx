@@ -8,7 +8,7 @@ import Columns from 'react-bulma-components/lib/components/columns';
 import MemberReport from './MemberReport';
 import { memberReportType } from '../../models/memberReportType';
 
-export default function Past(props) {
+export default function DetailsByMember(props) {
   const { teamReport } = props;
   return (
     <Section className="c-past">
@@ -21,6 +21,7 @@ export default function Past(props) {
             statusKnown={memberReport.statusKnown}
             plannedAvailability={memberReport.future.availability}
             past={memberReport.past}
+            future={memberReport.future}
           />
         ))}
       </Columns>
@@ -28,6 +29,6 @@ export default function Past(props) {
   );
 }
 
-Past.propTypes = {
+DetailsByMember.propTypes = {
   teamReport: PropTypes.arrayOf(PropTypes.shape(memberReportType)).isRequired
 };
