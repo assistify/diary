@@ -30,7 +30,7 @@ export default function MemberReport(props) {
               <User username={username} />
             </Card.Header.Title>
             <Tag.Group>
-              { blockingItems
+              { blockingItems && blockingItems.length > 0
               && (
                 <Tag size="medium" className="blocked">
                   Blockiert
