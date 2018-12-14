@@ -55,8 +55,9 @@
                 } else if (line.match(/Wo verbringst Du Deinen nächsten Arbeitstag/)) {
                     section = result.future.availability
                 } else {
-                    if (section && line.trim()) {
-                        section.push({title: line.replace(/^[\s\-]*/, '')})
+                    const title = line.trim().replace(/^[\s\-*»]*/, '')
+                    if (section && title) {
+                        section.push({title})
                     }
                 }
             })
