@@ -37,27 +37,21 @@ export default function DetailsAggregated(props) {
   },
   []);
 
+  const aggregatedMultipleOwners = aggregatedItems.filter(item => item.owners.length > 1);
+
   return (
+    aggregatedMultipleOwners.length > 0
+    && (
     <Section className="c-future">
 
-      <Heading size={3}>Was ansteht</Heading>
-
-      {
-        aggregatedItems.length > 0
-          ? (
-            <ActivityItems
-              title="Geplante Tätigkeiten"
-              list={aggregatedItems}
-              className="next"
-            />
-          )
-          : (
-            <Box>
-              <Container className="no-planned-activities">Bisher nichts geplant</Container>
-            </Box>
-          )
-      }
+      <Heading size={3}>Gemeinsame Tätigkeiten</Heading>
+      <ActivityItems
+        title="Geplante Tätigkeiten"
+        list={aggregatedMultipleOwners}
+        className="next"
+      />
     </Section>
+    )
 
   );
 }

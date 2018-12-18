@@ -8,7 +8,7 @@ exports[`aggregates correctly 1`] = `
   <h1
     className="title is-3"
   >
-    Was ansteht
+    Gemeinsame Tätigkeiten
   </h1>
   <div
     className="box c-activities next"
@@ -83,50 +83,6 @@ exports[`aggregates correctly 1`] = `
 </section>
 `;
 
-exports[`renders a placeholder if nothing's planned 1`] = `
-<section
-  className="section c-future"
-  style={Object {}}
->
-  <h1
-    className="title is-3"
-  >
-    Was ansteht
-  </h1>
-  <div
-    className="box"
-    style={Object {}}
-  >
-    <div
-      className="container no-planned-activities"
-      style={Object {}}
-    >
-      Bisher nichts geplant
-    </div>
-  </div>
-</section>
-`;
+exports[`renders a placeholder if nothing's planned 1`] = `null`;
 
-exports[`renders correctly 1`] = `
-<section
-  className="section c-future"
-  style={Object {}}
->
-  <h1
-    className="title is-3"
-  >
-    Was ansteht
-  </h1>
-  <div
-    className="box"
-    style={Object {}}
-  >
-    <div
-      className="container no-planned-activities"
-      style={Object {}}
-    >
-      Bisher nichts geplant
-    </div>
-  </div>
-</section>
-`;
+exports[`renders correctly 1`] = `null`;
