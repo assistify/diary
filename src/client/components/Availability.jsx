@@ -24,7 +24,7 @@ export default function Availabilities(props) {
             className={member.statusKnown ? 'status-known' : 'status-unknown'}
           >
             <UserFactsheet username={member.username}>
-              <Tag.Group renderAs="div">
+              <Tag.Group>
                 {member.statusKnown && member.blocked
                 && <Tag className="blocked">Blockiert</Tag>
                 }

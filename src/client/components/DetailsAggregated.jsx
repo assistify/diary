@@ -3,8 +3,6 @@ import { PropTypes } from 'prop-types';
 
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
-import Box from 'react-bulma-components/lib/components/box';
-import Container from 'react-bulma-components/lib/components/container';
 import ActivityItems from './Activity';
 import { memberReportType } from '../../models/memberReportType';
 

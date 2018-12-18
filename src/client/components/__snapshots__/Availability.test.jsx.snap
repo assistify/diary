@@ -68,7 +68,6 @@ exports[`renders correctly 1`] = `
             >
               <span
                 className="tags"
-                renderAs="div"
                 style={Object {}}
               >
                 <span
@@ -143,7 +142,6 @@ exports[`renders correctly 1`] = `
             >
               <span
                 className="tags"
-                renderAs="div"
                 style={Object {}}
               />
             </div>
