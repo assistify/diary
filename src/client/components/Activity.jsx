@@ -49,13 +49,16 @@ export default function ActivityItems(props) {
   const {
     title, list, className
   } = props;
-  return list.length > 0 && (
+
+  const titledItems = list.filter(item => item.title);
+
+  return titledItems.length > 0 && (
     <Box className={`c-activities ${className}`}>
       <Heading size={6}>{title}</Heading>
-      {list.length > 0
+      {titledItems.length > 0
         ? (
           <ul>
-            {list.map(item => (
+            {titledItems.map(item => (
               <ActivityItem
                 key={item.title}
                 title={item.title}

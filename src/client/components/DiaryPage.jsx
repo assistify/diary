@@ -10,6 +10,8 @@ import Availabilities from './Availability';
 import DetailsAggregated from './DetailsAggregated';
 import DetailsByMember from './DetailsByMember';
 
+import isBlocked from '../lib/isBlocked';
+
 export default class DiaryPage extends Component {
   static propTypes = dailyType;
 
@@ -39,7 +41,7 @@ export default class DiaryPage extends Component {
             username: memberReport.username,
             availability: memberReport.future.availability,
             statusKnown: memberReport.statusKnown,
-            blocked: memberReport.past.blockingItems && memberReport.past.blockingItems.length > 0
+            blocked: isBlocked(memberReport.past.blockingItems)
           }))}
         />
         <DetailsAggregated teamReport={this.teamReport} />

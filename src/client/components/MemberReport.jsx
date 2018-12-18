@@ -10,6 +10,8 @@ import Avatar from './Avatar';
 import { memberReportType } from '../../models/memberReportType';
 import User from './User';
 
+import isBlocked from '../lib/isBlocked';
+
 export default function MemberReport(props) {
   const {
     username, past, statusKnown, future
@@ -30,7 +32,7 @@ export default function MemberReport(props) {
               <User username={username} />
             </Card.Header.Title>
             <Tag.Group>
-              { blockingItems && blockingItems.length > 0
+              { isBlocked(blockingItems)
               && (
                 <Tag size="medium" className="blocked">
                   Blockiert

@@ -30,3 +30,16 @@ it('does not render an empty list', () => {
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+it('does not render a list without titled items', () => {
+  const tree = renderer
+    .create(
+      <ActivityItems
+        title="no-title"
+        list={[{ title: '' }]}
+        className="sample"
+      />
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
