@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`does not render a list without titled items 1`] = `null`;
+
 exports[`does not render an empty list 1`] = `null`;
 
 exports[`renders a list correctly 1`] = `

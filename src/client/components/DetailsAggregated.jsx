@@ -3,8 +3,6 @@ import { PropTypes } from 'prop-types';
 
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
-import Box from 'react-bulma-components/lib/components/box';
-import Container from 'react-bulma-components/lib/components/container';
 import ActivityItems from './Activity';
 import { memberReportType } from '../../models/memberReportType';
 
@@ -37,27 +35,21 @@ export default function DetailsAggregated(props) {
   },
   []);
 
+  const aggregatedMultipleOwners = aggregatedItems.filter(item => item.owners.length > 1);
+
   return (
+    aggregatedMultipleOwners.length > 0
+    && (
     <Section className="c-future">
 
-      <Heading size={3}>Was ansteht</Heading>
-
-      {
-        aggregatedItems.length > 0
-          ? (
-            <ActivityItems
-              title="Geplante Tätigkeiten"
-              list={aggregatedItems}
-              className="next"
-            />
-          )
-          : (
-            <Box>
-              <Container className="no-planned-activities">Bisher nichts geplant</Container>
-            </Box>
-          )
-      }
+      <Heading size={3}>Gemeinsame Tätigkeiten</Heading>
+      <ActivityItems
+        title="Geplante Tätigkeiten"
+        list={aggregatedMultipleOwners}
+        className="next"
+      />
     </Section>
+    )
 
   );
 }
