@@ -38,7 +38,7 @@ test('Should change the URL when changing the team name', async (t) => {
     .expect(getPageUrl()).eql(sampleUrlModified);
 });
 
-test('Should change the team name', async (t) => {
+test.skip('Should change the team name', async (t) => {
   const teamNameInput = Selector('.jsoneditor-tree table > tbody > tr:nth-child(3) > td:nth-child(3) > table > tbody > tr > td:nth-child(4) > div');
   const suffix = '-dummy';
   await t
