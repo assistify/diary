@@ -28,7 +28,7 @@
     "ui-test": "testcafe chrome:headless test/scripts/*.test.js --app 'npm run start' --app-init-delay 10000",
     "ui-test-live": "testcafe-live chrome test/scripts/*.test.js --app 'npm run start' --app-init-delay 10000",
     "predeploy": "PUBLIC_URL=https://assistify.github.io/diary npm run build",
-    "deploy": "gh-pages -d build -m [ci skip] Deployed via CI"
+    "deploy": "gh-pages -d build -m '[ci skip] Deployed via CI'"
   },
   "jest": {
     "collectCoverageFrom": [
