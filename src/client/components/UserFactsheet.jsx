@@ -8,7 +8,23 @@ import Avatar from './Avatar';
 
 
 export default function UserFactsheet(props) {
-  const { username, children } = props;
+  const {
+    username,
+    children,
+    contentEditable,
+    updateValue
+  } = props;
+
+  const statusKnownCheckbox = contentEditable && (
+    <div className="statusKnownCheckbox">
+      <input
+        type="checkbox"
+        onChange={e => updateValue(username, 'statusKnown', e.target.checked)}
+      />
+      &nbsp;provided info
+    </div>
+  );
+
   return (
     <Media>
       <Container>
@@ -22,6 +38,7 @@ export default function UserFactsheet(props) {
           <Heading size={5}>
             <User username={username} />
           </Heading>
+          {statusKnownCheckbox}
           <Container>{children}</Container>
         </Media.Item>
       </Container>
@@ -38,5 +55,7 @@ UserFactsheet.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ])
+  ]),
+  contentEditable: PropTypes.bool.isRequired,
+  updateValue: PropTypes.func.isRequired
 };
