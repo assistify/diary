@@ -21,27 +21,19 @@ exports[`aggregates correctly 1`] = `
     </h1>
     <ul>
       <li>
-        <span
+        <div
+          contentEditable={false}
           dangerouslySetInnerHTML={
             Object {
               "__html": "planned 1",
             }
           }
+          onBlur={[Function]}
         />
-        <span
-          className="container"
-          style={Object {}}
-        >
-          <span
-            className="content"
-            style={Object {}}
-          >
-             (
-          </span>
-          <span
-            className="container"
-            style={Object {}}
-          >
+        <span>
+           (
+          <span>
+            0
             <a
               className="c-user"
               href="/direct/user1"
@@ -50,17 +42,9 @@ exports[`aggregates correctly 1`] = `
             >
               @user1
             </a>
-            <span
-              className="content"
-              style={Object {}}
-            >
-              , 
-            </span>
           </span>
-          <span
-            className="container"
-            style={Object {}}
-          >
+          <span>
+            , 
             <a
               className="c-user"
               href="/direct/user2"
@@ -69,12 +53,6 @@ exports[`aggregates correctly 1`] = `
             >
               @user2
             </a>
-          </span>
-          <span
-            className="content"
-            style={Object {}}
-          >
-            )
           </span>
         </span>
       </li>

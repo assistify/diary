@@ -12,6 +12,8 @@ it('renders a list correctly', () => {
           { title: 'sample title 2', details: 'sample details' },
         ]}
         className="sample"
+        contentEditable={false}
+        updateValue={() => {}}
       />
     )
     .toJSON();
@@ -25,6 +27,8 @@ it('does not render an empty list', () => {
         title="empty"
         list={[]}
         className="sample"
+        contentEditable={false}
+        updateValue={() => {}}
       />
     )
     .toJSON();
@@ -38,6 +42,8 @@ it('does not render a list without titled items', () => {
         title="no-title"
         list={[{ title: '' }]}
         className="sample"
+        contentEditable={false}
+        updateValue={() => {}}
       />
     )
     .toJSON();

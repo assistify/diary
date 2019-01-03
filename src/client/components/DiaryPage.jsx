@@ -94,7 +94,11 @@ export default class DiaryPage extends Component {
           updateValue={(username, fieldName, value) => updateMember(username, fieldName, value)}
         />
         <DetailsAggregated teamReport={teamReport} />
-        <DetailsByMember teamReport={teamReport} />
+        <DetailsByMember
+          teamReport={teamReport}
+          contentEditable={contentEditable}
+          updateValue={(username, fieldName, value) => updateMember(username, fieldName, value)}
+        />
       </Container>
     );
   }

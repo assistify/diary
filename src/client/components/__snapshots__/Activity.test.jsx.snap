@@ -16,21 +16,25 @@ exports[`renders a list correctly 1`] = `
   </h1>
   <ul>
     <li>
-      <span
+      <div
+        contentEditable={false}
         dangerouslySetInnerHTML={
           Object {
             "__html": "sample title 1",
           }
         }
+        onBlur={[Function]}
       />
     </li>
     <li>
-      <span
+      <div
+        contentEditable={false}
         dangerouslySetInnerHTML={
           Object {
             "__html": "sample title 2",
           }
         }
+        onBlur={[Function]}
       />
     </li>
   </ul>
