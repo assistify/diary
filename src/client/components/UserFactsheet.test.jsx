@@ -4,7 +4,7 @@ import UserFactsheet from './UserFactsheet';
 
 it('renders correctly', () => {
   const tree = renderer
-    .create(<UserFactsheet username="testuser" contentEditable={false} updateValue={() => {}}>
+    .create(<UserFactsheet username="testuser" statusKnown contentEditable={false} updateValue={() => {}}>
       <div className="sampleChild">sample Child should be rendered</div>
             </UserFactsheet>)
     .toJSON();

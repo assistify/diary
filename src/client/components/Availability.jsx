@@ -27,6 +27,7 @@ export default function Availabilities(props) {
           >
             <UserFactsheet
               username={member.username}
+              statusKnown={member.statusKnown}
               contentEditable={contentEditable}
               updateValue={updateValue}
             >

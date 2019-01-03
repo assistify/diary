@@ -11,6 +11,7 @@ export default function UserFactsheet(props) {
   const {
     username,
     children,
+    statusKnown,
     contentEditable,
     updateValue
   } = props;
@@ -19,6 +20,7 @@ export default function UserFactsheet(props) {
     <div className="statusKnownCheckbox">
       <input
         type="checkbox"
+        checked={statusKnown}
         onChange={e => updateValue(username, 'statusKnown', e.target.checked)}
       />
       &nbsp;provided info
@@ -56,6 +58,7 @@ UserFactsheet.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
+  statusKnown: PropTypes.bool.isRequired,
   contentEditable: PropTypes.bool.isRequired,
   updateValue: PropTypes.func.isRequired
 };
