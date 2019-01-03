@@ -1,31 +1,31 @@
-import React from 'react';
-import {PropTypes} from 'prop-types';
+import React, { Fragment } from 'react';
+import { PropTypes } from 'prop-types';
 
 import Heading from 'react-bulma-components/lib/components/heading';
 import Box from 'react-bulma-components/lib/components/box';
-import Content from 'react-bulma-components/lib/components/content';
 
-import Container from 'react-bulma-components/lib/components/container';
-import {activityItemType} from '../../models/activityItemType';
+import { activityItemType } from '../../models/activityItemType';
 import MarkDown from './Markdown';
 import User from './User';
 
-import {TeamContext} from '../lib/teamContext';
+import { TeamContext } from '../lib/teamContext';
 
 function ActivityItem(props) {
   const {
     title, owners, contentEditable, updateValue
   } = props;
 
+  const separator = <Fragment>,&nbsp;</Fragment>;
   const listOfOwners = owners && (
     <span>
       &nbsp;(
       {owners.map((owner, i) => (
         <span key={owner}>
-          {(i && ', ')}
+          {i > 0 ? separator : ''}
           <User username={owner} />
         </span>
       ))}
+      )
     </span>
   );
 
