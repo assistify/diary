@@ -33,7 +33,7 @@ exports[`aggregates correctly 1`] = `
         <span>
            (
           <span>
-            0
+            
             <a
               className="c-user"
               href="/direct/user1"
@@ -44,7 +44,7 @@ exports[`aggregates correctly 1`] = `
             </a>
           </span>
           <span>
-            , 
+            , 
             <a
               className="c-user"
               href="/direct/user2"
@@ -54,6 +54,7 @@ exports[`aggregates correctly 1`] = `
               @user2
             </a>
           </span>
+          )
         </span>
       </li>
     </ul>
