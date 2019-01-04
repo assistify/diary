@@ -78,7 +78,6 @@ export default function ActivityItems(props) {
             {contentEditable
             && (
               <ActivityItem
-                key="__new__"
                 title=" "
                 contentEditable
                 updateValue={content => updateValue(titledItems.length, content)}
