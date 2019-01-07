@@ -10,5 +10,13 @@
 @import './components/Editor.scss';
 @import './components/MemberReport.scss';
 
+.serverUrl {
+  float: right;
+}
+
+.statusKnownCheckbox {
+  margin: -1.5em 0 1.5em;
+}
+
 // elements which properties are overridden
 @import './objects/section.scss';

@@ -9,7 +9,7 @@ import MemberReport from './MemberReport';
 import { memberReportType } from '../../models/memberReportType';
 
 export default function DetailsByMember(props) {
-  const { teamReport } = props;
+  const { teamReport, contentEditable, updateValue } = props;
   return (
     <Section className="c-past">
       <Heading size={3}>Was los war</Heading>
@@ -25,6 +25,8 @@ export default function DetailsByMember(props) {
               plannedAvailability={memberReport.future.availability}
               past={memberReport.past}
               future={memberReport.future}
+              contentEditable={contentEditable}
+              updateValue={updateValue}
             />
           ))}
       </Columns>
@@ -33,5 +35,7 @@ export default function DetailsByMember(props) {
 }
 
 DetailsByMember.propTypes = {
-  teamReport: PropTypes.arrayOf(PropTypes.shape(memberReportType)).isRequired
+  teamReport: PropTypes.arrayOf(PropTypes.shape(memberReportType)).isRequired,
+  contentEditable: PropTypes.bool.isRequired,
+  updateValue: PropTypes.func.isRequired
 };

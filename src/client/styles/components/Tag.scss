@@ -24,14 +24,14 @@
         max-width: 200px;
         overflow: hidden;
         hyphens: auto;
-        white-space: nowrap;
+        white-space: normal;
         text-overflow: ellipsis;
 
         &:not(body) {
             display: inline;
             padding: 0.25em 0.75em;
         }
-    
+
         &:hover {
             white-space: normal;
             height: auto;

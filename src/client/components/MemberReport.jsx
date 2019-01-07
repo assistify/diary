@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 import Card from 'react-bulma-components/lib/components/card';
 import Columns from 'react-bulma-components/lib/components/columns';
@@ -14,7 +15,7 @@ import isBlocked from '../lib/isBlocked';
 
 export default function MemberReport(props) {
   const {
-    username, past, statusKnown, future
+    username, past, statusKnown, future, contentEditable, updateValue
   } = props;
   const { workingOnItems, completedItems, blockingItems } = past;
   const { plannedItems } = future;
@@ -37,8 +38,21 @@ export default function MemberReport(props) {
                 <Tag size="medium" className="blocked">
                   Blockiert
                 </Tag>
-              )
-            }
+              )}
+              { contentEditable
+              && (
+                <div>
+                  <input
+                    type="checkbox"
+                    checked={isBlocked(blockingItems)}
+                    onChange={(event) => {
+                      const value = event.target.checked ? [{ title: 'Ich brauche...' }] : undefined;
+                      updateValue(username, 'past.blockingItems', value);
+                    }}
+                  />
+                  &nbsp; blockiert
+                </div>
+              )}
             </Tag.Group>
           </Card.Header>
           <Card.Content>
@@ -48,23 +62,43 @@ export default function MemberReport(props) {
                 title="Blockiert"
                 list={blockingItems}
                 className="blocking"
+                contentEditable={contentEditable}
+                updateValue={(liIndex, title) => {
+                  blockingItems[liIndex] = { title };
+                  updateValue(username, 'past.blockingItems', blockingItems);
+                }}
               />
               )}
             <ActivityItems
               title="Erledigt"
               list={completedItems}
               className="completed"
+              contentEditable={contentEditable}
+              updateValue={(liIndex, title) => {
+                completedItems[liIndex] = { title };
+                updateValue(username, 'past.completedItems', completedItems);
+              }}
             />
             <ActivityItems
               title="Arbeitet an"
               list={workingOnItems}
               className="worked-on"
+              contentEditable={contentEditable}
+              updateValue={(liIndex, title) => {
+                workingOnItems[liIndex] = { title };
+                updateValue(username, 'past.workingOnItems', workingOnItems);
+              }}
             />
 
             <ActivityItems
               title="Geplant"
               list={plannedItems}
               className="planned"
+              contentEditable={contentEditable}
+              updateValue={(liIndex, title) => {
+                plannedItems[liIndex] = { title };
+                updateValue(username, 'future.plannedItems', plannedItems);
+              }}
             />
           </Card.Content>
         </Card>
@@ -84,4 +118,7 @@ export default function MemberReport(props) {
     </Columns.Column>);
 }
 
-MemberReport.propTypes = memberReportType;
+MemberReport.propTypes = Object.assign({
+  contentEditable: PropTypes.bool.isRequired,
+  updateValue: PropTypes.func.isRequired
+}, memberReportType);

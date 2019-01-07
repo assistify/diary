@@ -20,6 +20,8 @@ it('renders correctly', () => {
             blocked: false
           },
         ]}
+        contentEditable={false}
+        updateValue={() => {}}
       />
     )
     .toJSON();
