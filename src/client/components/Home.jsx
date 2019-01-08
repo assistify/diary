@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import '../styles/index.scss';
 import Container from 'react-bulma-components/lib/components/container';
-import { decompressFromEncodedURIComponent as decode } from 'lz-string';
+import {compressToEncodedURIComponent as encode, decompressFromEncodedURIComponent as decode} from 'lz-string';
 
 import qs from 'qs';
 import { TeamContext } from '../lib/teamContext';
@@ -12,6 +12,8 @@ import { localization } from '../lib/localization';
 
 import 'jsoneditor-react/es/editor.min.css';
 import ReportFooter from './ReportFooter';
+
+const contentEditable = window.location.search && !!window.location.search.match(/\bedit=/);
 
 const templateData = {
   date: '2018-11-23T00:00:00.000Z',
@@ -122,6 +124,29 @@ export default class Home extends Component {
     });
   }
 
+  static getUrl(state) {
+    const {
+      diaryPage: {
+        teamName, date, serverUrl, teamReport
+      }
+    } = state;
+    const encodedTeamReport = encode(JSON.stringify(teamReport));
+    return `${window.location.origin}${window.location.pathname || '/'}`
+      + `?teamName=${encode(teamName)}`
+      + `&date=${encode(date && date.toJSON ? date.toJSON() : date)}`
+      + `&serverUrl=${encode(serverUrl)}`
+      + `&teamReport=${encodedTeamReport}`
+      + (contentEditable ? '&edit=true' : '');
+  }
+
+  updateValue(fieldname, value) {
+    this.setState((currentState) => {
+      const diaryPage = Object.assign(currentState.diaryPage, { [fieldname]: value });
+      window.history.pushState(null, '', Home.getUrl({ diaryPage }));
+      return { diaryPage };
+    });
+  }
+
   render() {
     const { diaryPage, editing } = this.state;
 
@@ -137,6 +162,9 @@ export default class Home extends Component {
               date={diaryPage.date}
               teamName={diaryPage.teamName}
               teamReport={diaryPage.teamReport}
+              serverUrl={diaryPage.serverUrl}
+              updateValue={(fieldname, value) => this.updateValue(fieldname, value)}
+              contentEditable={contentEditable}
             />
           </TeamContext.Provider>
           <ReportFooter onClick={this.toggleEdit} />

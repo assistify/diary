@@ -23,11 +23,16 @@ export default function Markdown(props) {
     return { __html: markDown.render(handleMentions(code)) };
   }
 
-  const { code, withBreaks } = props;
+  const {
+    code, withBreaks, contentEditable, updateValue
+  } = props;
   return (
-    <span dangerouslySetInnerHTML={withBreaks // eslint-disable-line react/no-danger
-      ? createMarkup(code)
-      : createMarkupInline(code)
+    <div
+      contentEditable={contentEditable}
+      onBlur={event => updateValue(event.target.innerText)}
+      dangerouslySetInnerHTML={withBreaks // eslint-disable-line react/no-danger
+        ? createMarkup(code)
+        : createMarkupInline(code)
     }
     />
   );
@@ -40,5 +45,7 @@ Markdown.defaultProps = {
 Markdown.propTypes = {
   code: PropTypes.string.isRequired,
   withBreaks: PropTypes.bool,
-  serverUrl: PropTypes.string.isRequired
+  serverUrl: PropTypes.string.isRequired,
+  contentEditable: PropTypes.bool.isRequired,
+  updateValue: PropTypes.func.isRequired
 };

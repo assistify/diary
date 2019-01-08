@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 
 import Heading from 'react-bulma-components/lib/components/heading';
 import Box from 'react-bulma-components/lib/components/box';
-import Content from 'react-bulma-components/lib/components/content';
 
-import Container from 'react-bulma-components/lib/components/container';
 import { activityItemType } from '../../models/activityItemType';
 import MarkDown from './Markdown';
 import User from './User';
@@ -13,28 +11,37 @@ import User from './User';
 import { TeamContext } from '../lib/teamContext';
 
 function ActivityItem(props) {
-  const { title, owners } = props;
+  const {
+    title, owners, contentEditable, updateValue
+  } = props;
+
+  const separator = <Fragment>,&nbsp;</Fragment>;
+  const listOfOwners = owners && (
+    <span>
+      &nbsp;(
+      {owners.map((owner, i) => (
+        <span key={owner}>
+          {i > 0 ? separator : ''}
+          <User username={owner} />
+        </span>
+      ))}
+      )
+    </span>
+  );
+
   return (
     <li key={title}>
       <TeamContext.Consumer>
-        {teamContext => <MarkDown code={title || ''} serverUrl={teamContext.serverUrl} />}
+        {teamContext => (
+          <MarkDown
+            contentEditable={contentEditable}
+            updateValue={updateValue}
+            code={title || ''}
+            serverUrl={teamContext.serverUrl}
+          />
+        )}
       </TeamContext.Consumer>
-      {owners
-        && (
-          <Container renderAs="span">
-            <Content renderAs="span">&nbsp;(</Content>
-            {owners.map((owner, i) => (
-              <Container key={owner} renderAs="span">
-                <User username={owner} />
-                {owners.length > 1 && i !== (owners.length - 1)
-                  && <Content renderAs="span">,&nbsp;</Content>
-                }
-              </Container>
-            ))}
-            <Content renderAs="span">)</Content>
-          </Container>
-        )
-      }
+      {listOfOwners}
     </li>
   );
 }
@@ -47,7 +54,7 @@ ActivityItem.propTypes = activityItemType;
 
 export default function ActivityItems(props) {
   const {
-    title, list, className
+    title, list, className, contentEditable, updateValue
   } = props;
 
   const titledItems = list.filter(item => item.title);
@@ -58,14 +65,24 @@ export default function ActivityItems(props) {
       {titledItems.length > 0
         ? (
           <ul>
-            {titledItems.map(item => (
+            {titledItems.map((item, liIndex) => (
               <ActivityItem
                 key={item.title}
                 title={item.title}
                 details={item.details}
                 owners={item.owners}
+                contentEditable={contentEditable}
+                updateValue={content => updateValue(liIndex, content)}
               />
             ))}
+            {contentEditable
+            && (
+              <ActivityItem
+                title=" "
+                contentEditable
+                updateValue={content => updateValue(titledItems.length, content)}
+              />
+            )}
           </ul>
         )
         : <div className="empty-items">-</div>
@@ -81,5 +98,7 @@ ActivityItems.defaultProps = {
 ActivityItems.propTypes = {
   title: PropTypes.string.isRequired,
   list: PropTypes.arrayOf(PropTypes.shape(activityItemType)),
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
+  contentEditable: PropTypes.bool,
+  updateValue: PropTypes.func
 };

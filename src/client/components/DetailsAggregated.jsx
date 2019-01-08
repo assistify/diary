@@ -47,6 +47,8 @@ export default function DetailsAggregated(props) {
         title="Geplante Tätigkeiten"
         list={aggregatedMultipleOwners}
         className="next"
+        contentEditable={false}
+        updateValue={() => {}}
       />
     </Section>
     )

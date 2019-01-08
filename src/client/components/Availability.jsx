@@ -8,7 +8,9 @@ import UserFactsheet from './UserFactsheet';
 
 export default function Availabilities(props) {
   const {
-    members
+    members,
+    contentEditable,
+    updateValue
   } = props;
 
   return (
@@ -23,7 +25,12 @@ export default function Availabilities(props) {
             size={4}
             className={member.statusKnown ? 'status-known' : 'status-unknown'}
           >
-            <UserFactsheet username={member.username}>
+            <UserFactsheet
+              username={member.username}
+              statusKnown={member.statusKnown}
+              contentEditable={contentEditable}
+              updateValue={updateValue}
+            >
               <Tag.Group>
                 {member.statusKnown && member.blocked
                 && <Tag className="blocked">Blockiert</Tag>
@@ -33,6 +40,9 @@ export default function Availabilities(props) {
                 <Tag
                   color="primary"
                   className="wrapped"
+                  contentEditable={contentEditable}
+                  suppressContentEditableWarning
+                  onBlur={e => updateValue(member.username, 'future.availability', e.target.innerHTML)}
                 >
                   {member.availability}
                 </Tag>
@@ -54,5 +64,7 @@ Availabilities.propTypes = {
     statusKnown: PropTypes.bool.isRequired,
     availability: PropTypes.string.isRequired,
     blocked: PropTypes.bool
-  })).isRequired
+  })).isRequired,
+  contentEditable: PropTypes.bool.isRequired,
+  updateValue: PropTypes.func.isRequired
 };

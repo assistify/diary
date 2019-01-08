@@ -78,7 +78,10 @@ exports[`renders correctly 1`] = `
                 </span>
                 <span
                   className="tag wrapped is-primary"
+                  contentEditable={false}
+                  onBlur={[Function]}
                   style={Object {}}
+                  suppressContentEditableWarning={true}
                 >
                   here
                 </span>
