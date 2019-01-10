@@ -10,14 +10,25 @@ it('renders correctly', () => {
           {
             username: 'user1',
             statusKnown: true,
-            availability: 'here',
-            blocked: true
+            past: {
+              completedItems: [],
+              blockingItems: [{title: 'bla'}]
+            },
+            future: {
+              availability: 'here',
+              plannedItems: []
+            }
           },
           {
             username: 'user2',
             statusKnown: false,
-            availability: '',
-            blocked: false
+            past: {
+              completedItems: []
+            },
+            future: {
+              availability: '',
+              plannedItems: []
+            }
           },
         ]}
         contentEditable={false}

@@ -6,6 +6,8 @@ import Columns from 'react-bulma-components/lib/components/columns';
 import Tag from 'react-bulma-components/lib/components/tag';
 import UserFactsheet from './UserFactsheet';
 
+import isBlocked from '../lib/isBlocked';
+
 export default function Availabilities(props) {
   const {
     members,
@@ -26,16 +28,15 @@ export default function Availabilities(props) {
             className={member.statusKnown ? 'status-known' : 'status-unknown'}
           >
             <UserFactsheet
-              username={member.username}
-              statusKnown={member.statusKnown}
+              member={member}
               contentEditable={contentEditable}
               updateValue={updateValue}
             >
               <Tag.Group>
-                {member.statusKnown && member.blocked
+                {member.statusKnown && isBlocked(member.past.blockingItems)
                 && <Tag className="blocked">Blockiert</Tag>
                 }
-                {member.statusKnown && member.availability
+                {member.statusKnown && member.future.availability
                 && (
                 <Tag
                   color="primary"
@@ -44,7 +45,7 @@ export default function Availabilities(props) {
                   suppressContentEditableWarning
                   onBlur={e => updateValue(member.username, 'future.availability', e.target.innerHTML)}
                 >
-                  {member.availability}
+                  {member.future.availability}
                 </Tag>
                 )
                 }
@@ -62,8 +63,14 @@ Availabilities.propTypes = {
   members: PropTypes.arrayOf(PropTypes.shape({
     username: PropTypes.string.isRequired,
     statusKnown: PropTypes.bool.isRequired,
-    availability: PropTypes.string.isRequired,
-    blocked: PropTypes.bool
+    future: PropTypes.shape({
+      availability: PropTypes.string,
+      plannedItems: PropTypes.array
+    }).isRequired,
+    past: PropTypes.shape({
+      completedItems: PropTypes.array,
+      blockingItems: PropTypes.array
+    }).isRequired
   })).isRequired,
   contentEditable: PropTypes.bool.isRequired,
   updateValue: PropTypes.func.isRequired
