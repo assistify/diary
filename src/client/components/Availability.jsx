@@ -63,8 +63,14 @@ Availabilities.propTypes = {
   members: PropTypes.arrayOf(PropTypes.shape({
     username: PropTypes.string.isRequired,
     statusKnown: PropTypes.bool.isRequired,
-    future: PropTypes.array.isRequired,
-    past: PropTypes.array.isRequired
+    future: PropTypes.shape({
+      availability: PropTypes.string,
+      plannedItems: PropTypes.array
+    }).isRequired,
+    past: PropTypes.shape({
+      completedItems: PropTypes.array,
+      blockingItems: PropTypes.array
+    }).isRequired
   })).isRequired,
   contentEditable: PropTypes.bool.isRequired,
   updateValue: PropTypes.func.isRequired

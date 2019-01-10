@@ -14,8 +14,52 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
     };
   }
 
-  showConverter() {
-    this.setState({ popupVisible: true });
+  getTextRepresentation() {
+    const {
+      member: {
+        past,
+        future
+      }
+    } = this.props;
+    return [
+      '**An was hast Du gearbeitet?**',
+      (past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
+      '\n**Was möchtest Du als nächstes tun?**',
+      (future.plannedItem || []).map(e => `- ${e.title}`).join('\n'),
+      '\n**Wobei benötigst Du Hilfe?**',
+      (past.blockingItems || []).map(e => `- ${e.title}`).join('\n'),
+      '\n**Wo verbringst Du Deinen nächsten Arbeitstag?**',
+      future.availability,
+    ].join('\n');
+  }
+
+  popupTextChanged(text) {
+    const { member, updateValue } = this.props;
+    const past = {
+      completedItems: [],
+      blockingItems: []
+    };
+    const future = {
+      availability: [],
+      plannedItems: []
+    };
+    let section;
+    text.split('\n').forEach((line) => {
+      if (line.match(/An was hast Du gearbeitet/)) {
+        section = past.completedItems;
+      } else if (line.match(/Was möchtest Du als nächstes tun/)) {
+        section = future.plannedItems;
+      } else if (line.match(/Wobei benötigst Du Hilfe/)) {
+        section = past.blockingItems;
+      } else if (line.match(/Wo verbringst Du Deinen nächsten Arbeitstag/)) {
+        section = future.availability;
+      } else if (section && line.trim()) {
+        section.push({ title: line.replace(/^[\s-]*/, '') });
+      }
+    });
+    future.availability = future.availability.map(item => item.title).join('\n') || 'unbekannt';
+    updateValue(member.username, 'past', past);
+    updateValue(member.username, 'future', future);
   }
 
   render() {
@@ -40,13 +84,16 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
     const { popupVisible } = this.state;
     const popup = popupVisible && (
       <div className="popup">
-        <textarea>{JSON.stringify(member, null, 2)}</textarea>
+        <textarea
+          onChange={e => this.popupTextChanged(e.target.value)}
+          value={this.getTextRepresentation(member)}
+        />
         <button type="button" onClick={() => this.setState({ popupVisible: false })}>Ok</button>
       </div>
     );
 
     const converterButton = member.statusKnown && (
-      <button type="button" className="converterButton" onClick={() => this.showConverter()}>✎</button>
+      <button type="button" className="converterButton" onClick={() => this.setState({ popupVisible: true })}>✎</button>
     );
 
     return (
@@ -77,8 +124,14 @@ UserFactsheet.propTypes = {
   member: PropTypes.shape({
     username: PropTypes.string.isRequired,
     statusKnown: PropTypes.bool.isRequired,
-    past: PropTypes.array.isRequired,
-    future: PropTypes.array.isRequired
+    future: PropTypes.shape({
+      availability: PropTypes.string,
+      plannedItems: PropTypes.array
+    }).isRequired,
+    past: PropTypes.shape({
+      completedItems: PropTypes.array,
+      blockingItems: PropTypes.array
+    }).isRequired
   }).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

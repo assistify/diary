@@ -22,72 +22,63 @@ exports[`renders correctly 1`] = `
         className="media"
         style={Object {}}
       >
-        <div
-          className="container"
+        <figure
+          className="media-left"
           style={Object {}}
         >
           <figure
-            className="media-left"
+            className="image avatar is-128x128"
             style={Object {}}
           >
-            <figure
-              className="image avatar is-128x128"
-              style={Object {}}
-            >
-              <img
-                alt="user1"
-                onError={[Function]}
-                src="/avatar/user1"
-              />
-            </figure>
+            <img
+              alt="user1"
+              onError={[Function]}
+              src="/avatar/user1"
+            />
           </figure>
-        </div>
+        </figure>
         <div
-          className="container availablity"
-          style={Object {}}
+          className="factSheetInfo"
         >
-          <div
-            className="media-content"
+          <button
+            className="converterButton"
+            onClick={[Function]}
+            type="button"
+          >
+            ✎
+          </button>
+          <h1
+            className="title is-5"
+          >
+            <a
+              className="c-user"
+              href="/direct/user1"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              @user1
+            </a>
+          </h1>
+          <span
+            className="tags"
             style={Object {}}
           >
-            <h1
-              className="title is-5"
-            >
-              <a
-                className="c-user"
-                href="/direct/user1"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                @user1
-              </a>
-            </h1>
-            <div
-              className="container"
+            <span
+              className="tag blocked"
               style={Object {}}
             >
-              <span
-                className="tags"
-                style={Object {}}
-              >
-                <span
-                  className="tag blocked"
-                  style={Object {}}
-                >
-                  Blockiert
-                </span>
-                <span
-                  className="tag wrapped is-primary"
-                  contentEditable={false}
-                  onBlur={[Function]}
-                  style={Object {}}
-                  suppressContentEditableWarning={true}
-                >
-                  here
-                </span>
-              </span>
-            </div>
-          </div>
+              Blockiert
+            </span>
+            <span
+              className="tag wrapped is-primary"
+              contentEditable={false}
+              onBlur={[Function]}
+              style={Object {}}
+              suppressContentEditableWarning={true}
+            >
+              here
+            </span>
+          </span>
         </div>
       </article>
     </div>
@@ -99,56 +90,40 @@ exports[`renders correctly 1`] = `
         className="media"
         style={Object {}}
       >
-        <div
-          className="container"
+        <figure
+          className="media-left"
           style={Object {}}
         >
           <figure
-            className="media-left"
+            className="image avatar is-128x128"
             style={Object {}}
           >
-            <figure
-              className="image avatar is-128x128"
-              style={Object {}}
-            >
-              <img
-                alt="user2"
-                onError={[Function]}
-                src="/avatar/user2"
-              />
-            </figure>
+            <img
+              alt="user2"
+              onError={[Function]}
+              src="/avatar/user2"
+            />
           </figure>
-        </div>
+        </figure>
         <div
-          className="container availablity"
-          style={Object {}}
+          className="factSheetInfo"
         >
-          <div
-            className="media-content"
-            style={Object {}}
+          <h1
+            className="title is-5"
           >
-            <h1
-              className="title is-5"
+            <a
+              className="c-user"
+              href="/direct/user2"
+              rel="noopener noreferrer"
+              target="_blank"
             >
-              <a
-                className="c-user"
-                href="/direct/user2"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                @user2
-              </a>
-            </h1>
-            <div
-              className="container"
-              style={Object {}}
-            >
-              <span
-                className="tags"
-                style={Object {}}
-              />
-            </div>
-          </div>
+              @user2
+            </a>
+          </h1>
+          <span
+            className="tags"
+            style={Object {}}
+          />
         </div>
       </article>
     </div>
