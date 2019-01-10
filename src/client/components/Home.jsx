@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import '../styles/index.scss';
 import Container from 'react-bulma-components/lib/components/container';
-import {compressToEncodedURIComponent as encode, decompressFromEncodedURIComponent as decode} from 'lz-string';
+import { compressToEncodedURIComponent as encode, decompressFromEncodedURIComponent as decode } from 'lz-string';
 
 import qs from 'qs';
 import { TeamContext } from '../lib/teamContext';
@@ -16,7 +16,7 @@ import ReportFooter from './ReportFooter';
 const contentEditable = !!window.location.search.match(/\bedit=/);
 
 const templateData = {
-  date: '2018-11-23T00:00:00.000Z',
+  date: new Date(),
   teamName: 'Assistify Core',
   serverUrl: 'https://team.assistify-test.noncd.db.de',
   teamReport: [
@@ -64,7 +64,7 @@ export default class Home extends Component {
 
     this.state = {
       editing: false,
-      diaryPage: { }// provided asynchronously in componentDidMount
+      diaryPage: templateData // will be overwritten with actual data in componentDidMount
     };
   }
 
@@ -108,9 +108,19 @@ export default class Home extends Component {
     };
   }
 
-  toggleEdit = () => {
-    const { editing } = this.state;
-    this.setState({ editing: !editing });
+  static getUrl(state) {
+    const {
+      diaryPage: {
+        teamName, date, serverUrl, teamReport
+      }
+    } = state;
+    const encodedTeamReport = encode(JSON.stringify(teamReport));
+    return [`${window.location.origin}${window.location.pathname || '/'}`,
+      `?teamName=${encode(teamName)}`,
+      `&date=${encode(date && date.toJSON ? date.toJSON() : date)}`,
+      `&serverUrl=${encode(serverUrl)}`,
+      `&teamReport=${encodedTeamReport}`,
+      (contentEditable ? '&edit=true' : '')].join();
   }
 
   updateDiaryPage = (newState, url) => {
@@ -124,19 +134,9 @@ export default class Home extends Component {
     });
   }
 
-  static getUrl(state) {
-    const {
-      diaryPage: {
-        teamName, date, serverUrl, teamReport
-      }
-    } = state;
-    const encodedTeamReport = encode(JSON.stringify(teamReport));
-    return `${window.location.origin}${window.location.pathname || '/'}`
-      + `?teamName=${encode(teamName)}`
-      + `&date=${encode(date && date.toJSON ? date.toJSON() : date)}`
-      + `&serverUrl=${encode(serverUrl)}`
-      + `&teamReport=${encodedTeamReport}`
-      + (contentEditable ? '&edit=true' : '');
+  toggleEdit = () => {
+    const { editing } = this.state;
+    this.setState({ editing: !editing });
   }
 
   updateValue(fieldname, value) {
@@ -170,11 +170,6 @@ export default class Home extends Component {
           <ReportFooter onClick={this.toggleEdit} />
         </Container>
       );
-    }
-
-    // we need to convert dates to strings in order to make them editable
-    if (!diaryPage.date || typeof diaryPage.date !== 'string') {
-      diaryPage.date = (diaryPage.date || new Date()).toJSON();
     }
 
     return (
