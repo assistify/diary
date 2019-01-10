@@ -84,11 +84,13 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
     const { popupVisible } = this.state;
     const popup = popupVisible && (
       <div className="popup">
-        <textarea
-          onChange={e => this.popupTextChanged(e.target.value)}
-          value={this.getTextRepresentation(member)}
-        />
-        <button type="button" onClick={() => this.setState({ popupVisible: false })}>Ok</button>
+        <div>
+          <textarea
+            onChange={e => this.popupTextChanged(e.target.value)}
+            value={this.getTextRepresentation(member)}
+          />
+          <button type="button" onClick={() => this.setState({ popupVisible: false })}>Ok</button>
+        </div>
       </div>
     );
 
