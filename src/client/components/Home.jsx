@@ -13,7 +13,7 @@ import { localization } from '../lib/localization';
 import 'jsoneditor-react/es/editor.min.css';
 import ReportFooter from './ReportFooter';
 
-const contentEditable = window.location.search && !!window.location.search.match(/\bedit=/);
+const contentEditable = !!window.location.search.match(/\bedit=/);
 
 const templateData = {
   date: '2018-11-23T00:00:00.000Z',
