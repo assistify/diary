@@ -10,8 +10,6 @@ import Availabilities from './Availability';
 import DetailsAggregated from './DetailsAggregated';
 import DetailsByMember from './DetailsByMember';
 
-import isBlocked from '../lib/isBlocked';
-
 export default class DiaryPage extends Component {
   static propTypes = dailyType;
 
@@ -84,12 +82,7 @@ export default class DiaryPage extends Component {
           </Hero.Body>
         </Hero>
         <Availabilities
-          members={teamReport.map(memberReport => ({
-            username: memberReport.username,
-            availability: memberReport.future.availability,
-            statusKnown: memberReport.statusKnown,
-            blocked: isBlocked(memberReport.past.blockingItems)
-          }))}
+          members={teamReport}
           contentEditable={contentEditable}
           updateValue={(username, fieldName, value) => updateMember(username, fieldName, value)}
         />

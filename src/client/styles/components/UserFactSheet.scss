@@ -1,0 +1,36 @@
+.factSheetInfo {
+  width: 100%;
+
+  .converterButton {
+    float: right;
+    border: none;
+    font-size: 22px;
+  }
+}
+
+.popup {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  textarea {
+    width: 80%;
+    height: 500px;
+    margin: 80px auto 10px;
+    max-height: 80%;
+    font-size: 13px;
+  }
+
+  button {
+    width: 100px;
+    padding: 5px 10px;
+    font-size: 16px;
+    margin: 0 auto;
+  }
+}
