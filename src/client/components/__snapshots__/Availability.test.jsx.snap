@@ -40,13 +40,6 @@ exports[`renders correctly 1`] = `
         <div
           className="factSheetInfo"
         >
-          <button
-            className="converterButton"
-            onClick={[Function]}
-            type="button"
-          >
-            ✎
-          </button>
           <h1
             className="title is-5"
           >
