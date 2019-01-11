@@ -27,7 +27,7 @@ export default function Editor(props) {
   return (
     <Container>
       <JsonEditor
-        value={diaryPage}
+        value={JSON.parse(JSON.stringify(diaryPage))}
         allowedModes={['tree', 'code', 'form', 'text']}
         onChange={state => onChange(state, copyStatefulUrlToClipboard(state))}
       />
