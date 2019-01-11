@@ -94,7 +94,7 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
       </div>
     );
 
-    const converterButton = member.statusKnown && (
+    const converterButton = contentEditable && (
       <button type="button" className="converterButton" onClick={() => this.setState({ popupVisible: true })}>✎</button>
     );
 
