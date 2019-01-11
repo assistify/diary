@@ -5,6 +5,8 @@ import Heading from 'react-bulma-components/lib/components/heading';
 import Hero from 'react-bulma-components/lib/components/hero';
 import Container from 'react-bulma-components/lib/components/container';
 
+import html2canvas from 'html2canvas';
+
 import { dailyType } from '../../models/dailyType';
 import Availabilities from './Availability';
 import DetailsAggregated from './DetailsAggregated';
@@ -32,6 +34,23 @@ export default class DiaryPage extends Component {
         serverUrl
       }
     } = this;
+
+    function downloadScreenshot(button) {
+      const width = 1440;
+      const options = {
+        windowWidth: width * 2,
+        width,
+        scale: 1,
+        x: width / 2
+      };
+      button.setAttribute('style', 'display: none');
+      html2canvas(document.getElementById('app'), options)
+        .then((canvas) => {
+          const prefix = 'data:application/octet-stream;headers=Content-Disposition%3Aattachment%3Bfilename=diary.png';
+          window.location.href = canvas.toDataURL('image/png').replace(/data:image\/png/, prefix);
+          button.removeAttribute('style');
+        });
+    }
 
     function updateMember(username, fieldName, value) {
       updateValue('teamReport', teamReport.map((member) => {
@@ -79,7 +98,9 @@ export default class DiaryPage extends Component {
             >
               {dateFormat(date, 'dddd, dd. mmmm yyyy')}
             </Heading>
+
           </Hero.Body>
+          <span id="screenshot-button" role="button" aria-label="Take Screenshot" onClick={e => downloadScreenshot(e.target)}>📷</span>
         </Hero>
         <Availabilities
           members={teamReport}
