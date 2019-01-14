@@ -120,7 +120,7 @@ export default class Home extends Component {
       `&date=${encode(date && date.toJSON ? date.toJSON() : date)}`,
       `&serverUrl=${encode(serverUrl)}`,
       `&teamReport=${encodedTeamReport}`,
-      (contentEditable ? '&edit=true' : '')].join();
+      (contentEditable ? '&edit=true' : '')].join('');
   }
 
   updateDiaryPage = (newState, url) => {
