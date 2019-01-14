@@ -60,6 +60,7 @@
     "babel-polyfill": "^6.26.0",
     "copy-to-clipboard": "^3.0.8",
     "dateformat": "^3.0.3",
+    "express": "^4.16.4",
     "history": "^4.7.2",
     "html2canvas": "^1.0.0-alpha.12",
     "jsoneditor": "^5.26.2",
@@ -78,6 +79,7 @@
     "react-dom": "^16.5.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "request": "^2.88.0",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
@@ -134,5 +136,6 @@
     "webpack-dev-server": "^3.1.14",
     "webpack-hot-middleware": "^2.24.3",
     "webpack-manifest-plugin": "1.1.0"
-  }
+  },
+  "proxy": "http://localhost:4001"
 }
