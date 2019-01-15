@@ -33,7 +33,7 @@ exports[`renders correctly 1`] = `
             <img
               alt="user1"
               onError={[Function]}
-              src="/avatar/user1"
+              src="http://localhost/image//avatar/user1"
             />
           </figure>
         </figure>
@@ -94,7 +94,7 @@ exports[`renders correctly 1`] = `
             <img
               alt="user2"
               onError={[Function]}
-              src="/avatar/user2"
+              src="http://localhost/image//avatar/user2"
             />
           </figure>
         </figure>
