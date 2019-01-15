@@ -27,11 +27,15 @@ export default class Avatar extends Component {
     render() {
       const { username, size } = this.state;
       return (
-
         <TeamContext.Consumer>
-          {teamContext => (
-            <Image size={size} className="avatar" alt={username} src={`${teamContext.serverUrl}/avatar/${username}`} fallback="http://bulma.io/images/placeholders/128x128.png" />
-          )}
+          {(teamContext) => {
+            const src = window.location.hostname === 'localhost'
+              ? `${window.location.origin.replace(4000, 4001)}/image/${encodeURIComponent(teamContext.serverUrl)}/avatar/${username}`
+              : `${teamContext.serverUrl}/avatar/${username}`;
+            return (
+              <Image size={size} className="avatar" alt={username} src={src} fallback="http://bulma.io/images/placeholders/128x128.png" />
+            );
+          }}
         </TeamContext.Consumer>
       );
     }
