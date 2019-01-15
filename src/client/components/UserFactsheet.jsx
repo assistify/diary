@@ -99,15 +99,13 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
         type="button"
         className="converterButton"
         onClick={() => {
-          updateValue(member.username, 'statusKnown', true); // one someone edits the text, it's because a status is known
+          updateValue(member.username, 'statusKnown', true); // once someone edits the text, it's because a status is known
           this.setState({
             popupVisible: true
           });
-        }
-      }
+        }}
       >
-✎
-
+        ✎
       </button>
     );
 
