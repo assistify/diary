@@ -21,6 +21,8 @@
     }
 
     &.wrapped {
+        max-height: 4em;
+        height: auto;
         max-width: 200px;
         overflow: hidden;
         hyphens: auto;
@@ -34,6 +36,7 @@
 
         &:hover {
             white-space: normal;
+            max-height: initial;
             height: auto;
         }
     }
