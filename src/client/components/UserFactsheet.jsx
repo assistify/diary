@@ -95,7 +95,18 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
     );
 
     const converterButton = contentEditable && (
-      <button type="button" className="converterButton" onClick={() => this.setState({ popupVisible: true })}>✎</button>
+      <button
+        type="button"
+        className="converterButton"
+        onClick={() => {
+          updateValue(member.username, 'statusKnown', true); // once someone edits the text, it's because a status is known
+          this.setState({
+            popupVisible: true
+          });
+        }}
+      >
+        ✎
+      </button>
     );
 
     return (
@@ -105,7 +116,7 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
         </Media.Item>
 
         <div className="factSheetInfo">
-          { converterButton }
+          {converterButton}
           <Heading size={5}>
             <User username={member.username} />
           </Heading>
