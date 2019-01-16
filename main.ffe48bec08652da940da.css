@@ -1001,6 +1001,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     color: white;
     background-color: #d4145a; }
   .tag.wrapped {
+    max-height: 4em;
+    height: auto;
     max-width: 200px;
     overflow: hidden;
     hyphens: auto;
@@ -1011,6 +1013,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
       padding: 0.25em 0.75em; }
     .tag.wrapped:hover {
       white-space: normal;
+      max-height: initial;
       height: auto; }
 
 .avatar > :first-child {
