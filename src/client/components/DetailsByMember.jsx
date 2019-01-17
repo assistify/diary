@@ -15,8 +15,7 @@ export default function DetailsByMember(props) {
       <Heading size={3}>Was los war</Heading>
       <Columns centered multiline>
         {teamReport
-          .sort((a, b) => (a.statusKnown && !b.statusKnown ? -1
-            : a.username > b.username))
+          .filter(memberReport => !!memberReport.statusKnown)
           .map(memberReport => (
             <MemberReport
               key={memberReport.username}
