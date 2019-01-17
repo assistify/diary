@@ -30,7 +30,13 @@ export default class Avatar extends Component {
 
         <TeamContext.Consumer>
           {teamContext => (
-            <Image size={size} className="avatar" alt={username} src={`${teamContext.serverUrl}/avatar/${username}`} fallback="http://bulma.io/images/placeholders/128x128.png" />
+            <a
+              href={`${teamContext.serverUrl}/direct/${username}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Image size={size} className="avatar" alt={username} src={`${teamContext.serverUrl}/avatar/${username}`} fallback="http://bulma.io/images/placeholders/128x128.png" />
+            </a>
           )}
         </TeamContext.Consumer>
       );

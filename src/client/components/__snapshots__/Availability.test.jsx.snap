@@ -26,16 +26,22 @@ exports[`renders correctly 1`] = `
           className="media-left"
           style={Object {}}
         >
-          <figure
-            className="image avatar is-128x128"
-            style={Object {}}
+          <a
+            href="/direct/user1"
+            rel="noopener noreferrer"
+            target="_blank"
           >
-            <img
-              alt="user1"
-              onError={[Function]}
-              src="/avatar/user1"
-            />
-          </figure>
+            <figure
+              className="image avatar is-128x128"
+              style={Object {}}
+            >
+              <img
+                alt="user1"
+                onError={[Function]}
+                src="/avatar/user1"
+              />
+            </figure>
+          </a>
         </figure>
         <div
           className="factSheetInfo"
@@ -88,7 +94,7 @@ exports[`renders correctly 1`] = `
           style={Object {}}
         >
           <figure
-            className="image avatar is-64x64"
+            className="image avatar is-128x128"
             style={Object {}}
           >
             <img

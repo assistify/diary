@@ -9,16 +9,22 @@ exports[`renders correctly 1`] = `
     className="media-left"
     style={Object {}}
   >
-    <figure
-      className="image avatar is-128x128"
-      style={Object {}}
+    <a
+      href="/direct/testuser"
+      rel="noopener noreferrer"
+      target="_blank"
     >
-      <img
-        alt="testuser"
-        onError={[Function]}
-        src="/avatar/testuser"
-      />
-    </figure>
+      <figure
+        className="image avatar is-128x128"
+        style={Object {}}
+      >
+        <img
+          alt="testuser"
+          onError={[Function]}
+          src="/avatar/testuser"
+        />
+      </figure>
+    </a>
   </figure>
   <div
     className="factSheetInfo"
