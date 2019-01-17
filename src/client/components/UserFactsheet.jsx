@@ -112,7 +112,10 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
     return (
       <Media>
         <Media.Item renderAs="figure" position="left">
-          <Avatar username={member.username} />
+          <Avatar
+            username={member.username}
+            size={member.statusKnown ? 128 : 64}
+          />
         </Media.Item>
 
         <div className="factSheetInfo">
