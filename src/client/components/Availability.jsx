@@ -22,7 +22,8 @@ export default function Availabilities(props) {
       <Columns multiline centered>
         {
           members
-            .sort(a => (a.statusKnown ? -1 : 1))
+            .sort((a, b) => (a.statusKnown && !b.statusKnown ? -1
+              : a.username > b.username))
             .map(member => (
               <Columns.Column
                 key={member.username}
