@@ -21,39 +21,41 @@ export default function Availabilities(props) {
 
       <Columns multiline centered>
         {
-        members.map(member => (
-          <Columns.Column
-            key={member.username}
-            size={4}
-            className={member.statusKnown ? 'status-known' : 'status-unknown'}
-          >
-            <UserFactsheet
-              member={member}
-              contentEditable={contentEditable}
-              updateValue={updateValue}
-            >
-              <Tag.Group>
-                {member.statusKnown && isBlocked(member.past.blockingItems)
-                && <Tag className="blocked">Blockiert</Tag>
-                }
-                {member.statusKnown && member.future.availability
-                && (
-                <Tag
-                  color="primary"
-                  className="wrapped"
+          members
+            .sort(a => (a.statusKnown ? -1 : 1))
+            .map(member => (
+              <Columns.Column
+                key={member.username}
+                size={4}
+                className={member.statusKnown ? 'status-known' : 'status-unknown'}
+              >
+                <UserFactsheet
+                  member={member}
                   contentEditable={contentEditable}
-                  suppressContentEditableWarning
-                  onBlur={e => updateValue(member.username, 'future.availability', e.target.innerHTML)}
+                  updateValue={updateValue}
                 >
-                  {member.future.availability}
-                </Tag>
-                )
-                }
-              </Tag.Group>
-            </UserFactsheet>
-          </Columns.Column>
-        ))
-      }
+                  <Tag.Group>
+                    {member.statusKnown && isBlocked(member.past.blockingItems)
+                      && <Tag className="blocked">Blockiert</Tag>
+                    }
+                    {member.statusKnown && member.future.availability
+                      && (
+                        <Tag
+                          color="primary"
+                          className="wrapped"
+                          contentEditable={contentEditable}
+                          suppressContentEditableWarning
+                          onBlur={e => updateValue(member.username, 'future.availability', e.target.innerHTML)}
+                        >
+                          {member.future.availability}
+                        </Tag>
+                      )
+                    }
+                  </Tag.Group>
+                </UserFactsheet>
+              </Columns.Column>
+            ))
+        }
       </Columns>
     </Section>
   );
