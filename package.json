@@ -62,8 +62,7 @@
   },
   "release-it": {
     "scripts": {
-      "beforeStart": "npm test",
-      "afterRelease": "echo Successfully released ${name} version ${version}."
+      "beforeStart": "npm test"
     }
   },
   "dependencies": {
