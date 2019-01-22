@@ -64,12 +64,6 @@
     "scripts": {
       "beforeStart": "npm test",
       "afterRelease": "echo Successfully released ${name} version ${version}."
-    },
-    "prompt": {
-      "commit": false,
-      "tag": false,
-      "push": false,
-      "publish": true
     }
   },
   "dependencies": {
