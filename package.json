@@ -1,5 +1,5 @@
 {
-  "name": "assistify-daily",
+  "name": "assistify-diary",
   "version": "0.1.2",
   "description": "A simple team diary",
   "keywords": [],
@@ -7,6 +7,10 @@
   "license": "ISC",
   "homepage": "https://diary.assistify.de",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/assistify/diary.git"
+  },
   "babel": {
     "presets": [
       "@babel/preset-env",
