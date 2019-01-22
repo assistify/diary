@@ -13,7 +13,7 @@ function parseText(text) {
       section = past.completedItems;
     } else if (line.match(/Was möchtest Du als nächstes tun/)) {
       section = future.plannedItems;
-    } else if (line.match(/Wobei benötigst Du Hilfe/)) {
+    } else if (line.match(/Kommst du bei etwas nicht weiter und brauchst Hilfe/)) {
       section = past.blockingItems;
     } else if (line.match(/Wo verbringst Du Deinen nächsten Arbeitstag/)) {
       section = future.availability;
@@ -31,7 +31,7 @@ function stringify(member) {
     (member.past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
     '\n**Was möchtest Du als nächstes tun?**',
     (member.future.plannedItems || []).map(e => `- ${e.title}`).join('\n'),
-    '\n**Wobei benötigst Du Hilfe?**',
+    '\n**Kommst du bei etwas nicht weiter und brauchst Hilfe?**',
     (member.past.blockingItems || []).map(e => `- ${e.title}`).join('\n'),
     '\n**Wo verbringst Du Deinen nächsten Arbeitstag?**',
     member.future.availability,

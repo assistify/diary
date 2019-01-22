@@ -6,7 +6,7 @@ const simpleText = `**An was hast Du gearbeitet?**
 **Was möchtest Du als nächstes tun?**
 - task 3
 
-**Wobei benötigst Du Hilfe?**
+**Kommst du bei etwas nicht weiter und brauchst Hilfe?**
 - task 2
 
 **Wo verbringst Du Deinen nächsten Arbeitstag?**
