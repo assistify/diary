@@ -1,6 +1,6 @@
 {
   "name": "assistify-daily",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple team diary",
   "keywords": [],
   "author": "",
@@ -27,7 +27,7 @@
     "coverage": "node scripts/test.js --env=jsdom --coverage",
     "ui-test": "testcafe chrome:headless test/scripts/*.test.js --app 'npm run start' --app-init-delay 10000",
     "ui-test-live": "testcafe-live chrome test/scripts/*.test.js --app 'npm run start' --app-init-delay 10000",
-    "release": "CI=true release-it",
+    "release": "NON_INTERACTIVE=true release-it",
     "predeploy": "PUBLIC_URL=https://assistify.github.io/diary npm run build",
     "deploy": "gh-pages -d build -m '[ci skip] Deployed via CI'"
   },
