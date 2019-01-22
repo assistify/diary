@@ -8,6 +8,8 @@ function parseText(text) {
     plannedItems: []
   };
   let section;
+  let manual;
+  let error;
   text.split('\n').forEach((line) => {
     if (line.match(/An was hast Du gearbeitet/)) {
       section = past.completedItems;
@@ -17,12 +19,22 @@ function parseText(text) {
       section = past.blockingItems;
     } else if (line.match(/Wo verbringst Du Deinen nächsten Arbeitstag/)) {
       section = future.availability;
-    } else if (section && line.trim()) {
-      section.push({ title: line.replace(/^[\s-]*/, '') });
+    } else if (section) {
+      if (line.trim()) {
+        section.push({ title: line.replace(/^[\s-]*/, '') });
+      }
+    } else {
+      error = 'Encountered text outside of template - manual intervention necessary!';
+      manual = (manual ? `${manual}\n` : '') + line;
     }
   });
   future.availability = future.availability.map(item => item.title).join('\n') || 'unbekannt';
-  return { past, future };
+  return {
+    past,
+    future,
+    manual,
+    error
+  };
 }
 
 function stringify(member) {

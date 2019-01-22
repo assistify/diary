@@ -31,4 +31,13 @@ describe('Parser', () => {
   it('should recognize the different fields in a text', () => {
     expect(parser.parseText(simpleText)).toEqual(simpleStructure);
   });
+
+  it('should report errors when text outside of the template is given', () => {
+    expect(parser.parseText('abc\ndef')).toEqual({
+      error: 'Encountered text outside of template - manual intervention necessary!',
+      future: { availability: 'unbekannt', plannedItems: [] },
+      manual: 'abc\ndef',
+      past: { blockingItems: [], completedItems: [] }
+    });
+  });
 });
