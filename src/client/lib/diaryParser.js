@@ -1,4 +1,4 @@
-function parseText(text) {
+function parse(text) {
   const past = {
     completedItems: [],
     blockingItems: []
@@ -8,8 +8,7 @@ function parseText(text) {
     plannedItems: []
   };
   let section;
-  let manual;
-  let error;
+  let notRecognized;
   text.split('\n').forEach((line) => {
     if (line.match(/An was hast Du gearbeitet/)) {
       section = past.completedItems;
@@ -24,20 +23,14 @@ function parseText(text) {
         section.push({ title: line.replace(/^[\s-]*/, '') });
       }
     } else {
-      error = 'Encountered text outside of template - manual intervention necessary!';
-      manual = (manual ? `${manual}\n` : '') + line;
+      notRecognized = (notRecognized ? `${notRecognized}\n` : '') + line;
     }
   });
   future.availability = future.availability.map(item => item.title).join('\n') || 'unbekannt';
-  return {
-    past,
-    future,
-    manual,
-    error
-  };
+  return { past, future, notRecognized };
 }
 
-function stringify(member) {
+function renderAsText(member) {
   let result = [
     '**An was hast Du gearbeitet?**',
     (member.past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
@@ -48,10 +41,10 @@ function stringify(member) {
     '\n**Wo verbringst Du Deinen nächsten Arbeitstag?**',
     member.future.availability,
   ].join('\n');
-  if (member.manual) {
-    result += `\n\n**UNFORMATTED**\n${member.manual}`;
+  if (member.notRecognized) {
+    result += `\n\n**NOT RECOGNIZED**\n${member.notRecognized}`;
   }
   return result;
 }
 
-export default { parseText, stringify };
+export default { parse, renderAsText };

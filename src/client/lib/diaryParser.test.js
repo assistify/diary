@@ -25,24 +25,23 @@ const simpleStructure = {
 
 describe('Parser', () => {
   it('should correctly serialize the data structure', () => {
-    expect(parser.stringify(simpleStructure)).toEqual(simpleText);
+    expect(parser.renderAsText(simpleStructure)).toEqual(simpleText);
   });
 
   it('should recognize the different fields in a text', () => {
-    expect(parser.parseText(simpleText)).toEqual(simpleStructure);
+    expect(parser.parse(simpleText)).toEqual(simpleStructure);
   });
 
   it('should report errors when text outside of the template is given', () => {
-    expect(parser.parseText('abc\ndef')).toEqual({
-      error: 'Encountered text outside of template - manual intervention necessary!',
+    expect(parser.parse('abc\ndef')).toEqual({
       future: { availability: 'unbekannt', plannedItems: [] },
-      manual: 'abc\ndef',
-      past: { blockingItems: [], completedItems: [] }
+      past: { blockingItems: [], completedItems: [] },
+      notRecognized: 'abc\ndef'
     });
   });
 
   it('should display unformatted text below the template with a caption', () => {
-    expect(parser.stringify(Object.assign({ manual: 'abc\ndef' }, simpleStructure)))
-      .toEqual(`${simpleText}\n\n**UNFORMATTED**\nabc\ndef`);
+    expect(parser.renderAsText(Object.assign({ notRecognized: 'abc\ndef' }, simpleStructure)))
+      .toEqual(`${simpleText}\n\n**NOT RECOGNIZED**\nabc\ndef`);
   });
 });

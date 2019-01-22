@@ -17,12 +17,12 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
 
   getTextRepresentation() {
     const { member } = this.props;
-    return parser.stringify(member);
+    return parser.renderAsText(member);
   }
 
   popupTextChanged(text) {
     const { member, updateValue } = this.props;
-    Object.assign(member, parser.parseText(text));
+    Object.assign(member, parser.parse(text));
     updateValue(member.username, 'past', member.past);
     updateValue(member.username, 'future', member.future);
   }
