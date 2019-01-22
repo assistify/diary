@@ -40,4 +40,9 @@ describe('Parser', () => {
       past: { blockingItems: [], completedItems: [] }
     });
   });
+
+  it('should display unformatted text below the template with a caption', () => {
+    expect(parser.stringify(Object.assign({ manual: 'abc\ndef' }, simpleStructure)))
+      .toEqual(`${simpleText}\n\n**UNFORMATTED**\nabc\ndef`);
+  });
 });

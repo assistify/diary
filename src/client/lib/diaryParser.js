@@ -38,7 +38,7 @@ function parseText(text) {
 }
 
 function stringify(member) {
-  return [
+  let result = [
     '**An was hast Du gearbeitet?**',
     (member.past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
     '\n**Was möchtest Du als nächstes tun?**',
@@ -48,6 +48,10 @@ function stringify(member) {
     '\n**Wo verbringst Du Deinen nächsten Arbeitstag?**',
     member.future.availability,
   ].join('\n');
+  if (member.manual) {
+    result += `\n\n**UNFORMATTED**\n${member.manual}`;
+  }
+  return result;
 }
 
 export default { parseText, stringify };
