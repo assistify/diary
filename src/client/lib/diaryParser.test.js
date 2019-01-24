@@ -3,7 +3,7 @@ import parser from './diaryParser';
 const simpleText = `**An was hast Du gearbeitet?**
 - task 1
 
-**Was möchtest Du als nächstes tun?**
+**Was möchtest Du als Nächstes tun?**
 - task 3
 
 **Kommst du bei etwas nicht weiter und brauchst Hilfe?**
