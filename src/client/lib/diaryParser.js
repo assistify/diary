@@ -1,3 +1,8 @@
+const question1 = 'An was hast Du gearbeitet';
+const question2 = 'Was möchtest Du als Nächstes tun';
+const question3 = 'Kommst du bei etwas nicht weiter und brauchst Hilfe';
+const question4 = 'Wo verbringst Du Deinen nächsten Arbeitstag';
+
 function parse(text) {
   const past = {
     completedItems: [],
@@ -10,13 +15,13 @@ function parse(text) {
   let section;
   let notRecognized;
   text.split('\n').forEach((line) => {
-    if (line.match(/An was hast Du gearbeitet/)) {
+    if (line.match(new RegExp(question1))) {
       section = past.completedItems;
-    } else if (line.match(/Was möchtest Du als Nächstes tun/)) {
+    } else if (line.match(new RegExp(question2))) {
       section = future.plannedItems;
-    } else if (line.match(/Kommst du bei etwas nicht weiter und brauchst Hilfe/)) {
+    } else if (line.match(new RegExp(question3))) {
       section = past.blockingItems;
-    } else if (line.match(/Wo verbringst Du Deinen nächsten Arbeitstag/)) {
+    } else if (line.match(new RegExp(question4))) {
       section = future.availability;
     } else if (section) {
       if (line.trim()) {
@@ -32,13 +37,13 @@ function parse(text) {
 
 function renderAsText(member) {
   let result = [
-    '**An was hast Du gearbeitet?**',
+    `**${question1}?**`,
     (member.past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
-    '\n**Was möchtest Du als nächstes tun?**',
+    `\n**${question2}?**`,
     (member.future.plannedItems || []).map(e => `- ${e.title}`).join('\n'),
-    '\n**Kommst du bei etwas nicht weiter und brauchst Hilfe?**',
+    `\n**${question3}?**`,
     (member.past.blockingItems || []).map(e => `- ${e.title}`).join('\n'),
-    '\n**Wo verbringst Du Deinen nächsten Arbeitstag?**',
+    `\n**${question4}?**`,
     member.future.availability,
   ].join('\n');
   if (member.notRecognized) {
