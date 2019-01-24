@@ -12,7 +12,7 @@ function parse(text) {
   text.split('\n').forEach((line) => {
     if (line.match(/An was hast Du gearbeitet/)) {
       section = past.completedItems;
-    } else if (line.match(/Was möchtest Du als nächstes tun/)) {
+    } else if (line.match(/Was möchtest Du als Nächstes tun/)) {
       section = future.plannedItems;
     } else if (line.match(/Kommst du bei etwas nicht weiter und brauchst Hilfe/)) {
       section = past.blockingItems;
