@@ -100,7 +100,10 @@ export default class DiaryPage extends Component {
             </Heading>
 
           </Hero.Body>
-          <span id="screenshot-button" role="button" aria-label="Take Screenshot" onClick={e => downloadScreenshot(e.target)}>📷</span>
+          {contentEditable && (
+            <button type="button" id="screenshot-button" onClick={e => downloadScreenshot(e.target)}>
+              <span role="img" aria-label="Screenshot">📷</span>
+            </button>)}
         </Hero>
         <Availabilities
           members={teamReport}

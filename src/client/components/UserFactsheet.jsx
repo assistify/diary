@@ -4,6 +4,7 @@ import Media from 'react-bulma-components/lib/components/media';
 import Heading from 'react-bulma-components/lib/components/heading';
 import User from './User';
 import Avatar from './Avatar';
+import parser from '../lib/diaryParser';
 import '../styles/components/UserFactSheet.scss';
 
 export default class UserFactsheet extends React.Component {  // eslint-disable-line
@@ -15,51 +16,15 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
   }
 
   getTextRepresentation() {
-    const {
-      member: {
-        past,
-        future
-      }
-    } = this.props;
-    return [
-      '**An was hast Du gearbeitet?**',
-      (past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
-      '\n**Was möchtest Du als nächstes tun?**',
-      (future.plannedItem || []).map(e => `- ${e.title}`).join('\n'),
-      '\n**Wobei benötigst Du Hilfe?**',
-      (past.blockingItems || []).map(e => `- ${e.title}`).join('\n'),
-      '\n**Wo verbringst Du Deinen nächsten Arbeitstag?**',
-      future.availability,
-    ].join('\n');
+    const { member } = this.props;
+    return parser.renderAsText(member);
   }
 
   popupTextChanged(text) {
     const { member, updateValue } = this.props;
-    const past = {
-      completedItems: [],
-      blockingItems: []
-    };
-    const future = {
-      availability: [],
-      plannedItems: []
-    };
-    let section;
-    text.split('\n').forEach((line) => {
-      if (line.match(/An was hast Du gearbeitet/)) {
-        section = past.completedItems;
-      } else if (line.match(/Was möchtest Du als nächstes tun/)) {
-        section = future.plannedItems;
-      } else if (line.match(/Wobei benötigst Du Hilfe/)) {
-        section = past.blockingItems;
-      } else if (line.match(/Wo verbringst Du Deinen nächsten Arbeitstag/)) {
-        section = future.availability;
-      } else if (section && line.trim()) {
-        section.push({ title: line.replace(/^[\s-]*/, '') });
-      }
-    });
-    future.availability = future.availability.map(item => item.title).join('\n') || 'unbekannt';
-    updateValue(member.username, 'past', past);
-    updateValue(member.username, 'future', future);
+    Object.assign(member, parser.parse(text));
+    updateValue(member.username, 'past', member.past);
+    updateValue(member.username, 'future', member.future);
   }
 
   render() {
