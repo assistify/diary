@@ -1,6 +1,6 @@
 const question1 = 'An was hast Du gearbeitet';
 const question2 = 'Was möchtest Du als Nächstes tun';
-const question3 = 'Kommst du bei etwas nicht weiter und brauchst Hilfe';
+const question3 = 'Kommst Du bei etwas nicht weiter und brauchst Hilfe';
 const question4 = 'Wo verbringst Du Deinen nächsten Arbeitstag';
 
 function parse(text) {
@@ -15,13 +15,13 @@ function parse(text) {
   let section;
   let notRecognized;
   text.split('\n').forEach((line) => {
-    if (line.match(new RegExp(question1))) {
+    if (line.match(new RegExp(question1, 'i'))) {
       section = past.completedItems;
-    } else if (line.match(new RegExp(question2))) {
+    } else if (line.match(new RegExp(question2, 'i'))) {
       section = future.plannedItems;
-    } else if (line.match(new RegExp(question3))) {
+    } else if (line.match(new RegExp(question3, 'i'))) {
       section = past.blockingItems;
-    } else if (line.match(new RegExp(question4))) {
+    } else if (line.match(new RegExp(question4, 'i'))) {
       section = future.availability;
     } else if (section) {
       if (line.trim()) {
