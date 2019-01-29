@@ -1,9 +1,4 @@
-const question1 = 'An was hast Du gearbeitet';
-const question2 = 'Was möchtest Du als Nächstes tun';
-const question3 = 'Kommst Du bei etwas nicht weiter und brauchst Hilfe';
-const question4 = 'Wo verbringst Du Deinen nächsten Arbeitstag';
-
-function parse(text) {
+module.exports = function DiaryParser() {
   const past = {
     completedItems: [],
     blockingItems: []
@@ -12,44 +7,55 @@ function parse(text) {
     availability: [],
     plannedItems: []
   };
-  let section;
-  let notRecognized;
-  text.split('\n').forEach((line) => {
-    if (line.match(new RegExp(question1, 'i'))) {
-      section = past.completedItems;
-    } else if (line.match(new RegExp(question2, 'i'))) {
-      section = future.plannedItems;
-    } else if (line.match(new RegExp(question3, 'i'))) {
-      section = past.blockingItems;
-    } else if (line.match(new RegExp(question4, 'i'))) {
-      section = future.availability;
-    } else if (section) {
-      if (line.trim()) {
-        section.push({ title: line.replace(/^[\s-]*/, '') });
+
+  const questions = [
+    { text: 'An was hast Du gearbeitet', destination: past.completedItems },
+    { text: 'Was möchtest Du als Nächstes tun', destination: future.plannedItems },
+    { text: 'Kommst Du bei etwas nicht weiter und brauchst Hilfe', destination: past.blockingItems },
+    { text: 'Wo verbringst Du deinen nächsten Arbeitstag', destination: future.availability }
+  ];
+
+  function parse(text) {
+    let currentSection;
+    let notRecognized;
+    text.split('\n').forEach((line) => {
+      const startOfSection = questions.some((question) => {
+        const m = line.match(new RegExp(question.text, 'i'));
+        if (m) {
+          currentSection = question.destination;
+        }
+        return !!m;
+      });
+      if (!startOfSection) {
+        if (currentSection) {
+          if (line.trim()) {
+            currentSection.push({ title: line.replace(/^[\s-]*/, '') });
+          }
+        } else {
+          notRecognized = (notRecognized ? `${notRecognized}\n` : '') + line;
+        }
       }
-    } else {
-      notRecognized = (notRecognized ? `${notRecognized}\n` : '') + line;
-    }
-  });
-  future.availability = future.availability.map(item => item.title).join('\n') || 'unbekannt';
-  return { past, future, notRecognized };
-}
-
-function renderAsText(member) {
-  let result = [
-    `**${question1}?**`,
-    (member.past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
-    `\n**${question2}?**`,
-    (member.future.plannedItems || []).map(e => `- ${e.title}`).join('\n'),
-    `\n**${question3}?**`,
-    (member.past.blockingItems || []).map(e => `- ${e.title}`).join('\n'),
-    `\n**${question4}?**`,
-    member.future.availability,
-  ].join('\n');
-  if (member.notRecognized) {
-    result += `\n\n**NOT RECOGNIZED**\n${member.notRecognized}`;
+    });
+    future.availability = future.availability.map(item => item.title).join('\n') || 'unbekannt';
+    return { past, future, notRecognized };
   }
-  return result;
-}
 
-export default { parse, renderAsText };
+  function renderAsText(member) {
+    let result = [
+      `**${questions[0].text}?**`,
+      (member.past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
+      `\n**${questions[1].text}?**`,
+      (member.future.plannedItems || []).map(e => `- ${e.title}`).join('\n'),
+      `\n**${questions[2].text}?**`,
+      (member.past.blockingItems || []).map(e => `- ${e.title}`).join('\n'),
+      `\n**${questions[3].text}?**`,
+      member.future.availability,
+    ].join('\n');
+    if (member.notRecognized) {
+      result += `\n&nbsp;\n**NOT RECOGNIZED**\n${member.notRecognized}`;
+    }
+    return result;
+  }
+
+  return { parse, renderAsText, questions: questions.map(q => q.text) };
+};

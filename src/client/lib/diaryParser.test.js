@@ -1,15 +1,17 @@
-import parser from './diaryParser';
+import DiaryParser from './diaryParser';
 
-const simpleText = `**An was hast Du gearbeitet?**
+const parser = new DiaryParser();
+
+const simpleText = `**${parser.questions[0]}?**
 - task 1
 
-**Was möchtest Du als Nächstes tun?**
+**${parser.questions[1]}?**
 - task 3
 
-**Kommst Du bei etwas nicht weiter und brauchst Hilfe?**
+**${parser.questions[2]}?**
 - task 2
 
-**Wo verbringst Du Deinen nächsten Arbeitstag?**
+**${parser.questions[3]}?**
 Office`;
 
 const simpleStructure = {
@@ -33,7 +35,8 @@ describe('Parser', () => {
   });
 
   it('should report errors when text outside of the template is given', () => {
-    expect(parser.parse('abc\ndef')).toEqual({
+    const newParser = new DiaryParser();
+    expect(newParser.parse('abc\ndef')).toEqual({
       future: { availability: 'unbekannt', plannedItems: [] },
       past: { blockingItems: [], completedItems: [] },
       notRecognized: 'abc\ndef'
@@ -42,6 +45,18 @@ describe('Parser', () => {
 
   it('should display unformatted text below the template with a caption', () => {
     expect(parser.renderAsText(Object.assign({ notRecognized: 'abc\ndef' }, simpleStructure)))
-      .toEqual(`${simpleText}\n\n**NOT RECOGNIZED**\nabc\ndef`);
+      .toEqual(`${simpleText}\n&nbsp;\n**NOT RECOGNIZED**\nabc\ndef`);
+  });
+
+  it('should ignore case of messages', () => {
+    const newParser = new DiaryParser();
+    const capitalizeEveryWord = text => text.toLowerCase()
+      .split(' ')
+      .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(' ');
+    expect(newParser.parse(`**${capitalizeEveryWord(newParser.questions[0])}?**\nqwert`)).toEqual({
+      future: { availability: 'unbekannt', plannedItems: [] },
+      past: { blockingItems: [], completedItems: [{ title: 'qwert' }] }
+    });
   });
 });
