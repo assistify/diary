@@ -1,12 +1,16 @@
 {
   "name": "assistify-diary",
-  "version": "0.0.1",
+  "version": "0.1.5",
   "description": "A simple team diary",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "homepage": "https://diary.assistify.de",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/assistify/diary.git"
+  },
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -27,6 +31,7 @@
     "coverage": "node scripts/test.js --env=jsdom --coverage",
     "ui-test": "testcafe chrome:headless test/scripts/*.test.js --app 'npm run start' --app-init-delay 10000",
     "ui-test-live": "testcafe-live chrome test/scripts/*.test.js --app 'npm run start' --app-init-delay 10000",
+    "release": "NON_INTERACTIVE=true release-it",
     "predeploy": "PUBLIC_URL=https://assistify.github.io/diary npm run build",
     "deploy": "gh-pages -d build -m '[ci skip] Deployed via CI'"
   },
@@ -53,6 +58,11 @@
     ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
+    }
+  },
+  "release-it": {
+    "scripts": {
+      "beforeStart": "npm test"
     }
   },
   "dependencies": {
@@ -121,6 +131,7 @@
     "react-error-overlay": "^1.0.7",
     "react-test-renderer": "^16.6.3",
     "regenerator-runtime": "^0.13.1",
+    "release-it": "^10.0.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "svg-url-loader": "^2.3.2",
