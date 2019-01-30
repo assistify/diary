@@ -1,54 +1,65 @@
 module.exports = function DiaryParser() {
-  const past = {
-    completedItems: [],
-    blockingItems: []
-  };
-  const future = {
-    availability: [],
-    plannedItems: []
-  };
-
-  const questions = [
-    { text: 'An was hast Du gearbeitet', destination: past.completedItems },
-    { text: 'Was möchtest Du als Nächstes tun', destination: future.plannedItems },
-    { text: 'Kommst Du bei etwas nicht weiter und brauchst Hilfe', destination: past.blockingItems },
-    { text: 'Wo verbringst Du deinen nächsten Arbeitstag', destination: future.availability }
+  const questionsMapping = [
+    { text: 'An was hast Du gearbeitet', destination: 'completedItems' },
+    { text: 'Was möchtest Du als Nächstes tun', destination: 'plannedItems' },
+    { text: 'Kommst Du bei etwas nicht weiter und brauchst Hilfe', destination: 'blockingItems' },
+    { text: 'Wo verbringst Du deinen nächsten Arbeitstag', destination: 'availability' }
   ];
 
   function parse(text) {
-    let currentSection;
-    let notRecognized;
-    text.split('\n').forEach((line) => {
-      const startOfSection = questions.some((question) => {
-        const m = line.match(new RegExp(question.text, 'i'));
-        if (m) {
-          currentSection = question.destination;
-        }
-        return !!m;
-      });
-      if (!startOfSection) {
-        if (currentSection) {
-          if (line.trim()) {
-            currentSection.push({ title: line.replace(/^[\s-]*/, '') });
-          }
+    const parsedDiary = {
+      completedItems: [],
+      blockingItems: [],
+      availability: [],
+      plannedItems: [],
+      notRecognized: [],
+    };
+
+    /*
+    The following logic parses a complete block of text.
+    It tries to detect one of the coded expressions. If it matches one of them,
+    *all* subsequent lines are considered to belong to this section, until *another one*
+    of the predefined expressions is detected.
+    Only if no match can be made before the text to classify was written, it is considered
+    as "not recognized"
+    */
+    let currentSection = 'notRecognized';
+
+    text.split('\n')
+      .filter(line => line.trim()) // ignore lines containing only whitespaces
+      .forEach((line) => {
+        const detectedSectionMapping = questionsMapping.find(question => line.match(new RegExp(question.text, 'i')));
+
+        if (detectedSectionMapping) {
+          currentSection = detectedSectionMapping.destination;
         } else {
-          notRecognized = (notRecognized ? `${notRecognized}\n` : '') + line;
+          parsedDiary[currentSection].push({ title: line.replace(/^[\s-]*/, '') });
         }
-      }
-    });
-    future.availability = future.availability.map(item => item.title).join('\n') || 'unbekannt';
-    return { past, future, notRecognized };
+      });
+    const diary = {
+      past: {
+        completedItems: parsedDiary.completedItems,
+        blockingItems: parsedDiary.blockingItems
+      },
+      future: {
+        plannedItems: parsedDiary.plannedItems,
+        availability: parsedDiary.availability.map(item => item.title).join('\n') || 'unbekannt'
+      },
+      notRecognized: parsedDiary.notRecognized.map(item => item.title).join('\n')
+    };
+
+    return diary;
   }
 
   function renderAsText(member) {
     let result = [
-      `**${questions[0].text}?**`,
+      `**${questionsMapping[0].text}?**`,
       (member.past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
-      `\n**${questions[1].text}?**`,
+      `\n**${questionsMapping[1].text}?**`,
       (member.future.plannedItems || []).map(e => `- ${e.title}`).join('\n'),
-      `\n**${questions[2].text}?**`,
+      `\n**${questionsMapping[2].text}?**`,
       (member.past.blockingItems || []).map(e => `- ${e.title}`).join('\n'),
-      `\n**${questions[3].text}?**`,
+      `\n**${questionsMapping[3].text}?**`,
       member.future.availability,
     ].join('\n');
     if (member.notRecognized) {
@@ -57,5 +68,5 @@ module.exports = function DiaryParser() {
     return result;
   }
 
-  return { parse, renderAsText, questions: questions.map(q => q.text) };
+  return { parse, renderAsText, questions: questionsMapping.map(q => q.text) };
 };

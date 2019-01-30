@@ -21,8 +21,9 @@ const simpleStructure = {
   },
   future: {
     plannedItems: [{ title: 'task 3' }],
-    availability: 'Office'
-  }
+    availability: 'Office',
+  },
+  notRecognized: ''
 };
 
 describe('Parser', () => {
@@ -44,7 +45,9 @@ describe('Parser', () => {
   });
 
   it('should display unformatted text below the template with a caption', () => {
-    expect(parser.renderAsText(Object.assign({ notRecognized: 'abc\ndef' }, simpleStructure)))
+    const simpleWithUnrecognized = simpleStructure;
+    simpleWithUnrecognized.notRecognized = 'abc\ndef';
+    expect(parser.renderAsText(simpleWithUnrecognized))
       .toEqual(`${simpleText}\n&nbsp;\n**NOT RECOGNIZED**\nabc\ndef`);
   });
 
@@ -56,7 +59,8 @@ describe('Parser', () => {
       .join(' ');
     expect(newParser.parse(`**${capitalizeEveryWord(newParser.questions[0])}?**\nqwert`)).toEqual({
       future: { availability: 'unbekannt', plannedItems: [] },
-      past: { blockingItems: [], completedItems: [{ title: 'qwert' }] }
+      past: { blockingItems: [], completedItems: [{ title: 'qwert' }] },
+      notRecognized: '',
     });
   });
 });
