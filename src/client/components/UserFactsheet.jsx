@@ -4,10 +4,8 @@ import Media from 'react-bulma-components/lib/components/media';
 import Heading from 'react-bulma-components/lib/components/heading';
 import User from './User';
 import Avatar from './Avatar';
-import Parser from '../lib/diaryParser';
+import { parse, renderAsText } from '../lib/diaryParser';
 import '../styles/components/UserFactSheet.scss';
-
-const parser = new Parser();
 
 export default class UserFactsheet extends React.Component {  // eslint-disable-line
   constructor(props) {
@@ -19,12 +17,12 @@ export default class UserFactsheet extends React.Component {  // eslint-disable-
 
   getTextRepresentation() {
     const { member } = this.props;
-    return parser.renderAsText(member);
+    return renderAsText(member);
   }
 
   popupTextChanged(text) {
     const { member, updateValue } = this.props;
-    Object.assign(member, parser.parse(text));
+    Object.assign(member, parse(text));
     updateValue(member.username, 'past', member.past);
     updateValue(member.username, 'future', member.future);
   }

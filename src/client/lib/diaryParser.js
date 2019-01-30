@@ -1,61 +1,79 @@
-module.exports = function DiaryParser() {
-  const past = {
+const questionsMapping = [
+  { text: 'An was hast Du gearbeitet', destination: 'completedItems' },
+  { text: 'Was möchtest Du als Nächstes tun', destination: 'plannedItems' },
+  { text: 'Kommst Du bei etwas nicht weiter und brauchst Hilfe', destination: 'blockingItems' },
+  { text: 'Wo verbringst Du deinen nächsten Arbeitstag', destination: 'availability' }
+];
+
+export function parse(text) {
+  const parsedDiary = {
     completedItems: [],
-    blockingItems: []
-  };
-  const future = {
+    blockingItems: [],
     availability: [],
-    plannedItems: []
+    plannedItems: [],
+    notRecognized: [],
   };
 
-  const questions = [
-    { text: 'An was hast Du gearbeitet', destination: past.completedItems },
-    { text: 'Was möchtest Du als Nächstes tun', destination: future.plannedItems },
-    { text: 'Kommst Du bei etwas nicht weiter und brauchst Hilfe', destination: past.blockingItems },
-    { text: 'Wo verbringst Du deinen nächsten Arbeitstag', destination: future.availability }
-  ];
+  /*
+  The following logic parses a complete block of text.
+  It tries to detect one of the coded expressions. If it matches one of them,
+  *all* subsequent lines are considered to belong to this section, until *another one*
+  of the predefined expressions is detected.
+  Only if no match can be made before the text to classify was written, it is considered
+  as "not recognized"
+  */
+  let currentSection = 'notRecognized';
 
-  function parse(text) {
-    let currentSection;
-    let notRecognized;
-    text.split('\n').forEach((line) => {
-      const startOfSection = questions.some((question) => {
-        const m = line.match(new RegExp(question.text, 'i'));
-        if (m) {
-          currentSection = question.destination;
-        }
-        return !!m;
-      });
-      if (!startOfSection) {
-        if (currentSection) {
-          if (line.trim()) {
-            currentSection.push({ title: line.replace(/^[\s-]*/, '') });
-          }
-        } else {
-          notRecognized = (notRecognized ? `${notRecognized}\n` : '') + line;
-        }
+  text.split('\n')
+    .filter(line => line.trim()) // ignore lines containing only whitespaces
+    .forEach((line) => {
+      const detectedSectionMapping = questionsMapping.find(question => line.match(new RegExp(question.text, 'i')));
+
+      if (detectedSectionMapping) {
+        currentSection = detectedSectionMapping.destination;
+      } else {
+        parsedDiary[currentSection].push({ title: line.replace(/^[\s-]*/, '') });
       }
     });
-    future.availability = future.availability.map(item => item.title).join('\n') || 'unbekannt';
-    return { past, future, notRecognized };
-  }
+  const diary = {
+    past: {
+      completedItems: parsedDiary.completedItems,
+      blockingItems: parsedDiary.blockingItems
+    },
+    future: {
+      plannedItems: parsedDiary.plannedItems,
+      availability: parsedDiary.availability.map(item => item.title).join('\n') || 'unbekannt'
+    },
+    notRecognized: parsedDiary.notRecognized.map(item => item.title).join('\n')
+  };
 
-  function renderAsText(member) {
-    let result = [
-      `**${questions[0].text}?**`,
-      (member.past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
-      `\n**${questions[1].text}?**`,
-      (member.future.plannedItems || []).map(e => `- ${e.title}`).join('\n'),
-      `\n**${questions[2].text}?**`,
-      (member.past.blockingItems || []).map(e => `- ${e.title}`).join('\n'),
-      `\n**${questions[3].text}?**`,
-      member.future.availability,
-    ].join('\n');
-    if (member.notRecognized) {
-      result += `\n&nbsp;\n**NOT RECOGNIZED**\n${member.notRecognized}`;
-    }
-    return result;
-  }
+  return diary;
+}
 
-  return { parse, renderAsText, questions: questions.map(q => q.text) };
-};
+export function renderAsText(member) {
+  let result = [
+    `**${questionsMapping[0].text}?**`,
+    (member.past.completedItems || []).map(e => `- ${e.title}`).join('\n'),
+    `\n**${questionsMapping[1].text}?**`,
+    (member.future.plannedItems || []).map(e => `- ${e.title}`).join('\n'),
+    `\n**${questionsMapping[2].text}?**`,
+    (member.past.blockingItems || []).map(e => `- ${e.title}`).join('\n'),
+    `\n**${questionsMapping[3].text}?**`,
+    member.future.availability,
+  ].join('\n');
+  if (member.notRecognized) {
+    result += `\n&nbsp;\n**NOT RECOGNIZED**\n${member.notRecognized}`;
+  }
+  return result;
+}
+
+export function getQuestions() { return questionsMapping.map(q => q.text); }
+
+// for legacy-code in operations: keep signature-comptibility
+export default function DiaryParser() {
+  return {
+    parse,
+    renderAsText,
+    questions: questionsMapping
+  };
+}
