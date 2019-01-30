@@ -26,6 +26,9 @@ const simpleStructure = {
   notRecognized: ''
 };
 
+const simpleWithUnrecognized = Object.assign({}, simpleStructure, { notRecognized: 'abc\ndef' });
+const simpleWithUnrecognizedText = `${simpleText}\n&nbsp;\n**NOT RECOGNIZED**\nabc\ndef`;
+
 describe('Parser', () => {
   it('should correctly serialize the data structure', () => {
     expect(parser.renderAsText(simpleStructure)).toEqual(simpleText);
@@ -45,10 +48,8 @@ describe('Parser', () => {
   });
 
   it('should display unformatted text below the template with a caption', () => {
-    const simpleWithUnrecognized = simpleStructure;
-    simpleWithUnrecognized.notRecognized = 'abc\ndef';
     expect(parser.renderAsText(simpleWithUnrecognized))
-      .toEqual(`${simpleText}\n&nbsp;\n**NOT RECOGNIZED**\nabc\ndef`);
+      .toEqual(simpleWithUnrecognizedText);
   });
 
   it('should ignore case of messages', () => {
@@ -62,5 +63,11 @@ describe('Parser', () => {
       past: { blockingItems: [], completedItems: [{ title: 'qwert' }] },
       notRecognized: '',
     });
+  });
+
+  it('should allow re-use', () => {
+    expect(parser.renderAsText(simpleStructure)).toEqual(simpleText);
+    expect(parser.renderAsText(simpleWithUnrecognized)).toEqual(simpleWithUnrecognizedText);
+    expect(parser.renderAsText(simpleStructure)).toEqual(simpleText);
   });
 });
