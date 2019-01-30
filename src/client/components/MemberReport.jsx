@@ -20,11 +20,13 @@ export default function MemberReport(props) {
   const { workingOnItems, completedItems, blockingItems } = past;
   const { plannedItems } = future;
 
-  const addOwnerToItems = function (items, owner) {
+  function addOwnerToItems(items, owner) {
     const withOwner = [];
-    items.forEach(item => withOwner.push(Object.assign({}, item, { owners: [owner] })));
+    if (items) {
+      items.forEach(item => withOwner.push(Object.assign({}, item, { owners: [owner] })));
+    }
     return withOwner;
-  };
+  }
 
   if (statusKnown) {
     return (
@@ -77,7 +79,7 @@ export default function MemberReport(props) {
               )}
             <ActivityItems
               title="Erledigt"
-              list={completedItems}
+              list={addOwnerToItems(completedItems, username)}
               className="completed"
               contentEditable={contentEditable}
               updateValue={(liIndex, title) => {
@@ -98,7 +100,7 @@ export default function MemberReport(props) {
 
             <ActivityItems
               title="Geplant"
-              list={plannedItems}
+              list={addOwnerToItems(plannedItems, username)}
               className="planned"
               contentEditable={contentEditable}
               updateValue={(liIndex, title) => {
