@@ -4,8 +4,10 @@ import Media from 'react-bulma-components/lib/components/media';
 import Heading from 'react-bulma-components/lib/components/heading';
 import User from './User';
 import Avatar from './Avatar';
-import parser from '../lib/diaryParser';
+import Parser from '../lib/diaryParser';
 import '../styles/components/UserFactSheet.scss';
+
+const parser = new Parser();
 
 export default class UserFactsheet extends React.Component {  // eslint-disable-line
   constructor(props) {
