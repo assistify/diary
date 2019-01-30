@@ -9,6 +9,7 @@ import MarkDown from './Markdown';
 import User from './User';
 
 import { TeamContext } from '../lib/teamContext';
+import { DiscussItem } from './DiscussItem';
 
 function ActivityItem(props) {
   const {
@@ -33,12 +34,19 @@ function ActivityItem(props) {
     <li key={title}>
       <TeamContext.Consumer>
         {teamContext => (
-          <MarkDown
-            contentEditable={contentEditable}
-            updateValue={updateValue}
-            code={title || ''}
-            serverUrl={teamContext.serverUrl}
-          />
+          <span>
+            <MarkDown
+              contentEditable={contentEditable}
+              updateValue={updateValue}
+              code={title || ''}
+              serverUrl={teamContext.serverUrl}
+            />
+
+            <DiscussItem
+              title={title}
+              author={owners}
+            />
+          </span>
         )}
       </TeamContext.Consumer>
       {listOfOwners}
