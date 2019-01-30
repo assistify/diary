@@ -9,7 +9,7 @@ export function DiscussItem(props) {
     let paramCount = 0;
     if (diaryChannel) {
       paramCount++;
-      url = `${url}${diaryChannel}`;
+      url = `${url}parentChannel=${diaryChannel}`;
     }
 
     if (title) {

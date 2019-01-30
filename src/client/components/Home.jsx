@@ -19,6 +19,7 @@ const templateData = {
   date: new Date(),
   teamName: 'Assistify Core',
   serverUrl: 'https://team.assistify-test.noncd.db.de',
+  diaryChannel: 'daily-notizen',
   teamReport: [
     {
       username: 'Template',
@@ -156,6 +157,7 @@ export default class Home extends Component {
           <TeamContext.Provider value={{
             teamName: diaryPage.teamName,
             serverUrl: diaryPage.serverUrl,
+            diaryChannel: diaryPage.diaryChannel,
           }}
           >
             <DiaryPage
