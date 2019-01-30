@@ -22,7 +22,7 @@ const templateData = {
   diaryChannel: 'daily-notizen',
   teamReport: [
     {
-      username: 'Template',
+      username: 'user',
       statusKnown: true,
       past: {
         completedItems: [

@@ -14,7 +14,7 @@ export function DiscussItem(props) {
 
     if (title) {
       paramCount++;
-      url = `${url}${paramCount > 1 ? '&' : ''}message=${authors && authors.length > 0 ? `${authors.map(author => `&%40${author}`)}%0A%0A` : ''}>%20${title}%0A%0A`;
+      url = `${url}${paramCount > 1 ? '&' : ''}message=>%20${title}%0A%0A${authors && authors.length > 0 ? `${authors.map(author => `%40${author}`)}%20` : ''}`;
     }
 
     return (url);
