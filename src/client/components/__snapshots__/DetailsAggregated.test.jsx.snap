@@ -21,15 +21,28 @@ exports[`aggregates correctly 1`] = `
     </h1>
     <ul>
       <li>
-        <div
-          contentEditable={false}
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "planned 1",
+        <span>
+          <span
+            contentEditable={false}
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "planned 1",
+              }
             }
-          }
-          onBlur={[Function]}
-        />
+            onBlur={[Function]}
+          />
+          <a
+            className="discuss"
+            href="/create-thread?message=>%20planned 1%0A%0A%40user1,%40user2%20"
+            target="blank"
+          >
+            <span
+              role="img"
+            >
+              ↩
+            </span>
+          </a>
+        </span>
         <span>
            (
           <span>

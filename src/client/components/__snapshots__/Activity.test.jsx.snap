@@ -16,26 +16,52 @@ exports[`renders a list correctly 1`] = `
   </h1>
   <ul>
     <li>
-      <div
-        contentEditable={false}
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "sample title 1",
+      <span>
+        <span
+          contentEditable={false}
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "sample title 1",
+            }
           }
-        }
-        onBlur={[Function]}
-      />
+          onBlur={[Function]}
+        />
+        <a
+          className="discuss"
+          href="/create-thread?message=>%20sample title 1%0A%0A"
+          target="blank"
+        >
+          <span
+            role="img"
+          >
+            ↩
+          </span>
+        </a>
+      </span>
     </li>
     <li>
-      <div
-        contentEditable={false}
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "sample title 2",
+      <span>
+        <span
+          contentEditable={false}
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "sample title 2",
+            }
           }
-        }
-        onBlur={[Function]}
-      />
+          onBlur={[Function]}
+        />
+        <a
+          className="discuss"
+          href="/create-thread?message=>%20sample title 2%0A%0A"
+          target="blank"
+        >
+          <span
+            role="img"
+          >
+            ↩
+          </span>
+        </a>
+      </span>
     </li>
   </ul>
 </div>
