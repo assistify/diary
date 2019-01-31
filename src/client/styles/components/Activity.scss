@@ -18,12 +18,11 @@
         // the discussion-decoration shall only be shown when hovered
         & .discuss {
             display: none;
-        }
-        &:hover .discuss {
-            // float: right;
-            display: inherit;
             margin-left: 10px;
             font-weight: bolder;
+        }
+        &:hover .discuss {
+            display: inherit;
         }
     }
 }

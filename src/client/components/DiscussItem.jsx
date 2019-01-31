@@ -5,19 +5,22 @@ import { TeamContext } from '../lib/teamContext';
 
 export function DiscussItem(props) {
   function getReplyUrl(serverUrl, diaryChannel, title, authors) {
-    let url = `${serverUrl}/create-thread?`;
-    let paramCount = 0;
+    const url = `${serverUrl}/create-thread`;
+    const effectiveParams = [];
+
     if (diaryChannel) {
-      paramCount++;
-      url = `${url}parentChannel=${diaryChannel}`;
+      effectiveParams.push(`parentChannel=${diaryChannel}`);
     }
 
     if (title) {
-      paramCount++;
-      url = `${url}${paramCount > 1 ? '&' : ''}message=>%20${title}%0A%0A${authors && authors.length > 0 ? `${authors.map(author => `%40${author}`)}%20` : ''}`;
+      let message = `> ${encodeURIComponent(title)}\n\n`;
+      if (authors && authors.length > 0) {
+        message += `${authors.map(author => `@${author} `)}`;
+      }
+      effectiveParams.push(`message=${encodeURIComponent(message)}`);
     }
 
-    return (url);
+    return `${url}?${effectiveParams.join('&')}`;
   }
 
   const {
@@ -30,7 +33,8 @@ export function DiscussItem(props) {
       {teamContext => (
         <a
           className="discuss"
-          target="blank"
+          rel="noopener noreferrer"
+          target="_blank"
           href={getReplyUrl(teamContext.serverUrl, teamContext.diaryChannel, title, authors)}
         >
           <span role="img">↩</span>

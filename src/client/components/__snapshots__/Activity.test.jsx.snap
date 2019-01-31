@@ -28,8 +28,9 @@ exports[`renders a list correctly 1`] = `
         />
         <a
           className="discuss"
-          href="/create-thread?message=>%20sample title 1%0A%0A"
-          target="blank"
+          href="/create-thread?message=%3E%20sample%2520title%25201%0A%0A"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           <span
             role="img"
@@ -52,8 +53,9 @@ exports[`renders a list correctly 1`] = `
         />
         <a
           className="discuss"
-          href="/create-thread?message=>%20sample title 2%0A%0A"
-          target="blank"
+          href="/create-thread?message=%3E%20sample%2520title%25202%0A%0A"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           <span
             role="img"

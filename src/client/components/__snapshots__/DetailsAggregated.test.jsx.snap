@@ -33,8 +33,9 @@ exports[`aggregates correctly 1`] = `
           />
           <a
             className="discuss"
-            href="/create-thread?message=>%20planned 1%0A%0A%40user1,%40user2%20"
-            target="blank"
+            href="/create-thread?message=%3E%20planned%25201%0A%0A%40user1%20%2C%40user2%20"
+            rel="noopener noreferrer"
+            target="_blank"
           >
             <span
               role="img"
