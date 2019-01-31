@@ -8,16 +8,11 @@ import Button from 'react-bulma-components/lib/components/button';
 import Container from 'react-bulma-components/lib/components/container';
 import ReportFooter from './ReportFooter';
 import { dailyType } from '../../models/dailyType';
-
+import { getUrl } from '../lib/urlGenerator';
 
 export default function Editor(props) {
-  const copyStatefulUrlToClipboard = ({teamName, date, serverUrl, teamReport}) => { // eslint-disable-line
-    const encodedTeamReport = encode(JSON.stringify(teamReport));
-    const url = `${window.location.origin}${window.location.pathname || '/'}`
-      + `?teamName=${encode(teamName)}`
-      + `&date=${encode(date && date.toJSON ? date.toJSON() : date)}`
-      + `&serverUrl=${encode(serverUrl)}`
-      + `&teamReport=${encodedTeamReport}`;
+  const copyStatefulUrlToClipboard = (params) => { // eslint-disable-line
+    const url = getUrl(params);
     copyToClipboard(url);
     return url;
   };
