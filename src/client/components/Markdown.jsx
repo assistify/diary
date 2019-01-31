@@ -27,7 +27,7 @@ export default function Markdown(props) {
     code, withBreaks, contentEditable, updateValue
   } = props;
   return (
-    <div
+    <span
       contentEditable={contentEditable}
       onBlur={event => updateValue(event.target.innerText)}
       dangerouslySetInnerHTML={withBreaks // eslint-disable-line react/no-danger

@@ -9,10 +9,11 @@ import MarkDown from './Markdown';
 import User from './User';
 
 import { TeamContext } from '../lib/teamContext';
+import { DiscussItem } from './DiscussItem';
 
 function ActivityItem(props) {
   const {
-    title, owners, contentEditable, updateValue
+    title, owners, contentEditable, updateValue, displayOwners,
   } = props;
 
   const separator = <Fragment>,&nbsp;</Fragment>;
@@ -33,28 +34,36 @@ function ActivityItem(props) {
     <li key={title}>
       <TeamContext.Consumer>
         {teamContext => (
-          <MarkDown
-            contentEditable={contentEditable}
-            updateValue={updateValue}
-            code={title || ''}
-            serverUrl={teamContext.serverUrl}
-          />
+          <span>
+            <MarkDown
+              contentEditable={contentEditable}
+              updateValue={updateValue}
+              code={title || ''}
+              serverUrl={teamContext.serverUrl}
+            />
+
+            <DiscussItem
+              title={title}
+              authors={owners}
+            />
+          </span>
         )}
       </TeamContext.Consumer>
-      {listOfOwners}
+      {displayOwners && listOfOwners}
     </li>
   );
 }
 
 ActivityItem.defaultProps = {
-  owners: null
+  owners: null,
+  displayOwners: false,
 };
 
 ActivityItem.propTypes = activityItemType;
 
 export default function ActivityItems(props) {
   const {
-    title, list, className, contentEditable, updateValue
+    title, list, className, contentEditable, updateValue, displayOwners
   } = props;
 
   const titledItems = list.filter(item => item.title);
@@ -70,6 +79,7 @@ export default function ActivityItems(props) {
                 key={item.title}
                 title={item.title}
                 details={item.details}
+                displayOwners={displayOwners}
                 owners={item.owners}
                 contentEditable={contentEditable}
                 updateValue={content => updateValue(liIndex, content)}
@@ -93,12 +103,14 @@ export default function ActivityItems(props) {
 
 ActivityItems.defaultProps = {
   list: [],
+  displayOwners: false,
 };
 
 ActivityItems.propTypes = {
   title: PropTypes.string.isRequired,
   list: PropTypes.arrayOf(PropTypes.shape(activityItemType)),
   className: PropTypes.string.isRequired,
+  displayOwners: PropTypes.bool,
   contentEditable: PropTypes.bool,
   updateValue: PropTypes.func
 };

@@ -46,6 +46,7 @@ export default function DetailsAggregated(props) {
       <ActivityItems
         title="Geplante Tätigkeiten"
         list={aggregatedMultipleOwners}
+        displayOwners
         className="next"
         contentEditable={false}
         updateValue={() => {}}

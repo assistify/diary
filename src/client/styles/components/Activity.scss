@@ -1,19 +1,29 @@
-.c-activities{
+.c-activities {
     border-left: 6px solid;
     overflow: hidden;
 
-    &.worked-on{
+    &.worked-on {
         border-left-color: goldenrod;
     }
-    &.completed{
+    &.completed {
         border-left-color: rgb(3, 98, 90);
     }
-    &.blocking{
+    &.blocking {
         border-left-color: $secondary;
     }
     & li {
         margin-bottom: 10px;
         padding-left: 1.5em;
+
+        // the discussion-decoration shall only be shown when hovered
+        & .discuss {
+            display: none;
+            margin-left: 10px;
+            font-weight: bolder;
+        }
+        &:hover .discuss {
+            display: inherit;
+        }
     }
 }
 
