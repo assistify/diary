@@ -1,7 +1,7 @@
 const DiaryParser = require('./src/client/lib/diaryParser');
-const urlGenerator = require('./src/client/lib/urlGenerator');
+const statefulUrl = require('./src/client/lib/statefulUrl');
 
 module.exports = {
   DiaryParser,
-  urlGenerator,
+  statefulUrl,
 };

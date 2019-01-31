@@ -1,6 +1,6 @@
 const { compressToEncodedURIComponent, decompressFromEncodedURIComponent } = require('lz-string');
 
-function getUrl({
+function generate({
   teamName,
   date,
   serverUrl,
@@ -16,7 +16,7 @@ function getUrl({
     (contentEditable ? '&edit=true' : '')].join('');
 }
 
-function getDiaryData(queryParams) {
+function getDiaryInfo(queryParams) {
   const diaryData = {
     date: new Date(),
     teamName: 'Team Name',
@@ -45,4 +45,4 @@ function getDiaryData(queryParams) {
   return diaryData;
 }
 
-module.exports = { getUrl, getDiaryData };
+module.exports = { generate, getDiaryInfo };

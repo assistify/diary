@@ -5,7 +5,7 @@ import Container from 'react-bulma-components/lib/components/container';
 
 import qs from 'qs';
 import { TeamContext } from '../lib/teamContext';
-import { getUrl, getDiaryData } from '../lib/urlGenerator';
+import statefulUrl from '../lib/statefulUrl';
 import DiaryPage from './DiaryPage';
 import Editor from './Editor';
 import { localization } from '../lib/localization';
@@ -83,7 +83,7 @@ export default class Home extends Component {
       return templateData;
     }
 
-    return getDiaryData(queryParams)
+    return statefulUrl.getDiaryInfo(queryParams);
   }
 
   updateDiaryPage = (newState, url) => {
@@ -105,7 +105,7 @@ export default class Home extends Component {
   updateValue(fieldname, value) {
     this.setState((currentState) => {
       const diaryPage = Object.assign(currentState.diaryPage, { [fieldname]: value });
-      window.history.pushState(null, '', getUrl({ ...diaryPage, contentEditable }));
+      window.history.pushState(null, '', statefulUrl.generate({ ...diaryPage, contentEditable }));
       return { diaryPage };
     });
   }

@@ -3,16 +3,15 @@ import { PropTypes } from 'prop-types';
 
 import { JsonEditor } from 'jsoneditor-react';
 import copyToClipboard from 'copy-to-clipboard';
-import { compressToEncodedURIComponent as encode } from 'lz-string';
 import Button from 'react-bulma-components/lib/components/button';
 import Container from 'react-bulma-components/lib/components/container';
 import ReportFooter from './ReportFooter';
 import { dailyType } from '../../models/dailyType';
-import { getUrl } from '../lib/urlGenerator';
+import statefulUrl from '../lib/statefulUrl';
 
 export default function Editor(props) {
   const copyStatefulUrlToClipboard = (params) => { // eslint-disable-line
-    const url = getUrl(params);
+    const url = statefulUrl.generate(params);
     copyToClipboard(url);
     return url;
   };
