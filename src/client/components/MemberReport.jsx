@@ -20,6 +20,14 @@ export default function MemberReport(props) {
   const { workingOnItems, completedItems, blockingItems } = past;
   const { plannedItems } = future;
 
+  function addOwnerToItems(items, owner) {
+    const withOwner = [];
+    if (items) {
+      items.forEach(item => withOwner.push(Object.assign({}, item, { owners: [owner] })));
+    }
+    return withOwner;
+  }
+
   if (statusKnown) {
     return (
       <Columns.Column renderAs="article" size={6}>
@@ -60,7 +68,7 @@ export default function MemberReport(props) {
               && (
               <ActivityItems
                 title="Blockiert"
-                list={blockingItems}
+                list={addOwnerToItems(blockingItems, username)}
                 className="blocking"
                 contentEditable={contentEditable}
                 updateValue={(liIndex, title) => {
@@ -71,7 +79,7 @@ export default function MemberReport(props) {
               )}
             <ActivityItems
               title="Erledigt"
-              list={completedItems}
+              list={addOwnerToItems(completedItems, username)}
               className="completed"
               contentEditable={contentEditable}
               updateValue={(liIndex, title) => {
@@ -81,7 +89,7 @@ export default function MemberReport(props) {
             />
             <ActivityItems
               title="Arbeitet an"
-              list={workingOnItems}
+              list={addOwnerToItems(workingOnItems, username)}
               className="worked-on"
               contentEditable={contentEditable}
               updateValue={(liIndex, title) => {
@@ -92,7 +100,7 @@ export default function MemberReport(props) {
 
             <ActivityItems
               title="Geplant"
-              list={plannedItems}
+              list={addOwnerToItems(plannedItems, username)}
               className="planned"
               contentEditable={contentEditable}
               updateValue={(liIndex, title) => {
