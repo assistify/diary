@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 import '../styles/index.scss';
 import Container from 'react-bulma-components/lib/components/container';
-import { compressToEncodedURIComponent as encode, decompressFromEncodedURIComponent as decode } from 'lz-string';
 
 import qs from 'qs';
 import { TeamContext } from '../lib/teamContext';
+import statefulUrl from '../lib/statefulUrl';
 import DiaryPage from './DiaryPage';
 import Editor from './Editor';
 import { localization } from '../lib/localization';
@@ -84,44 +84,7 @@ export default class Home extends Component {
       return templateData;
     }
 
-    if (queryParams.teamName) {
-      let teamReport;
-      try {
-        const decodedTeamReport = await decode(queryParams.teamReport);
-        teamReport = await JSON.parse(decodedTeamReport);
-      } catch (e) {
-        console.error(e); // eslint-disable-line no-console
-        teamReport = [];
-      }
-      return {
-        date: queryParams.date ? new Date(decode(queryParams.date)) : new Date(),
-        teamName: decode(queryParams.teamName),
-        serverUrl: queryParams.serverUrl ? decode(queryParams.serverUrl) : 'https://localhost:4000',
-        teamReport,
-      };
-    }
-
-    return {
-      date: new Date(),
-      teamName: 'Team Name',
-      serverUrl: 'https://team-assistify-url',
-      teamReport: [],
-    };
-  }
-
-  static getUrl(state) {
-    const {
-      diaryPage: {
-        teamName, date, serverUrl, teamReport
-      }
-    } = state;
-    const encodedTeamReport = encode(JSON.stringify(teamReport));
-    return [`${window.location.origin}${window.location.pathname || '/'}`,
-      `?teamName=${encode(teamName)}`,
-      `&date=${encode(date && date.toJSON ? date.toJSON() : date)}`,
-      `&serverUrl=${encode(serverUrl)}`,
-      `&teamReport=${encodedTeamReport}`,
-      (contentEditable ? '&edit=true' : '')].join('');
+    return statefulUrl.decode(queryParams);
   }
 
   updateDiaryPage = (newState, url) => {
@@ -143,7 +106,8 @@ export default class Home extends Component {
   updateValue(fieldname, value) {
     this.setState((currentState) => {
       const diaryPage = Object.assign(currentState.diaryPage, { [fieldname]: value });
-      window.history.pushState(null, '', Home.getUrl({ diaryPage }));
+      const edit = contentEditable ? '&edit=true' : '';
+      window.history.pushState(null, '', `${statefulUrl.encode(diaryPage)}${edit}`);
       return { diaryPage };
     });
   }
