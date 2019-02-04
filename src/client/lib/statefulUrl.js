@@ -1,48 +1,53 @@
-const { compressToEncodedURIComponent, decompressFromEncodedURIComponent } = require('lz-string');
+const { compressToEncodedURIComponent: compress, decompressFromEncodedURIComponent: decompress } = require('lz-string');
 
-function generate({
+function encode({
   teamName,
   date,
   serverUrl,
   teamReport,
-  contentEditable = false
+  diaryChannel,
 }) {
-  const encodedTeamReport = compressToEncodedURIComponent(JSON.stringify(teamReport));
+  const encodedTeamReport = compress(JSON.stringify(teamReport));
   return [`${window.location.origin}${window.location.pathname || '/'}`,
-    `?teamName=${compressToEncodedURIComponent(teamName)}`,
-    `&date=${compressToEncodedURIComponent(date && date.toJSON ? date.toJSON() : date)}`,
-    `&serverUrl=${compressToEncodedURIComponent(serverUrl)}`,
+    `?teamName=${compress(teamName)}`,
+    `&date=${compress(date && date.toJSON ? date.toJSON() : date)}`,
+    `&serverUrl=${compress(serverUrl)}`,
     `&teamReport=${encodedTeamReport}`,
-    (contentEditable ? '&edit=true' : '')].join('');
+    `&diaryChannel=${compress(diaryChannel)}`
+  ].join('');
 }
 
-function getDiaryInfo(queryParams) {
+function decode(queryParams) {
   const diaryData = {
     date: new Date(),
     teamName: 'Team Name',
     serverUrl: 'https://localhost:4000',
     teamReport: [],
+    diaryChannel: 'tagebuch'
   };
 
   if (queryParams.teamName) {
-    diaryData.teamName = decompressFromEncodedURIComponent(queryParams.teamName);
+    diaryData.teamName = decompress(queryParams.teamName);
   }
   if (queryParams.date) {
-    diaryData.date = new Date(decompressFromEncodedURIComponent(queryParams.date));
+    diaryData.date = new Date(decompress(queryParams.date));
   }
   if (queryParams.serverUrl) {
-    diaryData.serverUrl = decompressFromEncodedURIComponent(queryParams.serverUrl);
+    diaryData.serverUrl = decompress(queryParams.serverUrl);
   }
   if (queryParams.teamReport) {
     try {
-      const decodedTeamReport = decompressFromEncodedURIComponent(queryParams.teamReport);
+      const decodedTeamReport = decompress(queryParams.teamReport);
       diaryData.teamReport = JSON.parse(decodedTeamReport);
     } catch (e) {
       console.error(e); // eslint-disable-line no-console
     }
   }
+  if (queryParams.diaryChannel) {
+    diaryData.diaryChannel = decompress(queryParams.diaryChannel);
+  }
 
   return diaryData;
 }
 
-module.exports = { generate, getDiaryInfo };
+module.exports = { encode, decode };

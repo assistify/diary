@@ -83,7 +83,7 @@ export default class Home extends Component {
       return templateData;
     }
 
-    return statefulUrl.getDiaryInfo(queryParams);
+    return statefulUrl.decode(queryParams);
   }
 
   updateDiaryPage = (newState, url) => {
@@ -105,7 +105,8 @@ export default class Home extends Component {
   updateValue(fieldname, value) {
     this.setState((currentState) => {
       const diaryPage = Object.assign(currentState.diaryPage, { [fieldname]: value });
-      window.history.pushState(null, '', statefulUrl.generate({ ...diaryPage, contentEditable }));
+      const edit = contentEditable ? '&edit=true' : '';
+      window.history.pushState(null, '', `${statefulUrl.encode(diaryPage)}${edit}`);
       return { diaryPage };
     });
   }

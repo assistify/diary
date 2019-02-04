@@ -11,7 +11,7 @@ import statefulUrl from '../lib/statefulUrl';
 
 export default function Editor(props) {
   const copyStatefulUrlToClipboard = (params) => { // eslint-disable-line
-    const url = statefulUrl.generate(params);
+    const url = statefulUrl.encode(params);
     copyToClipboard(url);
     return url;
   };
