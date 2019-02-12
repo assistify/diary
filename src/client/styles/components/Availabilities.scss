@@ -1,6 +1,12 @@
 .c-availabilities {
     padding-bottom: 30px;
 
+    .columns {
+        border: 1px solid lightgray;
+        background: white;
+        border-radius: 6px;
+    }
+
     .status-unknown {
         opacity: 0.3;
         margin: auto;
