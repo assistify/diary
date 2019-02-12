@@ -21,12 +21,11 @@
     }
 
     &.wrapped {
-        max-height: 4em;
-        height: auto;
+        min-width: 0;
         max-width: 200px;
         overflow: hidden;
         hyphens: auto;
-        white-space: normal;
+        white-space: nowrap;
         text-overflow: ellipsis;
 
         &:not(body) {
