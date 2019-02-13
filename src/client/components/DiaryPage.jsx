@@ -82,15 +82,7 @@ export default class DiaryPage extends Component {
           <Hero.Body>
             {urlField}
             <Heading
-              contentEditable={contentEditable}
-              suppressContentEditableWarning
-              className="team-name"
-              onBlur={e => updateValue('teamName', e.target.innerHTML)}
-            >
-              {teamName}
-            </Heading>
-            <Heading
-              subtitle
+
               className="date"
               contentEditable={contentEditable}
               suppressContentEditableWarning
@@ -98,7 +90,15 @@ export default class DiaryPage extends Component {
             >
               {dateFormat(date, 'dddd, dd. mmmm yyyy')}
             </Heading>
-
+            <Heading
+              subtitle
+              contentEditable={contentEditable}
+              suppressContentEditableWarning
+              className="team-name"
+              onBlur={e => updateValue('teamName', e.target.innerHTML)}
+            >
+              {teamName}
+            </Heading>
           </Hero.Body>
           {contentEditable && (
             <button type="button" id="screenshot-button" onClick={e => downloadScreenshot(e.target)}>
