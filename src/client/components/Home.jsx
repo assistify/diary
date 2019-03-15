@@ -116,7 +116,8 @@ export default class Home extends Component {
     const [fullMatch, sendUrl] = window.location.search.match(/edit=(.*)/);
     if (fullMatch) {
       const { diaryPage } = this.state;
-      window.location.href = `${sendUrl}?diaryTeam=${diaryPage.teamName}&diaryUrl=${statefulUrl.encode(diaryPage)}`;
+      const diaryUrl = encodeURIComponent(statefulUrl.encode(diaryPage));
+      window.location.href = `${sendUrl}?diaryTeam=${diaryPage.teamName}&diaryUrl=${diaryUrl}`;
     }
   }
 
