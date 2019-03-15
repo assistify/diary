@@ -31,7 +31,8 @@ export default class DiaryPage extends Component {
         date,
         teamName,
         teamReport,
-        serverUrl
+        serverUrl,
+        sendDiary
       }
     } = this;
 
@@ -104,6 +105,11 @@ export default class DiaryPage extends Component {
             <button type="button" id="screenshot-button" onClick={e => downloadScreenshot(e.target)}>
               <span role="img" aria-label="Screenshot">📷</span>
             </button>)}
+          {contentEditable && (
+            <button type="button" id="send-button" onClick={sendDiary}>
+              <span role="img" aria-label="Send diary">✉</span>
+            </button>
+          )}
         </Hero>
         <Availabilities
           members={teamReport}

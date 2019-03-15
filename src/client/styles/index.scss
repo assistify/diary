@@ -36,5 +36,15 @@
   }
 }
 
+#send-button {
+  position: absolute;
+  right: 45px;
+  top: 10px;
+  height: 30px;
+  width: 30px;
+  font-size: 22px;
+  border-radius: 50%;
+}
+
 // elements which properties are overridden
 @import './objects/section.scss';

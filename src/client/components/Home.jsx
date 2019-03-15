@@ -112,6 +112,14 @@ export default class Home extends Component {
     });
   }
 
+  sendDiary() {
+    const [fullMatch, sendUrl] = window.location.search.match(/edit=(.*)/);
+    if (fullMatch) {
+      const { diaryPage } = this.state;
+      window.location.href = `${sendUrl}?diaryTeam=${diaryPage.teamName}&diaryUrl=${statefulUrl.encode(diaryPage)}`;
+    }
+  }
+
   render() {
     const { diaryPage, editing } = this.state;
 
@@ -131,6 +139,7 @@ export default class Home extends Component {
               serverUrl={diaryPage.serverUrl}
               updateValue={(fieldname, value) => this.updateValue(fieldname, value)}
               contentEditable={contentEditable}
+              sendDiary={() => this.sendDiary()}
             />
           </TeamContext.Provider>
           <ReportFooter onClick={this.toggleEdit} />
