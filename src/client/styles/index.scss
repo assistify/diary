@@ -23,22 +23,30 @@ body {
   margin: -1.5em 0 1.5em;
 }
 
-#screenshot-button {
+.hero button {
+  cursor: pointer;
   position: absolute;
   top: 10px;
-  right: 10px;
-  cursor: pointer;
-  width: 30px;
   height: 30px;
+  width: 30px;
   text-align: center;
   border-radius: 50%;
-  line-height: 1em;
-  text-indent: -4px;
-  font-size: 20px;
 
   &:hover {
     background-color: #cccccc;
   }
+}
+
+#screenshot-button {
+  right: 10px;
+  line-height: 1em;
+  text-indent: -4px;
+  font-size: 20px;
+}
+
+#send-button {
+  right: 45px;
+  font-size: 22px;
 }
 
 // elements which properties are overridden
