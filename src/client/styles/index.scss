@@ -5,6 +5,7 @@
 @import './components/Activity.scss';
 @import './components/Availabilities.scss';
 @import './components/Future.scss';
+@import './components/Past.scss';
 @import './components/Tag.scss';
 @import './components/User.scss';
 @import './components/Editor.scss';
@@ -12,6 +13,10 @@
 
 .serverUrl {
   float: right;
+}
+
+body {
+  background: #efefef
 }
 
 .statusKnownCheckbox {
@@ -47,4 +52,9 @@
 }
 
 // elements which properties are overridden
+@import './objects/card.scss';
+@import './objects/columns.scss';
+@import './objects/footer.scss';
+@import './objects/hero.scss';
 @import './objects/section.scss';
+@import './objects/title.scss';

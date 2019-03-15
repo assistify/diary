@@ -7,6 +7,7 @@ import Tag from 'react-bulma-components/lib/components/tag';
 import UserFactsheet from './UserFactsheet';
 
 import isBlocked from '../lib/isBlocked';
+import BlockedIndication from './BlockedIndication';
 
 export default function Availabilities(props) {
   const {
@@ -37,7 +38,7 @@ export default function Availabilities(props) {
                 >
                   <Tag.Group>
                     {member.statusKnown && isBlocked(member.past.blockingItems)
-                      && <Tag className="blocked">Blockiert</Tag>
+                      && <BlockedIndication />
                     }
                     {member.statusKnown && member.future.availability
                       && (

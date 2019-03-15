@@ -12,6 +12,7 @@ import { memberReportType } from '../../models/memberReportType';
 import User from './User';
 
 import isBlocked from '../lib/isBlocked';
+import BlockedIndication from './BlockedIndication';
 
 export default function MemberReport(props) {
   const {
@@ -41,12 +42,6 @@ export default function MemberReport(props) {
               <User username={username} />
             </Card.Header.Title>
             <Tag.Group>
-              { isBlocked(blockingItems)
-              && (
-                <Tag size="medium" className="blocked">
-                  Blockiert
-                </Tag>
-              )}
               { contentEditable
               && (
                 <div>
@@ -61,13 +56,17 @@ export default function MemberReport(props) {
                   &nbsp; blockiert
                 </div>
               )}
+              { isBlocked(blockingItems)
+              && (
+                <BlockedIndication />
+              )}
             </Tag.Group>
           </Card.Header>
           <Card.Content>
             { blockingItems
               && (
               <ActivityItems
-                title="Blockiert"
+                title="Brauche Hilfe"
                 list={addOwnerToItems(blockingItems, username)}
                 className="blocking"
                 contentEditable={contentEditable}
